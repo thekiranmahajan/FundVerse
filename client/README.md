@@ -43,6 +43,4 @@ For any questions, suggestions, join our discord at [https://discord.gg/thirdweb
 
 
 
-
-
 this app will help to collect funds by removing the man in the middle.
