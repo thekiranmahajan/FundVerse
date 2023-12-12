@@ -12,7 +12,10 @@ const App = () => {
       <div className="flex-1 max-sm:w-full max-w-[1280px] sm:pr-5">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/create-campaign" element={<CreateCampaign />} />
+          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
         </Routes>
       </div>
     </div>
