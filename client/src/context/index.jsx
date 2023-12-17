@@ -7,9 +7,9 @@ import {
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 
-const stateContext = createContext();
+const StateContext = createContext();
 
-export const stateContextProvider = ({ children }) => {
+export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
     "0xba414382Bc80410495601964D7c3700Bc95ca2FA"
   );
@@ -31,7 +31,7 @@ export const stateContextProvider = ({ children }) => {
         form.target,
         new Date(form.deadline).getTime(), //deadline
         form.image,
-      ]);
+      ])
 
       console.log("contract call success", data);
     } catch (error) {
@@ -39,7 +39,7 @@ export const stateContextProvider = ({ children }) => {
     }
   };
   return (
-    <stateContext.Provider
+    <StateContext.Provider
       value={{
         address,
         contract,
@@ -47,8 +47,8 @@ export const stateContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </stateContext.Provider>
-  );
-};
+    </StateContext.Provider>
+  )
+}
 
-export const useStateContext = () => useContext(stateContext);
+export const useStateContext = () => useContext(StateContext);
