@@ -31,7 +31,7 @@ const CreateCampaign = () => {
         setIsLoading(true);
         await createCampaign({
           ...form,
-          target: ethers.utils.parseUnits(form.target, 18)
+          target: ethers.utils.parseUnits(form.target, 18),
         });
         setIsLoading(false);
         navigate("/");
@@ -56,7 +56,7 @@ const CreateCampaign = () => {
         
         "
         >
-          Start a Compaign
+          Start a Campaign
         </h1>
       </div>
       <form
@@ -78,7 +78,7 @@ const CreateCampaign = () => {
 
           <FormField
             labelName="Compaign Title *"
-            placeholder="e.g. Funds for Tamilnadu floods"
+            placeholder="e.g. Funds for Tamilnadu floods"compai
             inputType="text"
             value={form.title}
             handleChange={(e) => handleFormFieldChange("title", e)}
