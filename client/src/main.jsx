@@ -6,7 +6,7 @@ import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 import { stateContextProvider } from "./context";
 import App from "./App";
-import "./index.css"
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
