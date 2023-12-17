@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Sepolia } from "@thirdweb-dev/chains";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import App from "./App";
-import "./index.css"
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
