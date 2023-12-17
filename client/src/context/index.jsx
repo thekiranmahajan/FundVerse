@@ -13,7 +13,6 @@ export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
     "0xba414382Bc80410495601964D7c3700Bc95ca2FA"
   );
-  //0xba414382Bc80410495601964D7c3700Bc95ca2FA
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
     "createCampaign"
@@ -24,14 +23,16 @@ export const StateContextProvider = ({ children }) => {
 
   const publishCampaign = async (form) => {
     try {
-      const data = await createCampaign([
-        address, //owner
-        form.title, // title
-        form.description, //description
-        form.target,
-        new Date(form.deadline).getTime(), //deadline
-        form.image,
-      ])
+      const data = await createCampaign({
+        args: [
+          address, //owner's address
+          from.title, //title of campaign
+          form.description, //description of campaign
+          form.target, //target amount of campaign
+          new Date(form.deadline).getTime(), //deadline of campaign
+          form.image, //img of campaign
+        ],
+      });
 
       console.log("contract call success", data);
     } catch (error) {
@@ -39,22 +40,23 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const getCampaigns = async () =>{
-    const campaigns = await contract.call('getCampaigns');
+  const getCampaigns = async () => {
+    const campaigns = await contract.call("getCampaigns");
 
-    const parsedCampaigns = campaigns.map((campaign, i)=>({
+    const parsedCampaigns = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
       title: campaign.title,
       description: campaign.description,
       target: ethers.utils.formatEther(campaign.target.toString()),
       deadline: campaign.deadline.toNumber(),
-      amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+      amountCollected: ethers.utils.formatEther(
+        campaign.amountCollected.toString()
+      ),
       image: campaign.image,
-      pId: i
-
+      pId: i,
     }));
     return parsedCampaigns;
-  }
+  };
   return (
     <StateContext.Provider
       value={{
@@ -67,7 +69,7 @@ export const StateContextProvider = ({ children }) => {
     >
       {children}
     </StateContext.Provider>
-  )
-}
+  );
+};
 
 export const useStateContext = () => useContext(StateContext);
