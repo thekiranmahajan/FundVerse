@@ -14,7 +14,7 @@ root.render(
   <ThirdwebProvider
     desiredChainId={ChainId.Sepolia}
     activeChain={Sepolia}
-    clientId="Enter your client ID from thirdweb"
+    clientId="65af5efe940207956d019ad36e02a00e"
   >
     <Router>
       <StateContextProvider>
