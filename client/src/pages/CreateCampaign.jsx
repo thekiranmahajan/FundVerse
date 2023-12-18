@@ -19,8 +19,8 @@ const CreateCampaign = () => {
     image: "",
   });
 
-  const handleFormFieldChange = (filedName, e) => {
-    setForm({ ...form, [filedName]: e.target.value });
+  const handleFormFieldChange = (fieldName, e) => {
+    setForm({ ...form, [fieldName]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -78,7 +78,8 @@ const CreateCampaign = () => {
 
           <FormField
             labelName="Compaign Title *"
-            placeholder="e.g. Funds for Tamilnadu floods"compai
+            placeholder="e.g. Funds for Tamilnadu floods"
+            compai
             inputType="text"
             value={form.title}
             handleChange={(e) => handleFormFieldChange("title", e)}
