@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 
 import { useStateContext } from "../context";
-import { CountBox, CustomButton } from "../components";
+import { CountBox, CustomButton, Loader } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import { thirdweb } from "../assets";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { getDonations, contract, address, donate } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -29,11 +30,12 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
     await donate(state.pId, amount);
+    navigate("/");
     setIsLoading(false);
   };
   return (
     <div>
-      {isLoading && "Loading..."}
+      {isLoading && <Loader />}
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
           <img
@@ -104,7 +106,19 @@ const CampaignDetails = () => {
             </h4>
             <div className=" mt-[20px] flex flex-col gap-4">
               {donators.length > 0 ? (
-                donators.map((item, index) => <div>DONATOR</div>)
+                donators.map((item, index) => (
+                  <div
+                    key={`${item.donator}-${index}`}
+                    className="flex justify-between items-center gap-4"
+                  >
+                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] ">
+                      {index + 1}. {item.donator}
+                    </p>{" "}
+                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] ">
+                      {item.donation}
+                    </p>
+                  </div>
+                ))
               ) : (
                 <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">
                   No donators yet. Be the first one to donate!
