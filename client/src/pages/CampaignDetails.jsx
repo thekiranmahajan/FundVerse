@@ -69,7 +69,7 @@ const CampaignDetails = () => {
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
-            <h4 className="font-epilouge font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
               Creator
             </h4>
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
@@ -153,7 +153,7 @@ const CampaignDetails = () => {
                   Back it because you believe in it.
                 </h4>
                 <p className=" mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191] ">
-                  Support the project for no reward, just it speeks to you{" "}
+                  Support the project for no reward, just it speaks to you{" "}
                 </p>
               </div>
               <CustomButton

@@ -13,7 +13,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
   return (
     <div>
-      <h1 className="font-epilogue font-semibold text[18px] text-white text-left">
+      <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">
         {title} ({campaigns.length})
         <div className="flex flex-wrap mt-[20px] gap-[26px] ">
           {isLoading && (
@@ -24,7 +24,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
             />
           )}
           {!isLoading && campaigns.length === 0 && (
-            <p className="font-epilogue font-semibold text-[14px] leading-[30px] text[#818183] ">
+            <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183] ">
               You have not created any campaigns yet
             </p>
           )}

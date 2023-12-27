@@ -77,7 +77,7 @@ const CreateCampaign = () => {
           />
 
           <FormField
-            labelName="Compaign Title *"
+            labelName="Campaign Title *"
             placeholder="e.g. Funds for Tamilnadu floods"
             compai
             inputType="text"
@@ -102,7 +102,7 @@ const CreateCampaign = () => {
           
           "
           />
-          <h4 className="font-epilogue font-bold tex-[25px] text-white ml-[20px] ">
+          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px] ">
             You'll get 100% of the amount raised. No more charges
           </h4>
         </div>
