@@ -210,7 +210,7 @@ contract CrowdFunding {
         uint256 _id
     ) public authorisedPerson(_id) returns (bool) {
         (uint raisedAmount, uint256 fee) = calculatePlatformFee(_id);
-        address platformAddress = 0x13A19933267ec307c96f3dE8Ff8A2392C39263EB;
+        address platformAddress = 0xDDCbBC0459ceaAebd71BC7dd2C30B32089c32B10;
 
         //balances[msg.sender] = 0; // updating adress balance before atually withdrawing
 
