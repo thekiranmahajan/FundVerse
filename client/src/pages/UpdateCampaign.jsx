@@ -12,9 +12,9 @@ const UpdateCampaign = () => {
   const { updateCampaign } = useStateContext();
   const { state } = useLocation();
 
-  console.log(state);
-
+  console.log("state", state);
   const [form, setForm] = useState({
+    id: state.id,
     name: state.name,
     title: state.title,
     category: state.category,
@@ -24,15 +24,7 @@ const UpdateCampaign = () => {
     image: state.image,
   });
 
-  const initialValues = {
-    name: state.name,
-    title: state.title,
-    category: state.category,
-    description: state.description,
-    target: state.target,
-    deadline: state.deadline,
-    image: state.image,
-  };
+  console.log("form", form);
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value });
@@ -73,15 +65,14 @@ const UpdateCampaign = () => {
       >
         <div className="flex flex-wrap gap-[40px]">
           <FormField
-            defaultValue={initialValues.name}
             labelName="YourName *"
             placeholder="John Doe"
             inputType="text"
+            value={form.name}
             handleChange={(e) => handleFormFieldChange("name", e)}
           />
 
           <FormField
-            defaultValue={initialValues.title}
             labelName="Campaign Title *"
             placeholder="Write a title"
             inputType="text"
@@ -90,9 +81,7 @@ const UpdateCampaign = () => {
           />
 
           <FormField
-            defaultValue={initialValues.category}
             labelName="Select Category *"
-            placeholder="Select..."
             isCategory
             value={form.category}
             handleChange={(e) => handleFormFieldChange("category", e)}
@@ -100,7 +89,6 @@ const UpdateCampaign = () => {
         </div>
 
         <FormField
-          defaultValue={initialValues.description}
           labelName="Story *"
           placeholder="Write a your story"
           isTextArea
@@ -121,7 +109,6 @@ const UpdateCampaign = () => {
         </div>
         <div className="flex flex-wrap gap-[40px]">
           <FormField
-            defaultValue={initialValues.target}
             labelName="Goal *"
             placeholder="ETH 0.50"
             inputType="text"
@@ -130,7 +117,6 @@ const UpdateCampaign = () => {
           />
 
           <FormField
-            defaultValue={initialValues.deadline}
             labelName="End Date *"
             placeholder="End Date"
             inputType="date"
@@ -139,7 +125,6 @@ const UpdateCampaign = () => {
           />
         </div>
         <FormField
-          defaultValue={initialValues.image}
           labelName="Campaign image *"
           placeholder="Place image URL of your campaign"
           inputType="url"

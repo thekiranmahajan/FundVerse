@@ -30,7 +30,6 @@ const CreateCampaign = () => {
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true);
-        // console.log("form", form);
         await createCampaign({
           ...form,
           target: ethers.utils.parseUnits(form.target, 18),

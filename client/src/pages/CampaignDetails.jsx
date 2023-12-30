@@ -43,8 +43,28 @@ const CampaignDetails = () => {
     if (contract) fetchSingleCampaign();
   }, [contract, address]);
 
+  const id = state.pId;
+  const name = state.name;
+  const title = state.title;
+  const category = state.category;
+  const description = state.description;
+  const target = state.target;
+  const deadline = state.deadline;
+  const image = state.image;
+
   const handleUpdate = () => {
-    navigate(`/update-campaign/${state.pId}`, { state: { singleCampaign } });
+    navigate(`/update-campaign/${state.pId}`, {
+      state: {
+        id,
+        name,
+        title,
+        category,
+        description,
+        target,
+        deadline,
+        image,
+      },
+    });
   };
 
   const handleDonate = async () => {
