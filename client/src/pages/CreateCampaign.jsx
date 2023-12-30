@@ -112,7 +112,7 @@ const CreateCampaign = () => {
           "
           />
           <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px] ">
-            You'll get 100% of the amount raised. No more charges
+            You'll get (100 - platformFee)% of the raised amount
           </h4>
         </div>
         <div
