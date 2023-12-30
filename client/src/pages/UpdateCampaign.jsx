@@ -12,7 +12,6 @@ const UpdateCampaign = () => {
   const { updateCampaign } = useStateContext();
   const { state } = useLocation();
 
-  console.log("state", state);
   const [form, setForm] = useState({
     id: state.id,
     name: state.name,
@@ -24,8 +23,6 @@ const UpdateCampaign = () => {
     image: state.image,
   });
 
-  console.log("form", form);
-
   const handleFormFieldChange = (fieldName, e) => {
     setForm({ ...form, [fieldName]: e.target.value });
   };
@@ -36,8 +33,7 @@ const UpdateCampaign = () => {
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true);
-        console.log("form", form);
-        console.log("target", form.target);
+
         await updateCampaign({
           ...form,
           target: ethers.utils.parseUnits(form.target, 18),

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Expandable = ({ children, maxChars = 250 }) => {
+const Expandable = ({ children, maxChars = 300 }) => {
   let [expanded, setExpanded] = useState(true);
 
   if (children.length <= maxChars) return <p>{children}</p>;
@@ -14,7 +14,7 @@ const Expandable = ({ children, maxChars = 250 }) => {
       </p>
       <span
         onClick={() => setExpanded(!expanded)}
-        className=" font-epilogue font-normal text-[16px] text-[#8c6dfd] leading-[26px] text-justify"
+        className=" cursor-pointer font-epilogue font-normal text-[16px] text-[#8c6dfd] leading-[26px] text-justify"
       >
         {expanded ? "Read More >>" : "Read Less <<"}
       </span>
