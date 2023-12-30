@@ -11,6 +11,7 @@ const CreateCampaign = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
+    Category: "",
     name: "",
     title: "",
     description: "",
@@ -83,6 +84,13 @@ const CreateCampaign = () => {
             inputType="text"
             value={form.title}
             handleChange={(e) => handleFormFieldChange("title", e)}
+          />
+
+          <FormField
+            labelName="Select Category *"
+            isCategory
+            value={form.Category}
+            handleChange={(e) => handleFormFieldChange("category", e)}
           />
         </div>
 
