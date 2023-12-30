@@ -10,7 +10,14 @@ import { thirdweb } from "../assets";
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { getDonations, contract, address, donate } = useStateContext();
+  const {
+    getDonations,
+    contract,
+    address,
+    donate,
+    deleteCampaign,
+    updateCampaign,
+  } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
@@ -30,6 +37,22 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
     await donate(state.pId, amount);
+    navigate("/");
+    setIsLoading(false);
+  };
+  const handleDelete = async () => {
+    setIsLoading(true);
+
+    await deleteCampaign(state.pId);
+
+    navigate("/");
+    setIsLoading(false);
+  };
+
+  const handleUpdate = async () => {
+    setIsLoading(true);
+
+    await contract.updateCampaign(state.pId);
     navigate("/");
     setIsLoading(false);
   };
@@ -177,6 +200,27 @@ const CampaignDetails = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-[60px] mb-[30px]">
+        {address == state.owner ? (
+          <div className="flex flex-wrap justify-between gap-[40px]">
+            <CustomButton
+              btnType="button"
+              title="Update Campaign"
+              styles="w-[31%] bg-[#8c6dfd]"
+              handleClick={handleUpdate}
+            />
+
+            <CustomButton
+              btnType="button"
+              title="Delete Campaign"
+              styles=" w-[31%] bg-[#8c6dfd]"
+              handleClick={handleDelete}
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );
