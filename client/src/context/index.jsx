@@ -94,6 +94,14 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
+  const getSingleCampaign = async (pId) => {
+    const allCampaign = await getCampaigns();
+    const filteredCampaign = allCampaign.filter(
+      (campaign) => campaign.pId === pId
+    );
+    return filteredCampaign;
+  };
+
   const donate = async (pId, amount) => {
     const data = await contract.call("donateToCampaign", [pId], {
       value: ethers.utils.parseEther(amount),
@@ -128,6 +136,7 @@ export const StateContextProvider = ({ children }) => {
         getDonations,
         deleteCampaign,
         updateCampaign,
+        getSingleCampaign,
       }}
     >
       {children}

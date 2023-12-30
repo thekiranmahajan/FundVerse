@@ -16,12 +16,13 @@ const CampaignDetails = () => {
     address,
     donate,
     deleteCampaign,
-    updateCampaign,
+    getSingleCampaign,
   } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
+  const [singleCampaign, setSingleCampaign] = useState([]);
 
   const remainingDays = daysLeft(state.deadline);
 
@@ -33,6 +34,18 @@ const CampaignDetails = () => {
   useEffect(() => {
     if (contract) fetchDonators();
   }, [contract, address]);
+
+  const fetchSingleCampaign = async () => {
+    const data = await getSingleCampaign(state.pId);
+    setSingleCampaign(data);
+  };
+  useEffect(() => {
+    if (contract) fetchSingleCampaign();
+  }, [contract, address]);
+
+  const handleUpdate = () => {
+    navigate(`/update-campaign/${state.pId}`, { state: { singleCampaign } });
+  };
 
   const handleDonate = async () => {
     setIsLoading(true);
@@ -49,13 +62,6 @@ const CampaignDetails = () => {
     setIsLoading(false);
   };
 
-  const handleUpdate = async () => {
-    setIsLoading(true);
-
-    await contract.updateCampaign(state.pId);
-    navigate("/");
-    setIsLoading(false);
-  };
   return (
     <div>
       {isLoading && <Loader />}
@@ -206,6 +212,7 @@ const CampaignDetails = () => {
           <div className="flex flex-wrap justify-between gap-[40px]">
             <CustomButton
               btnType="button"
+              id={state.pId}
               title="Update Campaign"
               styles="w-[31%] bg-[#8c6dfd]"
               handleClick={handleUpdate}
@@ -214,7 +221,7 @@ const CampaignDetails = () => {
             <CustomButton
               btnType="button"
               title="Delete Campaign"
-              styles=" w-[31%] bg-[#8c6dfd]"
+              styles=" w-[31%] bg-[#FF0000]"
               handleClick={handleDelete}
             />
           </div>
