@@ -51,6 +51,7 @@ const FormField = ({
           <option value="Non-Profit">Non-Profit</option>
           <option value="Personal">Personal</option>
           <option value="Environment">Environment</option>
+          <option value="Animals">Animals</option>
           <option value="Other">Other</option>
         </select>
       ) : (

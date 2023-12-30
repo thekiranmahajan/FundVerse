@@ -4,7 +4,9 @@ import { daysLeft } from "../utils";
 
 const FundCard = ({
   owner,
+  name,
   title,
+  category,
   description,
   target,
   deadline,
@@ -30,8 +32,8 @@ const FundCard = ({
             alt="tag"
             className="w-[17px] h-[17px] object-contain "
           />
-          <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] text-[#808191] ">
-            Category here
+          <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] h-[17px] text-[#808191] ">
+            {category}
           </p>
         </div>
         <div className="block">
@@ -48,7 +50,7 @@ const FundCard = ({
               {amountCollected}
             </h4>
             <p className=" mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">
-              Raised of {target}
+              Raised out of {target}
             </p>
           </div>
           <div className="flex flex-col ">
@@ -68,9 +70,14 @@ const FundCard = ({
               className="w-1/2 h-1/2 object-contain"
             />
           </div>
-          <p className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">
-            by <span className="text-[#b2b3bd] ">{owner}</span>
-          </p>
+          <div className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">
+            by <span className="text-[#b2b3bd]">{name}</span>
+            <div className="flex flex-col">
+              <span className=" font-epilogue font-normal text-[12px] text-[#b2b3bd] leading-[18px] sm:max-w-[120px] truncate ">
+                {owner}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

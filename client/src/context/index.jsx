@@ -26,7 +26,9 @@ export const StateContextProvider = ({ children }) => {
       const data = await createCampaign({
         args: [
           address, //owner's address
+          form.name, //name of creater
           form.title, //title of campaign
+          form.category, //category of fund raised
           form.description, //description of campaign
           form.target, //target amount of campaign
           new Date(form.deadline).getTime(), //deadline of campaign
@@ -45,7 +47,9 @@ export const StateContextProvider = ({ children }) => {
 
     const parsedCampaigns = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
+      name: campaign.name,
       title: campaign.title,
+      category: campaign.category,
       description: campaign.description,
       target: ethers.utils.formatEther(campaign.target.toString()),
       deadline: campaign.deadline.toNumber(),

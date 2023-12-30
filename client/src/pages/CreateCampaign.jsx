@@ -11,9 +11,9 @@ const CreateCampaign = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { createCampaign } = useStateContext();
   const [form, setForm] = useState({
-    Category: "",
     name: "",
     title: "",
+    category: "",
     description: "",
     target: "",
     deadline: "",
@@ -30,6 +30,7 @@ const CreateCampaign = () => {
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true);
+        console.log("form", form);
         await createCampaign({
           ...form,
           target: ethers.utils.parseUnits(form.target, 18),
