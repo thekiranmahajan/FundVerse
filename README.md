@@ -34,29 +34,29 @@ To Install and run this Blockchain based crowdfunding platform locally, one must
 
 **Clone the repository:**
 
-   https://github.com/thekiranmahajan/FundVerse.git
+         https://github.com/thekiranmahajan/FundVerse.git
 
 **Navigate to the web3 repository:**
 
-   cd web3
+         cd web3
 
 **Install required dependencies:**
 
-   npm install
+         npm install
 
 **Navigate to the client repository:**
 
-   cd client
+         cd client
 
 **Install required dependencies:**
 
-   npm install
+         npm install
 
 **Start the development server:**
 
-   npm run dev
+         npm run dev
 
-Open your browser and visit (http://localhost:5173) to view the user interface of the crowdfunding platform.
+Open your browser and visit http://localhost:5173 to view the user interface of the crowdfunding platform.
 
 ## How to Use?
 
