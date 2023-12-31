@@ -132,6 +132,57 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
+  const donate = async (pId, amount) => {
+    try {
+      const data = await contract.call("donateToCampaign", [pId], {
+        value: ethers.utils.parseEther(amount),
+      });
+      toast("🫡 Campaign funded successfully. Thanks for collaboration😊", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return data;
+    } catch (err) {
+      console.log("Error occurred while making donation", err);
+    }
+  };
+
+  const withdraw = async (pId) => {
+    try {
+      const data = await contract.call("withdrawDonations", [pId]);
+
+      toast("🤑 Campaign funds successfully withdrawn", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return data;
+    } catch (err) {
+      toast("❌ Error occurred while withdrawing funds.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      console.log("Error occurred while withdrawing funds", err);
+    }
+  };
+
   const getCampaigns = async () => {
     const campaigns = await contract.call("getCampaigns");
 
@@ -168,27 +219,6 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaign;
   };
 
-  const donate = async (pId, amount) => {
-    try {
-      const data = await contract.call("donateToCampaign", [pId], {
-        value: ethers.utils.parseEther(amount),
-      });
-      toast("🫡 Campaign funded successfully. Thanks for collaboration😊", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return data;
-    } catch (err) {
-      console.log("Error occurred while making donation", err);
-    }
-  };
-
   const getDonations = async (pId) => {
     const donations = await contract.call("getDonators", [pId]);
     const numberOfDonations = donations[0].length;
@@ -213,6 +243,7 @@ export const StateContextProvider = ({ children }) => {
         getCampaigns,
         getUserCampaigns,
         donate,
+        withdraw,
         getDonations,
         deleteCampaign,
         updateCampaign,
