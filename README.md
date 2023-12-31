@@ -33,22 +33,48 @@ Though there were many but some of the major challenges we faced while building 
 To Install and run this Blockchain based crowdfunding platform locally, one must follow all the steps mentioned below:
 
 **Clone the repository:**
+
 `https://github.com/thekiranmahajan/FundVerse.git`
 
 **Navigate to the web3 repository:**
+
 `cd web3`
 
 **Install required dependencies:**
+
 `npm install`
 
 **Navigate to the client repository:**
+
 `cd client`
 
 **Install required dependencies:**
+
 `npm install`
 
 **Start the development server:**
+
 `npm run dev`
 
 Open your browser and visit (http://localhost:5173) to view the user interface of the crowdfunding platform.
 
+## How to Use?
+
+To use this DApp user must have an extension called [Metamask](https://metamask.io/download/), this is a web browser extension, you can install it on Firefox, Chrome, Opera,etc.
+
+
+## Additional Features: 
+   
+- The website offers Interactive forms so that contributors and campaign designers can both easily create and pool campaigns. 
+- These forms also Allow for donation and request approval.
+- The platform allows users to track the amount raised and days left for each campaign whereas, it includes functionality to track and display the number of donations made to a specific campaign, providing transparency and accountability.
+- The ability to track the progress of campaign creation and view multiple campaign cards created by different users adds transparency and visibility to the crowdfunding platform.
+
+## Credits:
+
+https://github.com/adrianhajdin/project_crowdfunding
+
+## Contributor:
+
+1.	https://github.com/thekiranmahajan
+2.	https://github.com/thesakshijaiswal
