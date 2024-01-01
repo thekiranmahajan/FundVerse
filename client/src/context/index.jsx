@@ -15,7 +15,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
     //Smart Contract address from Thirdweb dashboard
-    "0x55478fF21df110b905774d1B08C46d92E5271Cb5",
+    "0x2E331D1F5c7aB3900cFBfE7158851c2051A40248",
     contractAbi
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -139,6 +139,7 @@ export const StateContextProvider = ({ children }) => {
       const data = await contract.call("donateToCampaign", [pId], {
         value: ethers.utils.parseEther(amount),
       });
+      
       toast("🫡 Campaign funded successfully. Thanks for collaboration😊", {
         position: "top-right",
         autoClose: 5000,
