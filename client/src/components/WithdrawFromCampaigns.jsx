@@ -4,12 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import WithdrawCard from "./WithdrawCard";
 import { useStateContext } from "../context";
 import { loader } from "../assets";
-import Loader from "./Loader";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const WithdrawFromCampaigns = ({ title, campaigns }) => {
   const navigate = useNavigate();
-  const { withdraw } = useStateContext();
   const [isLoading, setIsLoading] = useState(false);
+  const { withdraw } = useStateContext();
 
   const state = campaigns.find((campaign) => {
     return campaign;
@@ -18,14 +20,27 @@ const WithdrawFromCampaigns = ({ title, campaigns }) => {
   console.log(state);
 
   const handleWithdraw = async () => {
-    setIsLoading(true);
+    if (state.amountCollected == 0) {
+      toast("❌ Error! No donations found for this campaign", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      setIsLoading(true);
 
-    console.log("state", state.pId);
+      console.log("state", state.pId);
 
-    await withdraw(state.pId);
-    navigate("/");
+      await withdraw(state.pId);
 
-    setIsLoading(false);
+      navigate("/");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -37,7 +52,7 @@ const WithdrawFromCampaigns = ({ title, campaigns }) => {
       <div className="flex flex-wrap mt-[20px] gap-[26px]">
         {isLoading && (
           <img
-            src={Loader}
+            src={loader}
             alt="loader"
             className="w-[100px] h-[100px] object-contain"
           />

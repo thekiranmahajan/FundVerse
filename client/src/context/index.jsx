@@ -9,12 +9,14 @@ import { ethers } from "ethers";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { contractAbi } from "../constants";
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0x5A6f68187409325f275E9871A12AE8917eFf6062"
+    //Smart Contract address from Thirdweb dashboard
+    "0x5A6f68187409325f275E9871A12AE8917eFf6062",
+    contractAbi
   );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
@@ -66,7 +68,7 @@ export const StateContextProvider = ({ children }) => {
   const updateCampaign = async (form) => {
     try {
       const data = await contract.call("updateCampaign", [
-        form.id,
+        form.id, //campaign id
         form.name, //name of creater
         form.title, //title of campaign
         form.category, //category of fund raised
@@ -204,16 +206,16 @@ export const StateContextProvider = ({ children }) => {
   };
 
   const getUserCampaigns = async () => {
-    const allCampaign = await getCampaigns();
-    const filteredCampaigns = allCampaign.filter(
+    const allCampaigns = await getCampaigns();
+    const filteredCampaigns = allCampaigns.filter(
       (campaign) => campaign.owner === address
     );
     return filteredCampaigns;
   };
 
   const getSingleCampaign = async (pId) => {
-    const allCampaign = await getCampaigns();
-    const filteredCampaign = allCampaign.filter(
+    const allCampaigns = await getCampaigns();
+    const filteredCampaign = allCampaigns.filter(
       (campaign) => campaign.pId === pId
     );
     return filteredCampaign;

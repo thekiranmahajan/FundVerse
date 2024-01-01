@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ethers } from "ethers";
 
 import { useStateContext } from "../context";
 import { CountBox, CustomButton, Loader, Expandable } from "../components";
@@ -159,7 +158,7 @@ const CampaignDetails = () => {
                   >
                     <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] ">
                       {index + 1}. {item.donator}
-                    </p>{" "}
+                    </p>
                     <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] ">
                       {item.donation}
                     </p>
@@ -173,11 +172,7 @@ const CampaignDetails = () => {
             </div>
           </div>
         </div>
-        <div
-          className=" flex-1
-        
-        "
-        >
+        <div className=" flex-1">
           <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
             Fund
           </h4>
@@ -199,13 +194,13 @@ const CampaignDetails = () => {
                   Back it because you believe in it.
                 </h4>
                 <p className=" mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191] ">
-                  Support the project for no reward, just it speaks to you{" "}
+                  Support the project for no reward, just it speaks to you.
                 </p>
               </div>
               <CustomButton
                 btnType="button"
                 title="Fund Campaign"
-                styles="w-full bg-[#8c6dfd]"
+                styles="w-full bg-[#ac73ff]"
                 handleClick={handleDonate}
               />
             </div>
@@ -219,7 +214,7 @@ const CampaignDetails = () => {
               btnType="button"
               id={state.pId}
               title="Update Campaign"
-              styles="w-[31%] bg-[#8c6dfd]"
+              styles="w-[31%] bg-[#ac73ff]"
               handleClick={handleUpdate}
             />
 
