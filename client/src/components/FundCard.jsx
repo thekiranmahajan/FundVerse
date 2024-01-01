@@ -1,4 +1,5 @@
 import React from "react";
+
 import { tagType, thirdweb } from "../assets";
 import { daysLeft } from "../utils";
 
@@ -71,7 +72,10 @@ const FundCard = ({
             />
           </div>
           <div className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">
-            by <span className="text-[#b2b3bd]">{name}</span>
+            by{" "}
+            <span className="font-epilogue leading-[22px] text-[#b2b3bd]">
+              {name}
+            </span>
             <div className="flex flex-col">
               <span className=" font-epilogue font-normal text-[12px] text-[#b2b3bd] leading-[18px] sm:max-w-[120px] truncate ">
                 {owner}

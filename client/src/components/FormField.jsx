@@ -10,11 +10,7 @@ const FormField = ({
   handleChange,
 }) => {
   return (
-    <label
-      className="
-    flex-1 w-full flex flex-col
-    "
-    >
+    <label className="flex-1 w-full flex flex-col">
       {labelName && (
         <span
           className="font-epilogue font-medium text-[14px]
