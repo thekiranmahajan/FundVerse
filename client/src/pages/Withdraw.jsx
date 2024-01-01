@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { loader } from "../assets";
+
 import { useStateContext } from "../context";
 import { Loader, WithdrawFromCampaigns } from "../components";
 
