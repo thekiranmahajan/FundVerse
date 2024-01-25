@@ -38,7 +38,7 @@ contract CrowdFunding {
     uint256 public numberOfCampaigns;
 
     constructor(uint256 _platformFee) payable {
-        manager = msg.sender;
+        manager == msg.sender;
         platformFee = _platformFee;
         balances[msg.sender] = msg.value;
     }
@@ -67,7 +67,7 @@ contract CrowdFunding {
 
         // check that the dealine is in the future
         require(
-            _deadline > block.timestamp,
+            campaign.deadline < block.timestamp,
             "deadline should be a date in the future"
         );
 
@@ -86,48 +86,6 @@ contract CrowdFunding {
         return numberOfCampaigns - 1;
     }
 
-    // function updateCampaign(
-    //     uint256 _id,
-    //     string memory _name,
-    //     string memory _title,
-    //     string memory _category,
-    //     string memory _description,
-    //     uint256 _target,
-    //     uint256 _deadline,
-    //     string memory _image
-    // ) public authorisedPerson(_id) returns (bool) {
-    //     Campaign storage campaign = campaigns[_id];
-
-    //     // make sure the inputs can't be null
-    //     if (
-    //         (bytes(_title).length <= 0 &&
-    //             bytes(_description).length <= 0 &&
-    //             _target <= 0 &&
-    //             _deadline <= 0 &&
-    //             bytes(_image).length <= 0)
-    //     ) {
-    //         revert InputsCantBeNull();
-    //     }
-
-    //     if (block.timestamp > _deadline) {
-    //         revert DeadlineShouldBeInFuture();
-    //     }
-
-    //     require(campaign.owner > address(0), "No campaign exist with this ID");
-
-    //     campaign.name = _name;
-    //     campaign.title = _title;
-    //     campaign.category = _category;
-    //     campaign.description = _description;
-    //     campaign.target = _target;
-    //     campaign.deadline = _deadline;
-    //     campaign.image = _image;
-
-    //     emit Action(_id, "Campaign updated", msg.sender, block.timestamp);
-
-    //     return true;
-    // }
-
     function updateCampaign(
         uint256 _id,
         string memory _name,
@@ -140,47 +98,30 @@ contract CrowdFunding {
     ) public authorisedPerson(_id) returns (bool) {
         Campaign storage campaign = campaigns[_id];
 
-        require(
-            _deadline > block.timestamp,
-            "Deadline should be a date in the future"
-        );
-        require(
-            campaign.owner != address(0),
-            "No campaign exists with this ID"
-        );
+        // make sure the inputs can't be null
+        if (
+            (bytes(_title).length <= 0 &&
+                bytes(_description).length <= 0 &&
+                _target <= 0 &&
+                _deadline <= 0 &&
+                bytes(_image).length <= 0)
+        ) {
+            revert InputsCantBeNull();
+        }
 
-        // Validate that at least one field is being updated
-        require(
-            bytes(_title).length > 0 ||
-                bytes(_description).length > 0 ||
-                _target > 0 ||
-                _deadline > 0 ||
-                bytes(_image).length > 0,
-            "At least one field should be updated"
-        );
+        if (block.timestamp > _deadline) {
+            revert DeadlineShouldBeInFuture();
+        }
 
-        // Update campaign details
-        if (bytes(_title).length > 0) {
-            campaign.title = _title;
-        }
-        if (bytes(_name).length > 0) {
-            campaign.name = _name;
-        }
-        if (bytes(_category).length > 0) {
-            campaign.category = _category;
-        }
-        if (bytes(_description).length > 0) {
-            campaign.description = _description;
-        }
-        if (_target > 0) {
-            campaign.target = _target;
-        }
-        if (_deadline > 0) {
-            campaign.deadline = _deadline;
-        }
-        if (bytes(_image).length > 0) {
-            campaign.image = _image;
-        }
+        require(campaign.owner > address(0), "No campaign exist with this ID");
+
+        campaign.name = _name;
+        campaign.title = _title;
+        campaign.category = _category;
+        campaign.description = _description;
+        campaign.target = _target;
+        campaign.deadline = _deadline;
+        campaign.image = _image;
 
         emit Action(_id, "Campaign updated", msg.sender, block.timestamp);
 
@@ -240,42 +181,18 @@ contract CrowdFunding {
         return (true);
     }
 
-    // function _refundDonators(uint _id) public {
-    //     Campaign storage campaign = campaigns[_id];
-    //     for (uint i; i < campaign.donators.length; i++) {
-    //         address donators = campaign.donators[i];
-    //         uint256 donations = campaign.donations[i];
-
-    //         // setting values to zero before withdrawing for security purposes (WITHDRAWAL PATTERN)
-    //         campaign.donations[i] = 0;
-    //         campaign.amountCollected = 0;
-
-    //         _payTo(donators, donations);
-    //     }
-    // }
-
     function _refundDonators(uint _id) public {
         Campaign storage campaign = campaigns[_id];
         for (uint i; i < campaign.donators.length; i++) {
-            address donator = campaign.donators[i];
-            uint256 donationAmount = campaign.donations[i];
+            address donators = campaign.donators[i];
+            uint256 donations = campaign.donations[i];
 
-            // Ensure the contract has enough balance before transferring funds
-            require(
-                address(this).balance >= donationAmount,
-                "Insufficient contract balance"
-            );
+            // setting values to zero before withdrawing for security purposes (WITHDRAWAL PATTERN)
+            campaign.donations[i] = 0;
+            campaign.amountCollected = 0;
 
-            // Transfer the donation amount back to the respective donator
-            _payTo(donator, donationAmount);
+            _payTo(donators, donations);
         }
-
-        // Reset the donators array and donations array after refunding
-        delete campaign.donators;
-        delete campaign.donations;
-
-        // Resetting the total collected amount after refunds
-        campaign.amountCollected = 0;
     }
 
     // platform fee
