@@ -15,7 +15,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
     //Smart Contract address from Thirdweb dashboard
-    "0x10269069bd8986294d70436450B1698B4FA6Ad6B",
+    "0x4f8c6a700231635742217C3924d725a24bb19eeC",
     contractAbi
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -30,7 +30,7 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
-          address, //owner's address
+          // address, //owner's address
           form.name, //name of creater
           form.title, //title of campaign
           form.category, //category of fund raised
@@ -156,36 +156,6 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const withdraw = async (pId) => {
-    try {
-      const data = await contract.call("withdrawDonations", [pId]);
-
-      toast("🤑 Campaign funds successfully withdrawn", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return data;
-    } catch (err) {
-      toast("❌ Error occurred while withdrawing funds.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      console.log("Error occurred while withdrawing funds", err);
-    }
-  };
-
   const getCampaigns = async () => {
     const campaigns = await contract.call("getCampaigns");
 
@@ -246,7 +216,6 @@ export const StateContextProvider = ({ children }) => {
         getCampaigns,
         getUserCampaigns,
         donate,
-        withdraw,
         getDonations,
         deleteCampaign,
         updateCampaign,

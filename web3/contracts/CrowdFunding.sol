@@ -1,12 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-// Errors
-error CrowdFunding__CampaignDoesNotExist();
-error InputsCantBeNull();
-error DeadlineShouldBeInFuture();
-error AmountDonatedMustBeGreaterThanZero(uint minAmount, uint donatedAmount);
-error DeadlineReached(uint campaignDeadline, uint timeRequested);
 
 contract CrowdFunding {
     struct Campaign {
@@ -31,20 +25,16 @@ contract CrowdFunding {
     );
 
     address public manager;
-    uint256 public platformFee;
 
     mapping(uint256 => Campaign) public campaigns;
-    mapping(address => uint) balances;
     uint256 public numberOfCampaigns;
 
-    constructor(uint256 _platformFee) payable {
-        manager == msg.sender;
-        platformFee = _platformFee;
-        balances[msg.sender] = msg.value;
+    constructor() {
+        manager = msg.sender;
     }
 
     modifier onlyManager() {
-        require(msg.sender == manager, "not owner");
+        require(msg.sender == manager, "Not owner");
         _;
     }
 
@@ -54,7 +44,6 @@ contract CrowdFunding {
     }
 
     function createCampaign(
-        address _owner,
         string memory _name,
         string memory _title,
         string memory _category,
@@ -63,15 +52,11 @@ contract CrowdFunding {
         uint256 _deadline,
         string memory _image
     ) public returns (uint256) {
+        require(_deadline > block.timestamp, "Deadline should be in the future");
+
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
-        // check that the dealine is in the future
-        require(
-            campaign.deadline < block.timestamp,
-            "deadline should be a date in the future"
-        );
-
-        campaign.owner = _owner;
+        campaign.owner = msg.sender;
         campaign.name = _name;
         campaign.title = _title;
         campaign.category = _category;
@@ -82,6 +67,8 @@ contract CrowdFunding {
         campaign.image = _image;
 
         numberOfCampaigns++;
+
+        emit Action(numberOfCampaigns - 1, "Campaign created", msg.sender, block.timestamp);
 
         return numberOfCampaigns - 1;
     }
@@ -96,24 +83,9 @@ contract CrowdFunding {
         uint256 _deadline,
         string memory _image
     ) public authorisedPerson(_id) returns (bool) {
+        require(_deadline > block.timestamp, "Deadline should be in the future");
+        
         Campaign storage campaign = campaigns[_id];
-
-        // make sure the inputs can't be null
-        if (
-            (bytes(_title).length <= 0 &&
-                bytes(_description).length <= 0 &&
-                _target <= 0 &&
-                _deadline <= 0 &&
-                bytes(_image).length <= 0)
-        ) {
-            revert InputsCantBeNull();
-        }
-
-        if (block.timestamp > _deadline) {
-            revert DeadlineShouldBeInFuture();
-        }
-
-        require(campaign.owner > address(0), "No campaign exist with this ID");
 
         campaign.name = _name;
         campaign.title = _title;
@@ -128,126 +100,37 @@ contract CrowdFunding {
         return true;
     }
 
-    function donateToCampaign(uint256 _id) public payable {
-        uint256 amount = msg.value;
-
-        Campaign storage campaign = campaigns[_id];
-
-        // amount donated shouldn't be zero or less
-        if (amount <= 0 wei) {
-            revert AmountDonatedMustBeGreaterThanZero({
-                minAmount: 1 wei,
-                donatedAmount: amount
-            });
-        }
-
-        // cannot donate after deadline
-        if (campaign.deadline < block.timestamp) {
-            revert DeadlineReached({
-                campaignDeadline: campaigns[_id].deadline,
-                timeRequested: block.timestamp
-            });
-        }
-
-        campaign.donators.push(msg.sender);
-        campaign.donations.push(amount);
-
-        (bool sent, ) = payable(address(this)).call{value: amount}("");
-        require(sent, "donation failed");
-
-        if (sent) {
-            campaign.amountCollected = campaign.amountCollected + amount;
-        }
-    }
-
-    function deleteCampaign(
-        uint256 _id
-    ) public authorisedPerson(_id) returns (bool) {
-        if (campaigns[_id].owner == address(0)) {
-            revert CrowdFunding__CampaignDoesNotExist();
-        }
-
-        // refund the donators if any
-        if (campaigns[_id].amountCollected > 0) {
-            _refundDonators(_id);
-        }
+    function deleteCampaign(uint256 _id) public authorisedPerson(_id) returns (bool) {
+        require(campaigns[_id].owner != address(0), "Campaign does not exist");
 
         delete campaigns[_id];
 
-        numberOfCampaigns = numberOfCampaigns - 1;
-
-        emit Action(_id, "Campaign Deleted", msg.sender, block.timestamp);
-
-        return (true);
-    }
-
-    function _refundDonators(uint _id) public {
-        Campaign storage campaign = campaigns[_id];
-        for (uint i; i < campaign.donators.length; i++) {
-            address donators = campaign.donators[i];
-            uint256 donations = campaign.donations[i];
-
-            // setting values to zero before withdrawing for security purposes (WITHDRAWAL PATTERN)
-            campaign.donations[i] = 0;
-            campaign.amountCollected = 0;
-
-            _payTo(donators, donations);
-        }
-    }
-
-    // platform fee
-    function calculatePlatformFee(
-        uint256 _id
-    ) public view returns (uint, uint) {
-        require(campaigns[_id].amountCollected > 0, "no donations collected");
-        uint raisedAmount = campaigns[_id].amountCollected;
-        uint fee = (raisedAmount * platformFee) / 100;
-        return (raisedAmount, fee);
-    }
-
-    // withdraw donations
-    function withdrawDonations(
-        uint256 _id
-    ) public authorisedPerson(_id) returns (bool) {
-        (uint raisedAmount, uint256 fee) = calculatePlatformFee(_id);
-        address platformAddress = 0xDDCbBC0459ceaAebd71BC7dd2C30B32089c32B10;
-
-        //balances[msg.sender] = 0; // updating adress balance before atually withdrawing
-
-        //send to campaign owner
-        require(
-            (raisedAmount - fee) <= (address(this).balance),
-            "amount in excess of balance"
-        );
-        _payTo(campaigns[_id].owner, (raisedAmount - fee));
-
-        //send to platform
-        require(fee <= (address(this).balance), "fee in excess of balance");
-        _payTo(platformAddress, fee);
-
-        emit Action(_id, "Funds Withdrawn", msg.sender, block.timestamp);
+        emit Action(_id, "Campaign deleted", msg.sender, block.timestamp);
 
         return true;
     }
 
-    function _payTo(address to, uint256 amount) internal {
-        require(amount > 0, "Can't send 0");
-        (bool success, ) = payable(to).call{value: amount}("");
-        require(success, "transfer failed");
+    function donateToCampaign(uint256 _id) public payable {
+        require(msg.value > 0, "Amount donated must be greater than zero");
+        require(campaigns[_id].deadline > block.timestamp, "Deadline reached");
+
+        Campaign storage campaign = campaigns[_id];
+
+        campaign.donators.push(msg.sender);
+        campaign.donations.push(msg.value);
+        campaign.amountCollected += msg.value;
+
+        emit Action(_id, "Donation received", msg.sender, block.timestamp);
     }
 
-    function getDonators(
-        uint256 _id
-    ) public view returns (address[] memory, uint256[] memory) {
+    function getDonators(uint256 _id) public view returns (address[] memory, uint256[] memory) {
         return (campaigns[_id].donators, campaigns[_id].donations);
     }
 
     function getCampaigns() public view returns (Campaign[] memory) {
-        // create an empty array of as many structs as there are campaigns
         Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
 
-        // now we loop through the campaigns and populate the variable
-        for (uint i = 0; i < numberOfCampaigns; i++) {
+        for (uint256 i = 0; i < numberOfCampaigns; i++) {
             Campaign storage item = campaigns[i];
             allCampaigns[i] = item;
         }

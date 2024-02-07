@@ -89,7 +89,7 @@ const CreateCampaign = () => {
           <FormField
             labelName="Select Category *"
             isCategory
-            value={form.Category}
+            value={form.category}
             handleChange={(e) => handleFormFieldChange("category", e)}
           />
         </div>

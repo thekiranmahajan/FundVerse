@@ -7,7 +7,6 @@ import {
   Home,
   Profile,
   UpdateCampaign,
-  Withdraw,
 } from "./pages";
 
 const App = () => {
@@ -26,7 +25,6 @@ const App = () => {
           <Route path="/create-campaign" element={<CreateCampaign />} />
           <Route path="/update-campaign/:id" element={<UpdateCampaign />} />
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-          <Route path="/withdraw" element={<Withdraw />} />
         </Routes>
       </div>
     </div>

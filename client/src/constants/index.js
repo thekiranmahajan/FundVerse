@@ -46,67 +46,9 @@ export const contractAbi = [
   {
     type: "constructor",
     name: "",
-    inputs: [
-      {
-        type: "uint256",
-        name: "_platformFee",
-        internalType: "uint256",
-      },
-    ],
-    outputs: [],
-    stateMutability: "payable",
-  },
-  {
-    type: "error",
-    name: "AmountDonatedMustBeGreaterThanZero",
-    inputs: [
-      {
-        type: "uint256",
-        name: "minAmount",
-        internalType: "uint256",
-      },
-      {
-        type: "uint256",
-        name: "donatedAmount",
-        internalType: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    type: "error",
-    name: "CrowdFunding__CampaignDoesNotExist",
     inputs: [],
     outputs: [],
-  },
-  {
-    type: "error",
-    name: "DeadlineReached",
-    inputs: [
-      {
-        type: "uint256",
-        name: "campaignDeadline",
-        internalType: "uint256",
-      },
-      {
-        type: "uint256",
-        name: "timeRequested",
-        internalType: "uint256",
-      },
-    ],
-    outputs: [],
-  },
-  {
-    type: "error",
-    name: "DeadlineShouldBeInFuture",
-    inputs: [],
-    outputs: [],
-  },
-  {
-    type: "error",
-    name: "InputsCantBeNull",
-    inputs: [],
-    outputs: [],
+    stateMutability: "nonpayable",
   },
   {
     type: "event",
@@ -139,43 +81,6 @@ export const contractAbi = [
     ],
     outputs: [],
     anonymous: false,
-  },
-  {
-    type: "function",
-    name: "_refundDonators",
-    inputs: [
-      {
-        type: "uint256",
-        name: "_id",
-        internalType: "uint256",
-      },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "calculatePlatformFee",
-    inputs: [
-      {
-        type: "uint256",
-        name: "_id",
-        internalType: "uint256",
-      },
-    ],
-    outputs: [
-      {
-        type: "uint256",
-        name: "",
-        internalType: "uint256",
-      },
-      {
-        type: "uint256",
-        name: "",
-        internalType: "uint256",
-      },
-    ],
-    stateMutability: "view",
   },
   {
     type: "function",
@@ -240,11 +145,6 @@ export const contractAbi = [
     type: "function",
     name: "createCampaign",
     inputs: [
-      {
-        type: "address",
-        name: "_owner",
-        internalType: "address",
-      },
       {
         type: "string",
         name: "_name",
@@ -444,19 +344,6 @@ export const contractAbi = [
   },
   {
     type: "function",
-    name: "platformFee",
-    inputs: [],
-    outputs: [
-      {
-        type: "uint256",
-        name: "",
-        internalType: "uint256",
-      },
-    ],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
     name: "updateCampaign",
     inputs: [
       {
@@ -498,25 +385,6 @@ export const contractAbi = [
         type: "string",
         name: "_image",
         internalType: "string",
-      },
-    ],
-    outputs: [
-      {
-        type: "bool",
-        name: "",
-        internalType: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "withdrawDonations",
-    inputs: [
-      {
-        type: "uint256",
-        name: "_id",
-        internalType: "uint256",
       },
     ],
     outputs: [
