@@ -6,7 +6,6 @@ import {
   useContractWrite,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { contractAbi } from "../constants";
@@ -30,14 +29,13 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
-          // address, //owner's address
-          form.name, //name of creater
-          form.title, //title of campaign
-          form.category, //category of fund raised
-          form.description, //description of campaign
-          form.target, //target amount of campaign
-          new Date(form.deadline).getTime(), //deadline of campaign
-          form.image, //img of campaign
+          form.name,
+          form.title,
+          form.category,
+          form.description,
+          form.target,
+          new Date(form.deadline).getTime(),
+          form.image,
         ],
       });
       toast("✅ Campaign created successfully", {
@@ -68,14 +66,14 @@ export const StateContextProvider = ({ children }) => {
   const updateCampaign = async (form) => {
     try {
       const data = await contract.call("updateCampaign", [
-        form.id, //campaign id
-        form.name, //name of creater
-        form.title, //title of campaign
-        form.category, //category of fund raised
-        form.description, //description of campaign
-        form.target, //target amount of campaign
-        new Date(form.deadline).getTime(), //deadline of campaign
-        form.image, //img of campaign
+        form.id,
+        form.name,
+        form.title,
+        form.category,
+        form.description,
+        form.target,
+        new Date(form.deadline).getTime(),
+        form.image,
       ]);
       toast("✅ Campaign updated successfully", {
         position: "top-right",
@@ -118,6 +116,7 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
       console.log("Campaign delete success", data);
+      console.log(getCampaigns);
       return data;
     } catch (error) {
       toast("❌ Error while deleting Campaign, please 🙏🏻 try again", {
@@ -173,6 +172,7 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i,
     }));
+    console.log("Campaigns from index.jsx: " , parsedCampaigns);
     return parsedCampaigns;
   };
 
@@ -182,14 +182,6 @@ export const StateContextProvider = ({ children }) => {
       (campaign) => campaign.owner === address
     );
     return filteredCampaigns;
-  };
-
-  const getSingleCampaign = async (pId) => {
-    const allCampaigns = await getCampaigns();
-    const filteredCampaign = allCampaigns.filter(
-      (campaign) => campaign.pId === pId
-    );
-    return filteredCampaign;
   };
 
   const getDonations = async (pId) => {
@@ -219,7 +211,6 @@ export const StateContextProvider = ({ children }) => {
         getDonations,
         deleteCampaign,
         updateCampaign,
-        getSingleCampaign,
       }}
     >
       <ToastContainer />

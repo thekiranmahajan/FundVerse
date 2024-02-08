@@ -7,15 +7,16 @@ const Home = () => {
   const [campaigns, setCampaigns] = useState([]);
   const { address, contract, getCampaigns } = useStateContext();
 
-  
   const fetchCampaigns = async () => {
     setIsLoading(true);
     const data = await getCampaigns();
+    console.log("Campaigns from Home.jsx: ", data);
     setCampaigns(data);
     setIsLoading(false);
   };
 
   useEffect(() => {
+    console.log(contract);
     if (contract) fetchCampaigns();
   }, [address, contract]);
   return (
