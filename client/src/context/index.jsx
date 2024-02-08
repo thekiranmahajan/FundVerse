@@ -9,14 +9,13 @@ import { ethers } from "ethers";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { contractAbi } from "../constants";
+import { contractABI } from "../constants";
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    //Smart Contract address from Thirdweb dashboard
-    "0x10269069bd8986294d70436450B1698B4FA6Ad6B",
-    contractAbi
+    "0x6be240861B394d79E509b3B6C938eB89c9c0dcc2", // Contract Address
+    contractABI
   );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
@@ -30,12 +29,12 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
-          address, //owner's address
-          form.name, //name of creater
-          form.title, //title of campaign
-          form.category, //category of fund raised
-          form.description, //description of campaign
-          form.target, //target amount of campaign
+          address, 
+          form.name, 
+          form.title, 
+          form.category, 
+          form.description, 
+          form.target, 
           new Date(form.deadline).getTime(), //deadline of campaign
           form.image, //img of campaign
         ],
