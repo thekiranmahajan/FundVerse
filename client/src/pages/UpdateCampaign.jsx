@@ -100,7 +100,7 @@ const UpdateCampaign = () => {
           />
 
           <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">
-            You will get (100 - platformFee)% of the raised amount
+            You will get 100% of the raised amount
           </h4>
         </div>
         <div className="flex flex-wrap gap-[40px]">
@@ -116,7 +116,7 @@ const UpdateCampaign = () => {
             labelName="End Date *"
             placeholder="End Date"
             inputType="date"
-            value={new Date(Number(form.deadline)).toISOString().split("T")[0]}
+            value={form.deadline}
             handleChange={(e) => handleFormFieldChange("deadline", e)}
           />
         </div>

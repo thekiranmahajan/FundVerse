@@ -14,7 +14,7 @@ const StateContext = createContext();
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
     //Smart Contract address from Thirdweb dashboard
-    "0x4f8c6a700231635742217C3924d725a24bb19eeC",
+    "0x89968659f4B93B924b6ffBabe7B0C79f48B5A74F",
     contractAbi
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -29,6 +29,7 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
+          address,
           form.name,
           form.title,
           form.category,
@@ -116,7 +117,7 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
       console.log("Campaign delete success", data);
-      console.log(getCampaigns);
+      console.log("After deleting campaign", getCampaigns);
       return data;
     } catch (error) {
       toast("❌ Error while deleting Campaign, please 🙏🏻 try again", {
@@ -172,7 +173,7 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i,
     }));
-    console.log("Campaigns from index.jsx: " , parsedCampaigns);
+    console.log("Campaigns from index.jsx: ", parsedCampaigns);
     return parsedCampaigns;
   };
 

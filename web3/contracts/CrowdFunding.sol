@@ -44,6 +44,7 @@ contract CrowdFunding {
     }
 
     function createCampaign(
+        address _owner,
         string memory _name,
         string memory _title,
         string memory _category,
@@ -56,7 +57,7 @@ contract CrowdFunding {
 
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
-        campaign.owner = msg.sender;
+        campaign.owner = _owner;
         campaign.name = _name;
         campaign.title = _title;
         campaign.category = _category;

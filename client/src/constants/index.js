@@ -24,11 +24,7 @@ export const navlinks = [
     link: "/",
     disabled: true,
   },
-  {
-    name: "Withdraw",
-    imgUrl: withdraw,
-    link: "/withdraw",
-  },
+
   {
     name: "Profile",
     imgUrl: profile,
@@ -145,6 +141,11 @@ export const contractAbi = [
     type: "function",
     name: "createCampaign",
     inputs: [
+      {
+        type: "address",
+        name: "_owner",
+        internalType: "address",
+      },
       {
         type: "string",
         name: "_name",
