@@ -208,7 +208,7 @@ const CampaignDetails = () => {
         </div>
       </div>
       <div className="mt-[60px] mb-[30px]">
-        {address == state.owner ? (
+        {address == state.owner && (
           <div className="flex flex-wrap justify-between gap-[40px]">
             <CustomButton
               btnType="button"
@@ -225,8 +225,6 @@ const CampaignDetails = () => {
               handleClick={handleDelete}
             />
           </div>
-        ) : (
-          <div></div>
         )}
       </div>
     </div>
