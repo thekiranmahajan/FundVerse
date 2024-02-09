@@ -116,7 +116,7 @@ const UpdateCampaign = () => {
             labelName="End Date *"
             placeholder="End Date"
             inputType="date"
-            value={new Date(Number(form.deadline)).toISOString().split("T")[0]}
+            value={form.deadline}
             handleChange={(e) => handleFormFieldChange("deadline", e)}
           />
         </div>

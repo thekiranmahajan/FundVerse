@@ -59,7 +59,7 @@ contract CrowdFunding {
         uint256 _deadline,
         string memory _image
     ) public returns (uint256) {
-        require(_deadline > block.timestamp, "Deadline should be in the future");
+        require(_deadline > block.timestamp * 1000, "Deadline should be in the future");
 
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
@@ -90,7 +90,7 @@ contract CrowdFunding {
     ) public authorisedPerson(_id) returns (bool) {
         Campaign storage campaign = campaigns[_id];
 
-        require(_deadline > block.timestamp, "Deadline should be in the future");
+        require(_deadline > block.timestamp * 1000, "Deadline should be in the future");
         require(_target > 0, "Target amount must be greater than zero");
         require(campaign.owner != address(0), "Campaign does not exist");
 
@@ -114,7 +114,7 @@ contract CrowdFunding {
 
         Campaign storage campaign = campaigns[_id];
 
-        require(campaign.deadline > block.timestamp, "Deadline reached");
+        require(campaign.deadline > block.timestamp * 1000, "Deadline reached");
 
         campaign.donators.push(msg.sender);
         campaign.donations.push(amount);
@@ -163,6 +163,8 @@ contract CrowdFunding {
         require(campaign.amountCollected <= address(this).balance, "Insufficient contract balance");
 
         _payTo(campaign.owner, campaign.amountCollected);
+
+            campaign.amountCollected = 0;
 
         emit Action(_id, "Funds Withdrawn", msg.sender, block.timestamp);
 

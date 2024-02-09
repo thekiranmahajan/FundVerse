@@ -14,7 +14,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0x6be240861B394d79E509b3B6C938eB89c9c0dcc2", // Contract Address
+    "0xACAf7D5b72EB78c59B0d50ceC24E05682a9FF674",
     contractABI
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -34,8 +34,8 @@ export const StateContextProvider = ({ children }) => {
           form.category,
           form.description,
           form.target,
-          new Date(form.deadline).getTime(), //deadline of campaign
-          form.image, //img of campaign
+          new Date(form.deadline).getTime(),
+          form.image,
         ],
       });
       toast("✅ Campaign created successfully", {
@@ -66,14 +66,14 @@ export const StateContextProvider = ({ children }) => {
   const updateCampaign = async (form) => {
     try {
       const data = await contract.call("updateCampaign", [
-        form.id, //campaign id
-        form.name, //name of creater
-        form.title, //title of campaign
-        form.category, //category of fund raised
-        form.description, //description of campaign
-        form.target, //target amount of campaign
-        new Date(form.deadline).getTime(), //deadline of campaign
-        form.image, //img of campaign
+        form.id,
+        form.name,
+        form.title,
+        form.category,
+        form.description,
+        form.target,
+        new Date(form.deadline).getTime(),
+        form.image,
       ]);
       toast("✅ Campaign updated successfully", {
         position: "top-right",

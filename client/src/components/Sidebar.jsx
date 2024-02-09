@@ -23,6 +23,7 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
     )}
   </div>
 );
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");

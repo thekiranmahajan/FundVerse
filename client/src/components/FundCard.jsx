@@ -1,5 +1,4 @@
 import React from "react";
-
 import { tagType } from "../assets";
 import { daysLeft } from "../utils";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
@@ -16,6 +15,7 @@ const FundCard = ({
   image,
   handleClick,
 }) => {
+  console.log(deadline);
   const remainingDays = daysLeft(deadline);
   return (
     <div
