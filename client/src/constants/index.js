@@ -1,7 +1,7 @@
 import {
   createCampaign,
   dashboard,
-  logout,
+  disconnect,
   profile,
   withdraw,
 } from "../assets";
@@ -28,10 +28,9 @@ export const navlinks = [
     link: "/profile",
   },
   {
-    name: "Logout",
-    imgUrl: logout,
-    link: "/",
-    disabled: true,
+    name: "Disconnect",
+    imgUrl: disconnect,
+    link: "/disconnect",
   },
 ];
 

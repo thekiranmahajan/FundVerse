@@ -17,8 +17,6 @@ const WithdrawFromCampaigns = ({ title, campaigns }) => {
     return campaign;
   });
 
-  console.log(state);
-
   const handleWithdraw = async () => {
     if (state.amountCollected == 0) {
       toast("❌ Error! No donations found for this campaign", {

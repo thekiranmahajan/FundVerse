@@ -53,7 +53,7 @@ const CreateCampaign = () => {
       "
       >
         <h1
-          className="font-epilogue font-bold sm:tex-[25px] text-[18px] leading-[38px] text-white
+          className="font-epilogue font-bold sm:text-[25px] text-[18px] leading-[38px] text-white
         
         "
         >
