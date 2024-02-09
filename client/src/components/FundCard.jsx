@@ -1,7 +1,8 @@
 import React from "react";
 
-import { tagType, thirdweb } from "../assets";
+import { tagType } from "../assets";
 import { daysLeft } from "../utils";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
 const FundCard = ({
   owner,
@@ -64,11 +65,11 @@ const FundCard = ({
           </div>
         </div>
         <div className="flex items-center mt-[20px] gap-[12px] ">
-          <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-[#13131a] ">
-            <img
-              src={thirdweb}
-              alt="user"
+          <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-[#13131a] overflow-hidden ">
+            <Jazzicon
               className="w-1/2 h-1/2 object-contain"
+              diameter={30}
+              seed={jsNumberForAddress(`${owner}`)}
             />
           </div>
           <div className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">

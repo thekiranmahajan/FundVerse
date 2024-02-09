@@ -6,10 +6,10 @@ import {
   useContractWrite,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { contractABI } from "../constants";
+
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
@@ -21,7 +21,6 @@ export const StateContextProvider = ({ children }) => {
     contract,
     "createCampaign"
   );
-
   const address = useAddress();
   const connect = useMetamask();
 
@@ -29,12 +28,12 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
-          address, 
-          form.name, 
-          form.title, 
-          form.category, 
-          form.description, 
-          form.target, 
+          address,
+          form.name,
+          form.title,
+          form.category,
+          form.description,
+          form.target,
           new Date(form.deadline).getTime(), //deadline of campaign
           form.image, //img of campaign
         ],

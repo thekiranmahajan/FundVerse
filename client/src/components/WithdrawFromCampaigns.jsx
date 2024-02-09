@@ -5,7 +5,7 @@ import WithdrawCard from "./WithdrawCard";
 import { useStateContext } from "../context";
 import { loader } from "../assets";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const WithdrawFromCampaigns = ({ title, campaigns }) => {
@@ -34,9 +34,8 @@ const WithdrawFromCampaigns = ({ title, campaigns }) => {
     } else {
       setIsLoading(true);
 
-      console.log("state", state.pId);
-
       await withdraw(state.pId);
+      console.log("state", state.pId);
 
       navigate("/");
       setIsLoading(false);
