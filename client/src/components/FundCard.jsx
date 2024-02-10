@@ -38,7 +38,7 @@ const FundCard = ({
           </p>
         </div>
         <div className="block">
-          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] overflow-hidden text-ellipsis ">
+          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px]  truncate ">
             {title}
           </h3>
           <p className="mt-[5px] font-epilogue font-normal text-left leading-[18px] truncate  text-[#808191] ">

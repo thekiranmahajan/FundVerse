@@ -42,7 +42,7 @@ const WithdrawCard = ({
         </div>
 
         <div className="block">
-          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] overflow-hidden text-ellipsis ">
+          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate ">
             {title}
           </h3>
         </div>

@@ -18,7 +18,6 @@ root.render(
     <Router>
       <StateContextProvider>
         <App />
-        <Footer />
       </StateContextProvider>
     </Router>
   </ThirdwebProvider>

@@ -8,12 +8,13 @@ import { loader } from "../assets";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const WithdrawFromCampaigns = ({ title, campaigns }) => {
+const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
   const { withdraw } = useStateContext();
 
   const state = campaigns.find((campaign) => {
+    console.log(campaign);
     return campaign;
   });
 
@@ -30,13 +31,10 @@ const WithdrawFromCampaigns = ({ title, campaigns }) => {
         theme: "dark",
       });
     } else {
-      setIsLoading(true);
-
       await withdraw(state.pId);
       console.log("state", state.pId);
 
       navigate("/");
-      setIsLoading(false);
     }
   };
 
