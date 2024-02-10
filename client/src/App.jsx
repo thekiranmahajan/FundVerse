@@ -17,7 +17,7 @@ const App = () => {
       <div className="sm:flex hidden mr-10 relative">
         <Sidebar />
       </div>
-      <div className="flex justify-between flex-col w-full">
+      <div className="flex justify-between flex-col w-full gap-10">
         <div className="flex-1 max-sm:w-full  sm:pr-5">
           <Navbar />
 
