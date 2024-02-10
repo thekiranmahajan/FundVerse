@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import { useStateContext } from "../context";
-import { Loader, WithdrawFromCampaigns } from "../components";
+import { WithdrawFromCampaigns } from "../components";
+import { loader } from "../assets";
 
 const Withdraw = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,14 +21,13 @@ const Withdraw = () => {
   }, [address, contract]);
 
   return (
-    <div className="bg-[#1c1c24] flex items-center  flex-col rounded-[10px] sm:p-10 p-4 min-h-4/5">
-      {isLoading && <Loader />}
+    <div className="bg-[#1c1c24] flex items-center  flex-col rounded-[10px] sm:p-10 p-4 min-h-[80%]">
       <div className="flex items-center justify-center p-[16px] sm:min-w-[380px] bg-[#3a3a43] rounded-[10px] ">
         <h1 className=" font-epilogue font-bold sm:text-[25px] text-[18px] leading-[38px] text-white ">
           Withdraw
         </h1>
       </div>
-      <div className=" w-full mt-[65px] flex flex-col gap-[30px] ">
+      <div className=" w-full mt-8 flex flex-col gap-[30px] ">
         <WithdrawFromCampaigns
           title="My Campaigns"
           isLoading={isLoading}
