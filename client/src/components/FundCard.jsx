@@ -1,7 +1,7 @@
 import React from "react";
-
-import { tagType, thirdweb } from "../assets";
+import { tagType } from "../assets";
 import { daysLeft } from "../utils";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
 const FundCard = ({
   owner,
@@ -24,7 +24,7 @@ const FundCard = ({
       <img
         src={image}
         alt="fund"
-        className="w-full h-[158px] object-cover rounded-[15px]  "
+        className="w-full h-[158px] object-cover rounded-[15px]"
       />
       <div className="flex flex-col p-4 ">
         <div className="flex flex-row items-center mb-[18px] ">
@@ -38,7 +38,7 @@ const FundCard = ({
           </p>
         </div>
         <div className="block">
-          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] overflow-hidden text-ellipsis text">
+          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] overflow-hidden text-ellipsis ">
             {title}
           </h3>
           <p className="mt-[5px] font-epilogue font-normal text-left leading-[18px] truncate  text-[#808191] ">
@@ -55,20 +55,20 @@ const FundCard = ({
             </p>
           </div>
           <div className="flex flex-col ">
-            <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px] ">
+            <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px] text-center">
               {remainingDays}
             </h4>
-            <p className=" mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">
+            <p className=" mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate ">
               Days Left
             </p>
           </div>
         </div>
         <div className="flex items-center mt-[20px] gap-[12px] ">
-          <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-[#13131a] ">
-            <img
-              src={thirdweb}
-              alt="user"
+          <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-[#13131a] overflow-hidden ">
+            <Jazzicon
               className="w-1/2 h-1/2 object-contain"
+              diameter={30}
+              seed={jsNumberForAddress(`${owner}`)}
             />
           </div>
           <div className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">

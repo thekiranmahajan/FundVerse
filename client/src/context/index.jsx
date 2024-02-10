@@ -6,23 +6,21 @@ import {
   useContractWrite,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { contractAbi } from "../constants";
+import { contractABI } from "../constants";
+
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    //Smart Contract address from Thirdweb dashboard
-    "0x10269069bd8986294d70436450B1698B4FA6Ad6B",
-    contractAbi
+    "0xACAf7D5b72EB78c59B0d50ceC24E05682a9FF674",
+    contractABI
   );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
     "createCampaign"
   );
-
   const address = useAddress();
   const connect = useMetamask();
 
@@ -30,14 +28,14 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
-          address, //owner's address
-          form.name, //name of creater
-          form.title, //title of campaign
-          form.category, //category of fund raised
-          form.description, //description of campaign
-          form.target, //target amount of campaign
-          new Date(form.deadline).getTime(), //deadline of campaign
-          form.image, //img of campaign
+          address,
+          form.name,
+          form.title,
+          form.category,
+          form.description,
+          form.target,
+          new Date(form.deadline).getTime(),
+          form.image,
         ],
       });
       toast("✅ Campaign created successfully", {
@@ -68,14 +66,14 @@ export const StateContextProvider = ({ children }) => {
   const updateCampaign = async (form) => {
     try {
       const data = await contract.call("updateCampaign", [
-        form.id, //campaign id
-        form.name, //name of creater
-        form.title, //title of campaign
-        form.category, //category of fund raised
-        form.description, //description of campaign
-        form.target, //target amount of campaign
-        new Date(form.deadline).getTime(), //deadline of campaign
-        form.image, //img of campaign
+        form.id,
+        form.name,
+        form.title,
+        form.category,
+        form.description,
+        form.target,
+        new Date(form.deadline).getTime(),
+        form.image,
       ]);
       toast("✅ Campaign updated successfully", {
         position: "top-right",

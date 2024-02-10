@@ -1,5 +1,4 @@
 import React from "react";
-
 import { tagType } from "../assets";
 import { daysLeft } from "../utils";
 import CustomButton from "./CustomButton";
@@ -17,31 +16,33 @@ const WithdrawCard = ({
   const remainingDays = daysLeft(deadline);
 
   return (
-    <div className="sm:w-[288px] w-full rounded-[15px] bg-[#1c1c24] ">
+    <div className="sm:w-[288px] w-full rounded-[15px] bg-[#1c1c24] cursor-pointer">
       <img
         src={image}
         alt="fund"
         className="w-full h-[158px] object-cover rounded-[15px]"
       />
 
-      <div className="flex flex-col mt-[20px]">
-        <div className="flex flex-row items-center mb-[10px]">
-          <img
-            src={tagType}
-            alt="tag"
-            className="w-[20px] h-[20px] object-contain"
-          />
-          <p className="ml-[12px] w-full h-[20px]  font-epilogue font-medium text-[#808191] ">
-            {category}
-          </p>
+      <div className="flex flex-col p-4 ">
+        <div className="flex items-center justify-between mb-[18px]">
+          <div className="flex items-center justify-center">
+            <img
+              src={tagType}
+              alt="tag"
+              className="w-[17px] h-[17px] object-contain "
+            />
+            <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] h-[17px] text-[#808191] ">
+              {category}
+            </p>
+          </div>
 
-          <p className="ml-[12px]  w-full   font-epilogue font-medium text-[#808191] text-right leading-[26px] truncate">
+          <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] h-[17px] text-[#808191] ">
             Campaign Id: {pId}
           </p>
         </div>
 
         <div className="block">
-          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">
+          <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] overflow-hidden text-ellipsis ">
             {title}
           </h3>
         </div>
@@ -57,7 +58,7 @@ const WithdrawCard = ({
           </div>
 
           <div className="flex flex-col">
-            <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">
+            <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px] text-center">
               {remainingDays}
             </h4>
             <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">

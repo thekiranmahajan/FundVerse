@@ -4,6 +4,7 @@ import { Sidebar, Navbar } from "./components";
 import {
   CampaignDetails,
   CreateCampaign,
+  Disconnect,
   Home,
   Profile,
   UpdateCampaign,
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/update-campaign/:id" element={<UpdateCampaign />} />
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
           <Route path="/withdraw" element={<Withdraw />} />
+          <Route path="/disconnect" element={<Disconnect />} />
         </Routes>
       </div>
     </div>

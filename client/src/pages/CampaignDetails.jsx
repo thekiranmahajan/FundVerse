@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
 import { CountBox, CustomButton, Loader, Expandable } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
-import { thirdweb } from "../assets";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -117,19 +117,19 @@ const CampaignDetails = () => {
             </h4>
 
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
-              <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer ">
-                <img
-                  src={thirdweb}
-                  alt="user"
-                  className="w-[60%] h-[60%] object-contain"
+              <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer overflow-hidden">
+                <Jazzicon
+                  className="w-1/2 h-1/2 object-contain"
+                  diameter={52}
+                  seed={jsNumberForAddress(`${state.owner}`)}
                 />
               </div>
-              <div>
-                <h4 className="font-epilogue font-semibold text-[14px] text-white break-all ">
+              <div className="w-full">
+                <h4 className="font-epilogue font-semibold text-[14px] text-white truncate ">
                   {state.name} is organizing this fundraiser for{" "}
-                  {state.category}.
+                  {state.category} category.
                 </h4>
-                <p className="mt-[4px] font-epilogue font-normal text-[13px] text-[#808191]">
+                <p className="mt-[4px] font-epilogue font-normal text-[13px] text-[#808191] truncate">
                   {state.owner}
                 </p>
               </div>
@@ -156,10 +156,10 @@ const CampaignDetails = () => {
                     key={`${item.donator}-${index}`}
                     className="flex justify-between items-center gap-4"
                   >
-                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] ">
+                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] truncate">
                       {index + 1}. {item.donator}
                     </p>
-                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] ">
+                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] mr-3">
                       {item.donation}
                     </p>
                   </div>
