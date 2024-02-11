@@ -4,6 +4,8 @@ import {
   useContract,
   useMetamask,
   useContractWrite,
+  useDisconnect,
+  useConnectionStatus,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,7 +24,9 @@ export const StateContextProvider = ({ children }) => {
     "createCampaign"
   );
   const address = useAddress();
-  const connect = useMetamask();
+  const connectMetamask = useMetamask();
+  const disconnect = useDisconnect();
+  const connectionStatus = useConnectionStatus();
 
   const publishCampaign = async (form) => {
     try {
@@ -239,7 +243,9 @@ export const StateContextProvider = ({ children }) => {
       value={{
         address,
         contract,
-        connect,
+        connectMetamask,
+        disconnect,
+        connectionStatus,
         createCampaign: publishCampaign,
         getCampaigns,
         getUserCampaigns,
