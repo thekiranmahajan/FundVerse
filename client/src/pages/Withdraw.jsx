@@ -24,7 +24,7 @@ const Withdraw = () => {
       <div>
         <div className=" w-full mt-8 flex flex-col gap-[30px] ">
           <WithdrawFromCampaigns
-            title="My Campaigns"
+            title="Withdraw Campaigns"
             isLoading={isLoading}
             campaigns={campaigns}
           />
