@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Sepolia } from "@thirdweb-dev/chains";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import {
+  ThirdwebProvider,
+  coinbaseWallet,
+  metamaskWallet,
+  walletConnect,
+} from "@thirdweb-dev/react";
 import { StateContextProvider } from "./context";
 import App from "./App";
 import "./index.css";
@@ -10,7 +15,17 @@ import "./index.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ThirdwebProvider activeChain={Sepolia} clientId={`${process.env.CLIENT_ID}`}>
+  <ThirdwebProvider
+    supportedWallets={[
+      metamaskWallet({
+        recommended: true,
+      }),
+      coinbaseWallet(),
+      walletConnect(),
+    ]}
+    activeChain={Sepolia}
+    clientId={`${process.env.CLIENT_ID}`}
+  >
     <Router>
       <StateContextProvider>
         <App />
