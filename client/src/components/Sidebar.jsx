@@ -30,7 +30,7 @@ const Icon = ({
 
   return (
     <div
-      className={`relative w-[48px] h-[48px] rounded-[10px] ${
+      className={`relative w-[48px] h-[48px] rounded-[10px]  ${
         isActive && isActive === name && "bg-[#2c2f32]"
       } flex justify-center items-center ${
         !disabled && "cursor-pointer"
@@ -40,7 +40,11 @@ const Icon = ({
       onMouseLeave={handleMouseLeave}
     >
       {hovered && (
-        <div className="absolute top-1 left-20 bg-[#2c2f32] text-white py-2 px-3 rounded-md font-epilogue">
+        <div
+          className={`absolute top-1 left-20 bg-[#2c2f32] text-white py-2 px-3 rounded-md font-epilogue transition-opacity duration-300 opacity-${
+            hovered ? "100" : "0"
+          } transform ${hovered ? "scale-100" : "scale-0"}`}
+        >
           {name}
         </div>
       )}

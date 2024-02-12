@@ -8,31 +8,32 @@ const Disconnect = () => {
   const handleDisconnect = () => {
     if (!address) {
       connectMetamask();
-      return;
-    }
-
-    const confirmDisconnect = confirm(
-      "Do you really want to Disconnect from MetaMask"
-    );
-    if (confirmDisconnect) {
-      disconnect();
+    } else {
+      const confirmDisconnect = confirm(
+        "Do you really want to Disconnect from MetaMask"
+      );
+      if (confirmDisconnect) {
+        disconnect();
+      }
     }
   };
+
   return (
-    <div className=" flex items-center  flex-col rounded-[10px] sm:p-10 p-4 ">
+    <div className="flex items-center flex-col rounded-[10px] sm:p-10 p-4">
       <div className="mt-10 w-3/4 flex items-center justify-center flex-col gap-10">
         <Jazzicon diameter={100} seed={jsNumberForAddress(`${address}`)} />
 
-        {address && (
-          <p className="font-epilogue font-semibold text-[18px] text-white">
-            You are connected to {address}
-          </p>
-        )}
-        {!address && (
-          <p className="font-epilogue font-semibold text-[18px] text-white">
-            Connect to MetaMask
-          </p>
-        )}
+        <div className="font-epilogue font-semibold text-lg text-white h-16 flex items-center justify-center transition-all duration-300">
+          {address ? (
+            <p className="flex items-center justify-center flex-col">
+              You are connected to
+              <span className="text-base text-gray-400">{address}</span>
+            </p>
+          ) : (
+            "Connect to MetaMask"
+          )}
+        </div>
+
         <CustomButton
           btnType="button"
           title={address ? "Disconnect" : "Connect"}

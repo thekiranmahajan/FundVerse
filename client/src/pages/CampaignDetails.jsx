@@ -104,7 +104,7 @@ const CampaignDetails = () => {
       <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-lg text-white uppercase">
               {state.title}
             </h4>
             <p className="mt-[3px] font-epilogue font-normal text-[16px] leading-[18px] text-[#808191]">
@@ -112,7 +112,7 @@ const CampaignDetails = () => {
             </p>
           </div>
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-lg text-white uppercase">
               Organizer
             </h4>
 
@@ -136,7 +136,7 @@ const CampaignDetails = () => {
             </div>
           </div>
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white  uppercase">
+            <h4 className="font-epilogue font-semibold text-lg text-white  uppercase">
               Story
             </h4>
 
@@ -146,7 +146,7 @@ const CampaignDetails = () => {
           </div>
 
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+            <h4 className="font-epilogue font-semibold text-lg text-white uppercase">
               Donators
             </h4>
             <div className=" mt-[20px] flex flex-col gap-4">
@@ -173,7 +173,7 @@ const CampaignDetails = () => {
           </div>
         </div>
         <div className=" flex-1">
-          <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
+          <h4 className="font-epilogue font-semibold text-lg text-white uppercase">
             Fund
           </h4>
           <div className=" mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px] ">
@@ -187,7 +187,7 @@ const CampaignDetails = () => {
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px] "
+                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-lg leading-[30px] placeholder:text-[#4b5264] rounded-[10px] "
               />
               <div className="my-[20px] p-4 bg-[#13131a] rounded-[10px] ">
                 <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white ">

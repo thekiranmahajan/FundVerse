@@ -40,7 +40,7 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
 
   return (
     <div>
-      <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">
+      <h1 className="font-epilogue font-semibold text-lg text-white text-left">
         {title} ({campaigns.length})
       </h1>
 
