@@ -12,6 +12,21 @@ const Icon = ({
   handleClick,
 }) => {
   const [hovered, setHovered] = useState(false);
+  const [fadeOutTimer, setFadeOutTimer] = useState(null);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+
+    const timer = setTimeout(() => {
+      setHovered(false);
+    }, 1000);
+    setFadeOutTimer(timer);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+    clearTimeout(fadeOutTimer);
+  };
 
   return (
     <div
@@ -21,8 +36,8 @@ const Icon = ({
         !disabled && "cursor-pointer"
       } ${styles}`}
       onClick={handleClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {hovered && (
         <div className="absolute top-1 left-20 bg-[#2c2f32] text-white py-2 px-3 rounded-md font-epilogue">
