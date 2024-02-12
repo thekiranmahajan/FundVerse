@@ -216,12 +216,12 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
-  const getSingleCampaign = async (pId) => {
+  const getFilteredCampaigns = async (searchText) => {
     const allCampaigns = await getCampaigns();
-    const filteredCampaign = allCampaigns.filter(
-      (campaign) => campaign.pId === pId
+    const filteredCampaigns = allCampaigns.filter((campaign) =>
+      campaign.name.toLowerCase().includes(searchText.toLowerCase())
     );
-    return filteredCampaign;
+    return filteredCampaigns;
   };
 
   const getDonations = async (pId) => {
@@ -254,7 +254,7 @@ export const StateContextProvider = ({ children }) => {
         getDonations,
         deleteCampaign,
         updateCampaign,
-        getSingleCampaign,
+        getFilteredCampaigns,
       }}
     >
       <ToastContainer />
