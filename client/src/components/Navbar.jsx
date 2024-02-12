@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
-import { CustomButton } from "./";
 import { logo, menu, search } from "../assets";
 import { navlinks } from "../constants";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
@@ -11,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  const { connectMetamask, address } = useStateContext();
+  const { address } = useStateContext();
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -31,16 +30,21 @@ const Navbar = () => {
       </div>
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
-        <CustomButton
-          btnType="button"
-          title={address ? "Create a campaign" : "Connect"}
-          styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-          handleClick={() => {
-            if (address) navigate("create-campaign");
-            else connectMetamask();
+        <ConnectWallet
+          className={`!font-epilogue ${
+            address || "!bg-[#8c6dfd]"
+          } !text-white !mr-5`}
+          modalSize="wide"
+          welcomeScreen={{
+            title: "Your Team LEAD MR. MAHAJAN",
+            subtitle: "😂😂😂😂",
+            img: {
+              src: `${logo}`,
+              width: 300,
+            },
           }}
+          modalTitle="Welcome to FundVerse"
         />
-        <ConnectWallet />
         <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer overflow-hidden">
             <Jazzicon
@@ -58,7 +62,7 @@ const Navbar = () => {
         <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
           <img
             src={logo}
-            alt="user"
+            alt="Logo"
             className="w-[60%] h-[60%] object-contain"
           />
         </div>
@@ -99,14 +103,20 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="flex mx-4">
-            <CustomButton
-              btnType="button"
-              title={address ? "Create a campaign" : "Connect"}
-              styles={address ? "bg-[#1dc071]" : "bg-[#8c6dfd]"}
-              handleClick={() => {
-                if (address) navigate("create-campaign");
-                else connectMetamask();
+            <ConnectWallet
+              className={`!font-epilogue ${
+                address || "!bg-[#8c6dfd]"
+              } !text-white !mr-5`}
+              modalSize="wide"
+              welcomeScreen={{
+                title: "Your Team LEAD MR. MAHAJAN",
+                subtitle: "😂😂😂😂",
+                img: {
+                  src: `${logo}`,
+                  width: 300,
+                },
               }}
+              modalTitle="Welcome to FundVerse"
             />
           </div>
         </div>
