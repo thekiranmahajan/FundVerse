@@ -1,14 +1,15 @@
 export function daysLeft(deadline) {
   const currentTime = Date.now();
+  console.log("currentTime", currentTime);
   const difference = deadline - currentTime;
+  console.log("difference", difference);
+
   const remainingDays = difference / (1000 * 3600 * 24);
+  console.log("remainingDays", remainingDays);
 
   let daysLeft;
-  if (remainingDays >= 1) {
-    daysLeft = Math.floor(remainingDays);
-  } else {
-    daysLeft = Math.ceil(remainingDays);
-  }
+ 
+  daysLeft = Math.ceil(remainingDays);
   if (daysLeft <= 0) {
     daysLeft = "Ended";
   }

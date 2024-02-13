@@ -14,12 +14,11 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
   const { withdraw } = useStateContext();
 
   const state = campaigns.find((campaign) => {
-    console.log(campaign);
     return campaign;
   });
 
-  const handleWithdraw = async () => {
-    if (state.amountCollected == 0) {
+  const handleWithdraw = async (campaign) => {
+    if (campaign.amountCollected == 0) {
       toast("❌ Error! No donations found for this campaign", {
         position: "top-right",
         autoClose: 5000,
@@ -31,9 +30,8 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
         theme: "dark",
       });
     } else {
-      await withdraw(state.pId);
-      console.log("state", state.pId);
-
+      await withdraw(campaign.pId);
+      console.log(campaign);
       navigate("/");
     }
   };
@@ -65,7 +63,7 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
             <WithdrawCard
               key={uuidv4()}
               {...campaign}
-              handleClick={handleWithdraw}
+              handleClick={() => handleWithdraw(campaign)}
             />
           ))}
       </div>

@@ -7,7 +7,7 @@ const CustomButton = ({
   styles,
   isDisabled = false,
 }) => {
-  console.log(isDisabled);
+
   return (
     <button
       type={btnType}
