@@ -19,7 +19,7 @@ const Disconnect = () => {
   };
 
   return (
-    <div className="flex items-center flex-col rounded-[10px] sm:p-10 p-4">
+    <div className="flex items-center flex-col rounded-xl sm:p-10 p-4">
       <div className="mt-10 w-3/4 flex items-center justify-center flex-col gap-10">
         <Jazzicon diameter={100} seed={jsNumberForAddress(`${address}`)} />
 

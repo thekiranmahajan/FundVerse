@@ -20,7 +20,7 @@ const Navbar = () => {
           placeholder="Search for campaigns"
           className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
         />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer">
+        <div className="w-[72px] h-full rounded-[20px] bg-[#1dc071] flex justify-center items-center cursor-pointer">
           <img
             src={search}
             alt="search"
@@ -59,7 +59,7 @@ const Navbar = () => {
       {/* small screen navigation */}
 
       <div className="sm:hidden flex justify-between items-center relative">
-        <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
+        <div className="w-[40px] h-[40px] rounded-xl bg-[#2c2f32] flex justify-center items-center cursor-pointer">
           <img
             src={logo}
             alt="Logo"
@@ -83,7 +83,7 @@ const Navbar = () => {
               <li
                 key={Link.name}
                 className={`flex p-4 ${
-                  isActive === Link.name && "bg-[#3a3a43"
+                  isActive === Link.name && "bg-[#3a3a43]"
                 }`}
                 onClick={() => {
                   setIsActive(Link.name);
