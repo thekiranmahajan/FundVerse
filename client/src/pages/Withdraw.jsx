@@ -12,7 +12,6 @@ const Withdraw = () => {
     setIsLoading(true);
     const data = await getUserCampaigns();
     setCampaigns(data);
-    console.log(data, "userCampaigns from Withdraw");
     setIsLoading(false);
   };
 

@@ -31,7 +31,6 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
       });
     } else {
       await withdraw(campaign.pId);
-      console.log(campaign);
       navigate("/");
     }
   };

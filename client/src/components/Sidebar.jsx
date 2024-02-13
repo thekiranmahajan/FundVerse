@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logo, sun } from "../assets";
-import { navlinks } from "../constants";
+import { logo } from "../assets";
+import { navlinks, themeModes } from "../constants";
 
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => {
   const [hovered, setHovered] = useState(false);
@@ -23,7 +23,7 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => {
 
   return (
     <div
-      className={`relative w-[48px] h-[48px] rounded-[10px]  ${
+      className={`relative w-12 h-12 rounded-xl  ${
         isActive && isActive === name && "bg-[#2c2f32]"
       } flex justify-center items-center ${
         !disabled && "cursor-pointer"
@@ -57,7 +57,7 @@ const Sidebar = () => {
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
       <Link to="/">
         <Icon
-          name="Home"
+          name="FundVerse"
           styles="w-[52px] h-[52px] bg-[#2c2f32]"
           imgUrl={logo}
         />
@@ -80,11 +80,15 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <Icon
-          name="Dark/Light"
-          styles="bg-[#1c1c24] shadow-secondary"
-          imgUrl={sun}
-        />
+        <div className="flex items-center justify-center flex-col gap-1">
+          {themeModes.map((mode) => (
+            <Icon
+              key={mode.name}
+              {...mode}
+              handleClick={() => setIsActive(mode.name)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

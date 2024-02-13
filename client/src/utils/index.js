@@ -1,11 +1,7 @@
 export function daysLeft(deadline) {
   const currentTime = Date.now();
-  console.log("currentTime", currentTime);
   const difference = deadline - currentTime;
-  console.log("difference", difference);
-
   const remainingDays = difference / (1000 * 3600 * 24);
-  console.log("remainingDays", remainingDays);
 
   let daysLeft;
  

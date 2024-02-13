@@ -4,7 +4,16 @@ import {
   disconnect,
   profile,
   withdraw,
+  sun,
+  moon,
+  system,
 } from "../assets";
+
+export const themeModes = [
+  { name: "Light", imgUrl: sun },
+  { name: "Dark", imgUrl: moon },
+  { name: "System", imgUrl: system },
+];
 
 export const navlinks = [
   {
