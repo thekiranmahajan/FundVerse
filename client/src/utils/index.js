@@ -9,7 +9,9 @@ export function daysLeft(deadline) {
   } else {
     daysLeft = Math.ceil(remainingDays);
   }
-
+  if (daysLeft <= 0) {
+    daysLeft = "Ended";
+  }
   return daysLeft;
 }
 

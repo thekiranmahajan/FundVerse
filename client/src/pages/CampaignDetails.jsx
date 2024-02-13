@@ -54,6 +54,7 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
     await donate(state.pId, amount);
+
     navigate("/");
     setIsLoading(false);
   };
@@ -91,7 +92,7 @@ const CampaignDetails = () => {
           </div>
         </div>
 
-        <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
+        <div className="flex md:w-[150px] w-full md:flex-wrap sm:flex-row flex-col justify-between sm:items-start items-center gap-[30px]">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox
             title={`Raised of ${state.target}`}
@@ -201,6 +202,7 @@ const CampaignDetails = () => {
                 btnType="button"
                 title="Fund Campaign"
                 styles="w-full bg-[#ac73ff]"
+                isDisabled={remainingDays === "Ended"}
                 handleClick={handleDonate}
               />
             </div>
@@ -208,7 +210,7 @@ const CampaignDetails = () => {
         </div>
       </div>
       <div className="mt-[60px] mb-[30px]">
-        {address == state.owner ? (
+        {address == state.owner && (
           <div className="flex flex-wrap justify-between gap-[40px]">
             <CustomButton
               btnType="button"
@@ -225,8 +227,6 @@ const CampaignDetails = () => {
               handleClick={handleDelete}
             />
           </div>
-        ) : (
-          <div></div>
         )}
       </div>
     </div>
