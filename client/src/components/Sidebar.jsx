@@ -24,7 +24,7 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => {
   return (
     <div
       className={`relative w-12 h-12 rounded-xl  ${
-        isActive && isActive === name && "bg-[#2c2f32]"
+        isActive && isActive === name && "bg-[#f0f0f0] dark:bg-[#2c2f32]"
       } flex justify-center items-center ${
         !disabled && "cursor-pointer"
       } ${styles}`}
@@ -33,7 +33,7 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => {
       onMouseLeave={handleMouseLeave}
     >
       {hovered && (
-        <div className="absolute top-1 left-20 bg-[#2c2f32a7] text-white py-2 px-3 rounded-md font-epilogue">
+        <div className="absolute top-1 left-20 #f0f0f0a7 dark:bg-[#2c2f32a7] text-black dark:text-white py-2 px-3 rounded-md font-epilogue">
           {name}
         </div>
       )}
@@ -58,12 +58,12 @@ const Sidebar = () => {
       <Link to="/">
         <Icon
           name="FundVerse"
-          styles="w-[52px] h-[52px] bg-[#2c2f32]"
+          styles="w-[52px] h-[52px] bg-[#f0f0f0] dark:bg-[#2c2f32]"
           imgUrl={logo}
         />
       </Link>
 
-      <div className="flex-1 flex flex-col justify-between items-center bg-[#1c1c24] rounded-[20px] w-[76px] py-4 mt-12">
+      <div className="flex-1 flex flex-col justify-between items-center bg-[#f2f2f2] dark:bg-[#1c1c24] rounded-[20px] w-[76px] py-4 mt-12">
         <div className="flex flex-col justify-center items-center gap-3">
           {navlinks.map((Link) => (
             <Icon

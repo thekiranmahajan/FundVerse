@@ -47,10 +47,10 @@ const UpdateCampaign = () => {
     });
   };
   return (
-    <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-xl sm:p-10 p-4">
+    <div className="bg-[#f2f2f2] dark:bg-[#1c1c24] flex justify-center items-center flex-col rounded-xl sm:p-10 p-4">
       {isLoading && <Loader />}
-      <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#3a3a43] rounded-xl">
-        <h1 className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-white">
+      <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#e5e5e5] dark:bg-[#3a3a43] rounded-xl">
+        <h1 className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-black dark:text-white">
           Edit Campaign
         </h1>
       </div>
@@ -92,14 +92,14 @@ const UpdateCampaign = () => {
           handleChange={(e) => handleFormFieldChange("description", e)}
         />
 
-        <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] rounded-xl">
+        <div className="w-full flex justify-start items-center p-4 bg-[#b394ff] dark:bg-[#8c6dfd] rounded-xl">
           <img
             src={money}
             alt="money"
             className="w-[40px] h-[40px] object-contain"
           />
 
-          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">
+          <h4 className="font-epilogue font-bold text-[25px] text-black dark:text-white ml-[20px]">
             You will get 100% of the raised amount
           </h4>
         </div>
@@ -132,7 +132,7 @@ const UpdateCampaign = () => {
           <CustomButton
             btnType="submit"
             title="Update campaign"
-            styles="bg-[#1dc071]"
+            styles="bg-[#48d48a] dark:bg-[#1dc071]"
           />
         </div>
       </form>

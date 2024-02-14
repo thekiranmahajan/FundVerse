@@ -23,7 +23,7 @@ const Disconnect = () => {
       <div className="mt-10 w-3/4 flex items-center justify-center flex-col gap-10">
         <Jazzicon diameter={100} seed={jsNumberForAddress(`${address}`)} />
 
-        <div className="font-epilogue font-semibold text-lg text-white h-16 flex items-center justify-center transition-all duration-300">
+        <div className="font-epilogue font-semibold text-lg text-black dark:text-white h-16 flex items-center justify-center transition-all duration-300">
           {address ? (
             <p className="flex items-center justify-center flex-col">
               You are connected to
@@ -37,7 +37,11 @@ const Disconnect = () => {
         <CustomButton
           btnType="button"
           title={address ? "Disconnect" : "Connect"}
-          styles={address ? "bg-[#FF0000]" : "bg-[#8c6dfd]"}
+          styles={
+            address
+              ? "bg-[#ff3333] dark:bg-[#FF0000]"
+              : "bg-[#b394ff] dark:bg-[#8c6dfd]"
+          }
           handleClick={handleDisconnect}
         />
       </div>
