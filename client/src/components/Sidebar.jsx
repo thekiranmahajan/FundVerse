@@ -8,13 +8,26 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("Dashboard");
   const [themeMode, setThemeMode] = useState(
-    localStorage.getItem("themeMode")
-      ? localStorage.getItem("themeMode")
-      : "System"
+    localStorage.getItem("themeMode") || "System"
   );
   const docElement = document.documentElement;
   const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
+  const onWindowMatch = () => {
+    if (
+      localStorage.getItem("themeMode") === "Dark" ||
+      (!localStorage.getItem("themeMode") && systemTheme.matches)
+    ) {
+      docElement.classList.add("dark");
+    } else {
+      docElement.classList.remove("dark");
+    }
+  };
+  onWindowMatch();
+  useEffect(() => {
+    systemTheme.addEventListener("change", onWindowMatch);
+    console.log("render()");
+  }, []);
   useEffect(() => {
     switch (themeMode) {
       case "Dark":
@@ -35,17 +48,6 @@ const Sidebar = () => {
     }
   }, [themeMode]);
 
-  const onWindowMatch = () => {
-    if (
-      localStorage.theme === "Dark" ||
-      (!("themeMode" in localStorage) && systemTheme.matches)
-    ) {
-      docElement.classList.add("dark");
-    } else {
-      docElement.classList.remove("dark");
-    }
-  };
-  onWindowMatch();
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
       <Link to="/">

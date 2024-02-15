@@ -32,7 +32,13 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick, themeMode }) => {
       )}
 
       {!isActive ? (
-        <img src={imgUrl} alt="fund_logo" className={`w-1/2 h-1/2`} />
+        <img
+          src={imgUrl}
+          alt="fund_logo"
+          className={`w-1/2 h-1/2 ${
+            name === "FundVerse" && "w-[110%] h-[110%]"
+          }`}
+        />
       ) : (
         <img
           src={imgUrl}
