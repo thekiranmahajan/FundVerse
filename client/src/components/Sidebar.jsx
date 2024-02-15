@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets";
 import { navlinks, themeModes } from "../constants";
@@ -7,7 +7,45 @@ import Icon from "./Icon";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("Dashboard");
-  const [themeMode, setThemeMode] = useState("System");
+  const [themeMode, setThemeMode] = useState(
+    localStorage.getItem("themeMode")
+      ? localStorage.getItem("themeMode")
+      : "System"
+  );
+  const docElement = document.documentElement;
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+  useEffect(() => {
+    switch (themeMode) {
+      case "Dark":
+        docElement.classList.add("dark");
+        localStorage.setItem("themeMode", "Dark");
+
+        break;
+      case "Light":
+        docElement.classList.remove("dark");
+        localStorage.setItem("themeMode", "Light");
+
+        break;
+      default:
+        localStorage.removeItem("themeMode");
+        onWindowMatch();
+
+        break;
+    }
+  }, [themeMode]);
+
+  const onWindowMatch = () => {
+    if (
+      localStorage.theme === "Dark" ||
+      (!("themeMode" in localStorage) && systemTheme.matches)
+    ) {
+      docElement.classList.add("dark");
+    } else {
+      docElement.classList.remove("dark");
+    }
+  };
+  onWindowMatch();
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
       <Link to="/">

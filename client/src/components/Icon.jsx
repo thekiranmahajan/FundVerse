@@ -20,7 +20,7 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick, themeMode }) => {
     <div
       className={`relative w-12 h-12 rounded-xl cursor-pointer flex justify-center items-center ${
         isActive && isActive === name && "bg-[#00000020] dark:bg-[#2c2f32]"
-      } ${styles}`}
+      }${themeMode === name && "bg-[#00000020] dark:bg-[#2c2f32]"} ${styles}`}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
