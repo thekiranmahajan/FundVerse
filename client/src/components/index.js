@@ -10,3 +10,4 @@ export { default as Footer } from "./Footer";
 export { default as Expandable } from "./Expandable";
 export { default as WithdrawCard } from "./WithdrawCard";
 export { default as WithdrawFromCampaigns } from "./WithdrawFromCampaigns";
+export { default as Icon } from "./Icon";
