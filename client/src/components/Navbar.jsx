@@ -18,7 +18,7 @@ const Navbar = () => {
         <input
           type="text"
           placeholder="Search for campaigns"
-          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#6e7682] dark:text-[#4b5264] text-black dark:text-white bg-transparent outline-none"
+          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#6e7682]  text-black dark:text-white bg-transparent outline-none"
         />
         <div className="w-[72px] h-full rounded-[20px] bg-[#48d48a] dark:bg-[#1dc071] flex justify-center items-center cursor-pointer">
           <img
@@ -95,7 +95,7 @@ const Navbar = () => {
                 <p
                   className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
                     isActive === Link.name
-                      ? "text-[#48d48a] dark:text-[#38d586] dark:text-[#1dc071]"
+                      ? "text-[#48d48a]  dark:text-[#1dc071]"
                       : "text-[#4d4d4d] dark:text-[#808191]"
                   }`}
                 >

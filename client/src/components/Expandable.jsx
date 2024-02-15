@@ -14,7 +14,7 @@ const Expandable = ({ children, maxChars = 300 }) => {
       </p>
       <span
         onClick={() => setExpanded(!expanded)}
-        className=" cursor-pointer font-epilogue font-normal text-[16px] text-[#8c6dfd] dark:text-[#b394ff] dark:text-[#8c6dfd] dark:text-[#b394ff] dark:text-[#8c6dfd] leading-[26px] text-justify"
+        className=" cursor-pointer font-epilogue font-normal text-[16px] text-[#b394ff] dark:text-[#8c6dfd] leading-[26px] text-justify"
       >
         {expanded ? "Read More >>" : "Read Less <<"}
       </span>

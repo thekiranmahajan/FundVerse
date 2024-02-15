@@ -188,7 +188,7 @@ const CampaignDetails = () => {
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#e5e5e5] dark:border-[#3a3a43] bg-transparent font-epilogue text-black dark:text-white text-lg leading-[30px] placeholder:text-[#6e7682] dark:text-[#4b5264] rounded-xl "
+                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#e5e5e5] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-lg leading-[30px] placeholder:text-[#6e7682] text-[#4b5264] rounded-xl "
               />
               <div className="my-[20px] p-4 bg-[#eaeaea] dark:bg-[#13131a] rounded-xl ">
                 <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-black dark:text-white ">
