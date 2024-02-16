@@ -53,7 +53,7 @@ const CreateCampaign = () => {
       "
       >
         <h1
-          className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-black dark:text-white
+          className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-[#414A4C] dark:text-white
         
         "
         >
@@ -89,7 +89,7 @@ const CreateCampaign = () => {
           <FormField
             labelName="Select Category *"
             isCategory
-            value={form.Category}
+            value={form.category}
             handleChange={(e) => handleFormFieldChange("category", e)}
           />
         </div>
@@ -102,7 +102,7 @@ const CreateCampaign = () => {
           handleChange={(e) => handleFormFieldChange("description", e)}
         />
 
-        <div className="w-full flex justify-start items-center p-4 bg-[#b394ff] dark:bg-[#03dac5] h-[120px] rounded-xl ">
+        <div className="w-full flex justify-center items-center p-4 bg-[#03dac5] h-[120px] rounded-xl ">
           <img
             src={money}
             alt="money"
@@ -110,7 +110,7 @@ const CreateCampaign = () => {
           
           "
           />
-          <h4 className="font-epilogue font-bold text-[25px] text-black dark:text-white ml-[20px] ">
+          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px] ">
             You'll get 100% of the raised amount
           </h4>
         </div>
@@ -121,7 +121,7 @@ const CreateCampaign = () => {
           <FormField
             labelName="Goal *"
             placeholder="e.g. ETH 0.50"
-            inputType="text"
+            inputType="number"
             value={form.target}
             handleChange={(e) => handleFormFieldChange("target", e)}
           />
@@ -146,7 +146,7 @@ const CreateCampaign = () => {
           <CustomButton
             btnType="submit"
             title="Submit New Campaign"
-            styles="bg-[#48d48a] dark:bg-[#6F01Ec]"
+            styles="bg-[#6F01Ec] text-white"
           />
         </div>
       </form>

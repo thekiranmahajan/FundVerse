@@ -16,7 +16,7 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick, themeMode }) => {
     setHovered(false);
     clearTimeout(fadeOutTimer);
   };
-  console.log(`${name} === ${themeMode} isActive === ${isActive}`);
+  // console.log(`${name} === ${themeMode} isActive === ${isActive}`);
   return (
     <div
       className={`relative w-12 h-12 rounded-xl cursor-pointer flex justify-center items-center ${
