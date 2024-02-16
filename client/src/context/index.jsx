@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from "react";
+import React, { useContext, createContext, useState, useEffect } from "react";
 import {
   useAddress,
   useContract,
@@ -27,6 +27,52 @@ export const StateContextProvider = ({ children }) => {
   const connectMetamask = useMetamask();
   const disconnect = useDisconnect();
   const connectionStatus = useConnectionStatus();
+
+  const [themeMode, setThemeMode] = useState(
+    localStorage.getItem("themeMode") || "System"
+  );
+
+  useEffect(() => {
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const onWindowMatch = () => {
+      if (
+        localStorage.getItem("themeMode") === "Dark" ||
+        (!localStorage.getItem("themeMode") && systemTheme.matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
+    onWindowMatch();
+
+    systemTheme.addEventListener("change", onWindowMatch);
+
+    return () => {
+      systemTheme.removeEventListener("change", onWindowMatch);
+    };
+  }, []);
+
+  const toggleTheme = (mode) => {
+    setThemeMode(mode);
+  };
+
+  useEffect(() => {
+    switch (themeMode) {
+      case "Dark":
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("themeMode", "Dark");
+        break;
+      case "Light":
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("themeMode", "Light");
+        break;
+      default:
+        localStorage.removeItem("themeMode");
+        break;
+    }
+  }, [themeMode]);
 
   const publishCampaign = async (form) => {
     try {
@@ -265,6 +311,8 @@ export const StateContextProvider = ({ children }) => {
         deleteCampaign,
         updateCampaign,
         getFilteredCampaigns,
+        toggleTheme,
+        themeMode,
       }}
     >
       <ToastContainer />

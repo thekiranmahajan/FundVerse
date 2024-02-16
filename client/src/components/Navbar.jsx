@@ -10,7 +10,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
-  const { address } = useStateContext();
+  const { address, themeMode } = useStateContext();
+  console.log(themeMode, "themeMode");
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -31,19 +32,19 @@ const Navbar = () => {
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
         <ConnectWallet
-          className={`!font-epilogue ${
-            address || "!bg-[#03dac5]"
-          } !text-black dark:text-white !mr-5`}
-          modalSize="wide"
+          className={"!font-epilogue !bg-[#6F01Ec] !text-white !mr-5"}
+          theme={(themeMode === "Light" && "light") || "dark"}
+          modalSize={"wide"}
+          showThirdwebBranding={false}
           welcomeScreen={{
-            title: "Your Team LEAD MR. MAHAJAN",
-            subtitle: "😂😂😂😂",
+            title:
+              "Welcome To FundVerse: A Decentralised CrowdFunding Application",
             img: {
               src: `${logo}`,
               width: 300,
             },
           }}
-          modalTitle="Welcome to FundVerse"
+          modalTitle="FundVerse"
         />
         <Link to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer overflow-hidden">
@@ -106,19 +107,19 @@ const Navbar = () => {
           </ul>
           <div className="flex mx-4">
             <ConnectWallet
-              className={`!font-epilogue ${
-                address || "!bg-[#03dac5]"
-              } !text-black dark:text-white !mr-5`}
-              modalSize="wide"
+              className={"!font-epilogue !bg-[#6F01Ec] !text-white !mr-5"}
+              theme={(themeMode === "Light" && "light") || "dark"}
+              modalSize={"wide"}
+              showThirdwebBranding={false}
               welcomeScreen={{
-                title: "Your Team LEAD MR. MAHAJAN",
-                subtitle: "😂😂😂😂",
+                title:
+                  "Welcome To FundVerse: A Decentralised CrowdFunding Application",
                 img: {
                   src: `${logo}`,
                   width: 300,
                 },
               }}
-              modalTitle="Welcome to FundVerse"
+              modalTitle="FundVerse"
             />
           </div>
         </div>

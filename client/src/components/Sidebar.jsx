@@ -1,59 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets";
 import { navlinks, themeModes } from "../constants";
 import Icon from "./Icon";
+import { useStateContext } from "../context";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("Dashboard");
-  const [themeMode, setThemeMode] = useState(
-    localStorage.getItem("themeMode") || "System"
-  );
-  const docElement = document.documentElement;
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+  const { toggleTheme, themeMode } = useStateContext();
 
-  const onWindowMatch = () => {
-    if (
-      localStorage.getItem("themeMode") === "Dark" ||
-      (!localStorage.getItem("themeMode") && systemTheme.matches)
-    ) {
-      docElement.classList.add("dark");
-    } else {
-      docElement.classList.remove("dark");
-    }
+  const handleLinkClick = (Link) => {
+    setIsActive(Link.name);
+    navigate(Link.link);
   };
-  onWindowMatch();
-  useEffect(() => {
-    systemTheme.addEventListener("change", onWindowMatch);
-    console.log("render()");
-  }, []);
-  useEffect(() => {
-    switch (themeMode) {
-      case "Dark":
-        docElement.classList.add("dark");
-        localStorage.setItem("themeMode", "Dark");
-
-        break;
-      case "Light":
-        docElement.classList.remove("dark");
-        localStorage.setItem("themeMode", "Light");
-
-        break;
-      default:
-        localStorage.removeItem("themeMode");
-        onWindowMatch();
-
-        break;
-    }
-  }, [themeMode]);
-
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh] ">
       <Link to="/">
         <Icon
           name="FundVerse"
-          styles="w-[52px] h-[52px] bg-[#f0f0f0] dark:bg-[#2c2f32] shadow-md"
+          styles="w-[52px] h-[52px] bg-[#f0f0f0] dark:bg-[#2c2f32] shadow-md overflow-hidden"
           imgUrl={logo}
         />
       </Link>
@@ -65,10 +31,7 @@ const Sidebar = () => {
               key={Link.name}
               {...Link}
               isActive={isActive}
-              handleClick={() => {
-                setIsActive(Link.name);
-                navigate(Link.link);
-              }}
+              handleClick={() => handleLinkClick(Link)}
             />
           ))}
         </div>
@@ -80,9 +43,7 @@ const Sidebar = () => {
               {...mode}
               isActive={isActive}
               themeMode={themeMode}
-              handleClick={() => {
-                setThemeMode(mode.name);
-              }}
+              handleClick={() => toggleTheme(mode.name)}
             />
           ))}
         </div>
