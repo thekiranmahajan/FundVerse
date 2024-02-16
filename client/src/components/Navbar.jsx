@@ -4,7 +4,7 @@ import { useStateContext } from "../context";
 import { logo, menu, search } from "../assets";
 import { navlinks } from "../constants";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, darkTheme, lightTheme } from "@thirdweb-dev/react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ const Navbar = () => {
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
-      <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#f2f2f2] dark:bg-[#1c1c24] rounded-[100px]">
+      <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#f2f2f2] dark:bg-[#1c1c24] rounded-[100px] shadow-md">
         <input
           type="text"
           placeholder="Search for campaigns"
           className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#6e7682]  text-black dark:text-white bg-transparent outline-none"
         />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#6F01Ec] flex justify-center items-center cursor-pointer">
+        <div className="w-[72px] h-full rounded-[20px] bg-[#6F01Ec] flex justify-center items-center cursor-pointer shadow-md">
           <img
             src={search}
             alt="search"
@@ -32,22 +32,43 @@ const Navbar = () => {
 
       <div className="sm:flex hidden flex-row justify-end gap-4">
         <ConnectWallet
-          className={"!font-epilogue !bg-[#6F01Ec] !text-white !mr-5"}
-          theme={(themeMode === "Light" && "light") || "dark"}
+          className={
+            "!font-epilogue !bg-[#03dac5]  !text-white !mr-5 !shadow-md !border-none !outline-none"
+          }
+          theme={
+            (themeMode === "Light" &&
+              lightTheme({
+                colors: {
+                  accentButtonBg: "#03dac5",
+                  primaryButtonBg: "#03dac5",
+                  accentText: "#03dac5",
+                },
+              })) ||
+            (themeMode === "Dark" &&
+              darkTheme({
+                colors: {
+                  accentButtonBg: "#03dac5",
+                  primaryButtonBg: "#03dac5",
+                  accentText: "#03dac5",
+                },
+              }))
+          }
+          modalTitle={"FundVerse"}
           modalSize={"wide"}
-          showThirdwebBranding={false}
           welcomeScreen={{
-            title:
-              "Welcome To FundVerse: A Decentralised CrowdFunding Application",
             img: {
               src: `${logo}`,
-              width: 300,
+              width: 200,
+              height: 200,
             },
+            title:
+              "Welcome To FundVerse: A Decentralised CrowdFunding Application",
           }}
-          modalTitle="FundVerse"
+          modalTitleIconUrl={logo}
+          showThirdwebBranding={false}
         />
         <Link to="/profile">
-          <div className="w-[52px] h-[52px] rounded-full bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer overflow-hidden">
+          <div className="w-[52px] h-[52px] rounded-full bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer overflow-hidden shadow-md">
             <Jazzicon
               className="w-[60%] h-[60%] object-contain"
               diameter={52}
@@ -107,7 +128,9 @@ const Navbar = () => {
           </ul>
           <div className="flex mx-4">
             <ConnectWallet
-              className={"!font-epilogue !bg-[#6F01Ec] !text-white !mr-5"}
+              className={
+                "!font-epilogue !bg-[#6F01Ec] !text-white !mr-5 !shadow-md"
+              }
               theme={(themeMode === "Light" && "light") || "dark"}
               modalSize={"wide"}
               showThirdwebBranding={false}

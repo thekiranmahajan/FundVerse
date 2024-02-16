@@ -6,6 +6,8 @@ import {
   ThirdwebProvider,
   coinbaseWallet,
   metamaskWallet,
+  rainbowWallet,
+  trustWallet,
   walletConnect,
 } from "@thirdweb-dev/react";
 import { StateContextProvider } from "./context";
@@ -16,15 +18,17 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <ThirdwebProvider
+    activeChain={Sepolia}
+    clientId={`${process.env.CLIENT_ID}`}
     supportedWallets={[
       metamaskWallet({
         recommended: true,
       }),
       coinbaseWallet(),
+      rainbowWallet(),
       walletConnect(),
+      trustWallet(),
     ]}
-    activeChain={Sepolia}
-    clientId={`${process.env.CLIENT_ID}`}
   >
     <Router>
       <StateContextProvider>
