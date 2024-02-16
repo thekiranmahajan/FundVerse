@@ -9,6 +9,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("Dashboard");
   const { toggleTheme, themeMode } = useStateContext();
+  const [isThemeActive, setIsThemeActive] = useState(themeMode);
 
   const handleLinkClick = (Link) => {
     setIsActive(Link.name);
@@ -41,9 +42,9 @@ const Sidebar = () => {
             <Icon
               key={mode.name}
               {...mode}
-              isActive={isActive}
-              themeMode={themeMode}
-              handleClick={() => toggleTheme(mode.name)}
+              handleClick={() => {
+                toggleTheme(mode.name);
+              }}
             />
           ))}
         </div>

@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const { address, themeMode } = useStateContext();
-  console.log(themeMode, "themeMode");
+  // console.log(themeMode, "themeMode");
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="sm:flex hidden flex-row justify-end gap-4">
         <ConnectWallet
           className={
-            "!font-epilogue !bg-[#03dac5]  !text-white !mr-5 !shadow-md !border-none !outline-none"
+            "!font-epilogue !bg-[#03dac5] !mr-5 !shadow-md !outline-none"
           }
           theme={
             (themeMode === "Light" &&
