@@ -92,15 +92,16 @@ const UpdateCampaign = () => {
           handleChange={(e) => handleFormFieldChange("description", e)}
         />
 
-        <div className="w-full flex justify-start items-center p-4 bg-[#b394ff] dark:bg-[#03dac5] rounded-xl">
+        <div className="w-full flex justify-center items-center p-4 bg-[#03dac5] h-[120px] rounded-xl ">
           <img
             src={money}
             alt="money"
-            className="w-[40px] h-[40px] object-contain"
+            className=" w-[40px] h-[40px] object-contain
+          
+          "
           />
-
-          <h4 className="font-epilogue font-bold text-[25px] text-black dark:text-white ml-[20px]">
-            You will get 100% of the raised amount
+          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px] ">
+            You'll get 100% of the raised amount
           </h4>
         </div>
         <div className="flex flex-wrap gap-[40px]">
@@ -132,7 +133,7 @@ const UpdateCampaign = () => {
           <CustomButton
             btnType="submit"
             title="Update campaign"
-            styles="bg-[#48d48a] dark:bg-[#6F01Ec]"
+            styles="bg-[#6F01Ec] text-white"
           />
         </div>
       </form>

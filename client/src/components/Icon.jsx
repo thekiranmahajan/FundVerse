@@ -27,7 +27,7 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick, themeMode }) => {
       onMouseLeave={handleMouseLeave}
     >
       {hovered && (
-        <div className="absolute top-1 left-20 bg-[#6F01Ec] dark:bg-[#2c2f32a7] text-white dark:text-[#6F01Ec] py-2 px-3 rounded-md font-epilogue">
+        <div className="absolute top-1 left-16 bg-[#6F01Ec] dark:bg-[#2c2f32a7] text-white dark:text-[#6F01Ec] py-2 px-3 rounded-md font-epilogue">
           {name}
         </div>
       )}

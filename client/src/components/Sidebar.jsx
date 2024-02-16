@@ -19,7 +19,7 @@ const Sidebar = () => {
       <Link to="/">
         <Icon
           name="FundVerse"
-          styles="w-[52px] h-[52px] bg-[#f0f0f0] dark:bg-[#2c2f32] shadow-md overflow-hidden"
+          styles="w-[52px] h-[52px] bg-[#f0f0f0] dark:bg-[#2c2f32] shadow-md "
           imgUrl={logo}
         />
       </Link>

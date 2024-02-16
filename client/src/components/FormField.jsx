@@ -27,7 +27,7 @@ const FormField = ({
           type={inputType}
           rows={10}
           placeholder={placeholder}
-          className=" py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#e5e5e5] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-[14px] placeholder:text-[#6e7682] text-[#4b5264] rounded-xl sm:min-w-[300px]
+          className=" py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-[14px] placeholder:text-[#6e7682] text-[#4b5264] rounded-xl sm:min-w-[300px]
           "
         />
       ) : isCategory ? (
@@ -35,7 +35,7 @@ const FormField = ({
           required
           value={value}
           onChange={handleChange}
-          className="py-[17px] sm:px-[25px] px-[20px] outline-none border-[1px] border-[#e5e5e5] dark:border-[#3a3a43]  font-epilogue text-black dark:text-white text-[14px]  rounded-xl sm:min-w-[300px] bg-[#f2f2f2] dark:bg-[#1c1c24]"
+          className="py-[17px] sm:px-[25px] px-[20px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43]  font-epilogue text-black dark:text-white text-[14px]  rounded-xl sm:min-w-[300px] bg-[#f2f2f2] dark:bg-[#1c1c24]"
         >
           <option value="">Select any Category</option>
           <option value="Fundraiser">Fundraiser</option>
@@ -56,7 +56,7 @@ const FormField = ({
           onChange={handleChange}
           type={inputType}
           placeholder={placeholder}
-          className=" py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#e5e5e5] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-[14px] placeholder:text-[#6e7682] text-[#4b5264] rounded-xl sm:min-w-[300px] 
+          className=" py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-[14px] placeholder:text-[#6e7682] text-[#4b5264] rounded-xl sm:min-w-[300px] 
           "
         />
       )}
