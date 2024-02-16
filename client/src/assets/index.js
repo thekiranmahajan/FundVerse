@@ -1,6 +1,5 @@
 import createCampaign from "./create-campaign.svg";
 import dashboard from "./dashboard.svg";
-import logoold from "./logo.svg";
 import logo from "./logo.png";
 import disconnect from "./disconnect.svg";
 import profile from "./profile.svg";
@@ -18,7 +17,6 @@ export {
   tagType,
   createCampaign,
   dashboard,
-  logoold,
   disconnect,
   profile,
   withdraw,

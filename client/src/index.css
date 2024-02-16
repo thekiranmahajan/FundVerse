@@ -24,7 +24,7 @@
     scrollbar-width: none; /* Firefox */
   }
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
 
   /* Track */
@@ -34,18 +34,12 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #fddf47d6;
+    background: #3f334b;
     border-radius: 5px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #fd0101;
-  }
-}
-
-@layer components {
-  .gradient-bg {
-    @apply bg-gradient-to-b from-transparent to-black;
+    background: #7d6af0;
   }
 }

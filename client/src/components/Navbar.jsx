@@ -20,7 +20,7 @@ const Navbar = () => {
           placeholder="Search for campaigns"
           className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#6e7682]  text-black dark:text-white bg-transparent outline-none"
         />
-        <div className="w-[72px] h-full rounded-[20px] bg-[#48d48a] dark:bg-[#1dc071] flex justify-center items-center cursor-pointer">
+        <div className="w-[72px] h-full rounded-[20px] bg-[#6F01Ec] flex justify-center items-center cursor-pointer">
           <img
             src={search}
             alt="search"
@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className="sm:flex hidden flex-row justify-end gap-4">
         <ConnectWallet
           className={`!font-epilogue ${
-            address || "!bg-[#b394ff] !dark:bg-[#8c6dfd]"
+            address || "!bg-[#03dac5]"
           } !text-black dark:text-white !mr-5`}
           modalSize="wide"
           welcomeScreen={{
@@ -95,7 +95,7 @@ const Navbar = () => {
                 <p
                   className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
                     isActive === Link.name
-                      ? "text-[#48d48a]  dark:text-[#1dc071]"
+                      ? "text-[#48d48a]  dark:text-[#6F01Ec]"
                       : "text-[#4d4d4d] dark:text-[#808191]"
                   }`}
                 >
@@ -107,7 +107,7 @@ const Navbar = () => {
           <div className="flex mx-4">
             <ConnectWallet
               className={`!font-epilogue ${
-                address || "!bg-[#b394ff] !dark:bg-[#8c6dfd]"
+                address || "!bg-[#03dac5]"
               } !text-black dark:text-white !mr-5`}
               modalSize="wide"
               welcomeScreen={{

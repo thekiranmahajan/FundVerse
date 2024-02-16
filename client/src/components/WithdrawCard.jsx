@@ -16,7 +16,7 @@ const WithdrawCard = ({
   const remainingDays = daysLeft(deadline);
 
   return (
-    <div className="sm:w-[288px] w-full rounded-[15px] bg-[#f2f2f2] dark:bg-[#1c1c24] cursor-pointer">
+    <div className="sm:w-[288px] w-full rounded-[15px] bg-[#f2f2f2] dark:bg-[#1c1c24] cursor-pointer shadow-md hover:scale-95 focus:scale-105 transition-transform duration-300">
       <img
         src={image}
         alt="fund"
@@ -71,7 +71,7 @@ const WithdrawCard = ({
           <CustomButton
             btnType="button"
             title="Withdraw from Campaign"
-            styles="w-full bg-[#d7b4ff] dark:bg-[#ac73ff] cursor-pointer"
+            styles="w-full bg-[#d7b4ff] dark:bg-[#ac73ff] text-white cursor-pointer"
             handleClick={handleClick}
           />
         </div>

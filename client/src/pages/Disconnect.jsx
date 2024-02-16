@@ -37,11 +37,7 @@ const Disconnect = () => {
         <CustomButton
           btnType="button"
           title={address ? "Disconnect" : "Connect"}
-          styles={
-            address
-              ? "bg-[#ff3333] dark:bg-[#FF0000]"
-              : "bg-[#b394ff] dark:bg-[#8c6dfd]"
-          }
+          styles={address ? "bg-[#ff3333] " : "bg-[#03dac5]"}
           handleClick={handleDisconnect}
         />
       </div>
