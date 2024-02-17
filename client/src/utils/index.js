@@ -4,10 +4,10 @@ export function daysLeft(deadline) {
   const remainingDays = difference / (1000 * 3600 * 24);
 
   let daysLeft;
- 
+
   daysLeft = Math.ceil(remainingDays);
   if (daysLeft <= 0) {
-    daysLeft = "Ended";
+    daysLeft = 0;
   }
   return daysLeft;
 }
