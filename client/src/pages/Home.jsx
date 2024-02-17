@@ -7,12 +7,12 @@ const Home = () => {
   const [campaigns, setCampaigns] = useState([]);
   const { address, contract, getCampaigns } = useStateContext();
 
-  
   const fetchCampaigns = async () => {
     setIsLoading(true);
     const data = await getCampaigns();
     setCampaigns(data);
     setIsLoading(false);
+    console.log(campaigns);
   };
 
   useEffect(() => {

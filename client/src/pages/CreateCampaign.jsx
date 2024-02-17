@@ -100,21 +100,12 @@ const CreateCampaign = () => {
         />
 
         <div className="w-full flex justify-center items-center p-4 bg-[#03dac5] h-[120px] rounded-xl ">
-          <img
-            src={money}
-            alt="money"
-            className="  w-10 h-10 object-contain
-          
-          "
-          />
+          <img src={money} alt="money" className="w-10 h-10 object-contain" />
           <h4 className="font-epilogue font-bold text-[25px] text-white ml-5 ">
             You'll get 100% of the raised amount
           </h4>
         </div>
-        <div
-          className=" flex flex-wrap gap-[40px]
- "
-        >
+        <div className="flex flex-wrap gap-[40px]">
           <FormField
             labelName="Goal *"
             placeholder="e.g. ETH 0.50"
