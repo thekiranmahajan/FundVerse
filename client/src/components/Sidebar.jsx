@@ -4,6 +4,7 @@ import { logo } from "../assets";
 import { navlinks, themeModes } from "../constants";
 import Icon from "./Icon";
 import { useStateContext } from "../context";
+import ThemeModeIcon from "./ThemeModeIcon";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -39,11 +40,13 @@ const Sidebar = () => {
 
         <div className="flex items-center justify-center flex-col gap-1">
           {themeModes.map((mode) => (
-            <Icon
+            <ThemeModeIcon
               key={mode.name}
               {...mode}
+              isThemeActive={isThemeActive}
               handleClick={() => {
                 toggleTheme(mode.name);
+                setIsThemeActive(mode.name);
               }}
             />
           ))}
