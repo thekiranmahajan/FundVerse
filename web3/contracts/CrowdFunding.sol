@@ -167,6 +167,11 @@ contract CrowdFunding {
         Campaign storage campaign = campaigns[_id];
 
         require(
+            block.timestamp * 1000 >= campaign.deadline,
+            "Cannot withdraw before the deadline"
+        );
+        
+        require(
             campaign.amountCollected <= address(this).balance,
             "Insufficient contract balance"
         );
