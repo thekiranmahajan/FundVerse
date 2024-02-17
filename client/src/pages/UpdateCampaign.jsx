@@ -96,11 +96,11 @@ const UpdateCampaign = () => {
           <img
             src={money}
             alt="money"
-            className=" w-[40px] h-[40px] object-contain
+            className="  w-10 h-10 object-contain
           
           "
           />
-          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px] ">
+          <h4 className="font-epilogue font-bold text-[25px] text-white ml-5 ">
             You'll get 100% of the raised amount
           </h4>
         </div>

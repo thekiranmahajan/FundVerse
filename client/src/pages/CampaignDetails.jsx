@@ -79,8 +79,7 @@ const CampaignDetails = () => {
           />
           <div className="relative w-full h-[5px] bg-[#e5e5e5] dark:bg-[#3a3a43] mt-2">
             <div
-              className="absolute h-full bg-[#48d48a] dark:bg-[#6F01Ec]
-          "
+              className="absolute h-full bg-[#6F01Ec]"
               style={{
                 width: `${calculateBarPercentage(
                   state.target,
@@ -102,13 +101,13 @@ const CampaignDetails = () => {
         </div>
       </div>
 
-      <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
+      <div className="mt-16 flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
             <h4 className="font-epilogue font-semibold text-lg text-black dark:text-white uppercase">
               {state.title}
             </h4>
-            <p className="mt-[3px] font-epilogue font-normal text-[16px] leading-[18px] text-[#4d4d4d] dark:text-[#808191]">
+            <p className="mt-[3px] font-epilogue font-normal   leading-[18px] text-[#4d4d4d] dark:text-[#808191]">
               {state.category}
             </p>
           </div>
@@ -126,7 +125,7 @@ const CampaignDetails = () => {
                 />
               </div>
               <div className="w-full">
-                <h4 className="font-epilogue font-semibold text-[14px] text-black dark:text-white truncate ">
+                <h4 className="font-epilogue font-semibold text-sm text-black dark:text-white truncate ">
                   {state.name} is organizing this fundraiser for{" "}
                   {state.category} category.
                 </h4>
@@ -157,16 +156,16 @@ const CampaignDetails = () => {
                     key={`${item.donator}-${index}`}
                     className="flex justify-between items-center gap-4"
                   >
-                    <p className="font-epilogue font-normal text-[16px] text-[#78787c] dark:text-[#b2b3bd] leading-[26px] truncate">
+                    <p className="font-epilogue font-normal   text-[#78787c] dark:text-[#b2b3bd] leading-[26px] truncate">
                       {index + 1}. {item.donator}
                     </p>
-                    <p className="font-epilogue font-normal text-[16px] text-[#4d4d4d] dark:text-[#808191] leading-[26px] mr-3">
+                    <p className="font-epilogue font-normal   text-[#4d4d4d] dark:text-[#808191] leading-[26px] mr-3">
                       {item.donation}
                     </p>
                   </div>
                 ))
               ) : (
-                <p className="font-epilogue font-normal text-[16px] text-[#4d4d4d] dark:text-[#808191] leading-[26px] text-justify">
+                <p className="font-epilogue font-normal   text-[#4d4d4d] dark:text-[#808191] leading-[26px] text-justify">
                   No donators yet. Be the first one to donate!
                 </p>
               )}
@@ -178,7 +177,7 @@ const CampaignDetails = () => {
             Fund
           </h4>
           <div className=" mt-[20px] flex flex-col p-4 bg-[#f2f2f2] dark:bg-[#1c1c24] rounded-xl ">
-            <p className=" font-epilogue font-medium text-[20px ] leading-[30px] text-center text-[#4d4d4d] dark:text-[#808191] ">
+            <p className=" font-epilogue font-medium text-[20px ] leading-8 text-center text-[#4d4d4d] dark:text-[#808191] ">
               Fund the campaign
             </p>
             <div className="mt-[30px]">
@@ -188,10 +187,10 @@ const CampaignDetails = () => {
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-lg leading-[30px] placeholder:text-[#6e7682] text-[#4b5264] rounded-xl "
+                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-lg leading-8 placeholder:text-[#6e7682] text-[#4b5264] rounded-xl "
               />
               <div className="my-[20px] p-4 bg-[#eaeaea] dark:bg-[#13131a] rounded-xl ">
-                <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-black dark:text-white ">
+                <h4 className="font-epilogue font-semibold text-sm leading-[22px] text-black dark:text-white ">
                   Back it because you believe in it.
                 </h4>
                 <p className=" mt-[20px] font-epilogue font-normal leading-[22px] text-[#4d4d4d] dark:text-[#808191] ">
@@ -209,7 +208,7 @@ const CampaignDetails = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[60px] mb-[30px]">
+      <div className="mt-16 mb-[30px]">
         {address == state.owner && (
           <div className="flex flex-wrap justify-between gap-[40px]">
             <CustomButton

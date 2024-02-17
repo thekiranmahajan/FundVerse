@@ -25,9 +25,9 @@ const Disconnect = () => {
 
         <div className="font-epilogue font-semibold text-lg text-black dark:text-white h-16 flex items-center justify-center transition-all duration-300">
           {address ? (
-            <p className="flex items-center justify-center flex-col">
+            <p className="flex items-center justify-center flex-col text-[#131418]">
               You are connected to
-              <span className="text-base text-gray-400">{address}</span>
+              <span className="  text-gray-400 truncate">{address}</span>
             </p>
           ) : (
             "Connect to MetaMask"
@@ -37,7 +37,7 @@ const Disconnect = () => {
         <CustomButton
           btnType="button"
           title={address ? "Disconnect" : "Connect"}
-          styles={address ? "bg-[#ff3333] " : "bg-[#03dac5] !text-[#131418]"}
+          styles={address ? "bg-[#ff3333] " : "bg-[#03dac5] "}
           handleClick={handleDisconnect}
         />
       </div>

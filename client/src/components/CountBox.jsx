@@ -6,7 +6,7 @@ const CountBox = ({ title, value }) => {
       <h4 className="font-epilogue font-bold text-[30px] text-black dark:text-white p-3 bg-[#f2f2f2] dark:bg-[#1c1c24] rounded-t-[10px] w-full text-center truncate">
         {value}
       </h4>
-      <p className="font-epilogue font-normal text-[16px] text-[#4d4d4d] dark:text-[#808191] bg-[#dddddd] dark:bg-[#28282e] px-3 py-2 w-full rounded-b-[10px] text-center">
+      <p className="font-epilogue font-normal  text-[#4d4d4d] dark:text-[#808191] bg-[#dddddd] dark:bg-[#28282e] px-3 py-2 w-full rounded-b-[10px] text-center">
         {title}
       </p>
     </div>

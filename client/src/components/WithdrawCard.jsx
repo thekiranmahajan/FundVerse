@@ -42,14 +42,14 @@ const WithdrawCard = ({
         </div>
 
         <div className="block">
-          <h3 className="font-epilogue font-semibold text-[16px] text-black dark:text-white text-left leading-[26px] truncate ">
+          <h3 className="font-epilogue font-semibold   text-black dark:text-white text-left leading-[26px] truncate ">
             {title}
           </h3>
         </div>
 
         <div className="flex justify-between flex-wrap mt-[15px] gap-2">
           <div className="flex flex-col">
-            <h4 className="font-epilogue font-semibold text-[14px] text-[#78787c] dark:text-[#b2b3bd] leading-[22px]">
+            <h4 className="font-epilogue font-semibold text-sm text-[#78787c] dark:text-[#b2b3bd] leading-[22px]">
               {amountCollected}
             </h4>
             <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#4d4d4d] dark:text-[#808191] sm:max-w-[120px] truncate">
@@ -58,7 +58,7 @@ const WithdrawCard = ({
           </div>
 
           <div className="flex flex-col">
-            <h4 className="font-epilogue font-semibold text-[14px] text-[#78787c] dark:text-[#b2b3bd] leading-[22px] text-center">
+            <h4 className="font-epilogue font-semibold text-sm text-[#78787c] dark:text-[#b2b3bd] leading-[22px] text-center">
               {remainingDays}
             </h4>
             <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#4d4d4d] dark:text-[#808191] sm:max-w-[120px] truncate">
