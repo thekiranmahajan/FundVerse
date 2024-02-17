@@ -50,7 +50,7 @@ const UpdateCampaign = () => {
     <div className="bg-[#f2f2f2] dark:bg-[#1c1c24] flex justify-center items-center flex-col rounded-xl sm:p-10 p-4">
       {isLoading && <Loader />}
       <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#e5e5e5] dark:bg-[#3a3a43] rounded-xl">
-        <h1 className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-black dark:text-white">
+        <h1 className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-[#131418] dark:text-white">
           Edit Campaign
         </h1>
       </div>
@@ -133,7 +133,7 @@ const UpdateCampaign = () => {
           <CustomButton
             btnType="submit"
             title="Update campaign"
-            styles="bg-[#6F01Ec] text-white"
+            styles="bg-[#6F01Ec]"
           />
         </div>
       </form>

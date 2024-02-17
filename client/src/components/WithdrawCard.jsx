@@ -71,7 +71,7 @@ const WithdrawCard = ({
           <CustomButton
             btnType="button"
             title="Withdraw from Campaign"
-            styles="w-full bg-[#d7b4ff] dark:bg-[#ac73ff] text-white cursor-pointer"
+            styles="w-full bg-[#6F01Ec]  !text-white  cursor-pointer"
             handleClick={handleClick}
           />
         </div>

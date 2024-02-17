@@ -14,13 +14,13 @@ const CampaignDetails = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
-  const [donators, setDonators] = useState([]);
+  const [donors, setDonors] = useState([]);
 
   const remainingDays = daysLeft(state.deadline);
 
   const fetchDonators = async () => {
     const data = await getDonations(state.pId);
-    setDonators(data);
+    setDonors(data);
   };
 
   useEffect(() => {
@@ -92,12 +92,15 @@ const CampaignDetails = () => {
         </div>
 
         <div className="flex md:w-[150px] w-full md:flex-wrap sm:flex-row flex-col justify-between sm:items-start items-center gap-[30px]">
-          <CountBox title="Days Left" value={remainingDays} />
+          <CountBox
+            title="Days Left"
+            value={remainingDays === 0 ? "Ended" : remainingDays}
+          />
           <CountBox
             title={`Raised of ${state.target}`}
             value={state.amountCollected}
           />
-          <CountBox title="Total Backers" value={donators.length} />
+          <CountBox title="Total Backers" value={donors.length} />
         </div>
       </div>
 
@@ -147,11 +150,11 @@ const CampaignDetails = () => {
 
           <div>
             <h4 className="font-epilogue font-semibold text-lg text-black dark:text-white uppercase">
-              Donators
+              Donors
             </h4>
             <div className=" mt-[20px] flex flex-col gap-4">
-              {donators.length > 0 ? (
-                donators.map((item, index) => (
+              {donors.length > 0 ? (
+                donors.map((item, index) => (
                   <div
                     key={`${item.donator}-${index}`}
                     className="flex justify-between items-center gap-4"
@@ -166,7 +169,7 @@ const CampaignDetails = () => {
                 ))
               ) : (
                 <p className="font-epilogue font-normal   text-[#4d4d4d] dark:text-[#808191] leading-[26px] text-justify">
-                  No donators yet. Be the first one to donate!
+                  No Donors yet. Be the first one to donate!
                 </p>
               )}
             </div>
@@ -191,17 +194,22 @@ const CampaignDetails = () => {
               />
               <div className="my-[20px] p-4 bg-[#eaeaea] dark:bg-[#13131a] rounded-xl ">
                 <h4 className="font-epilogue font-semibold text-sm leading-[22px] text-black dark:text-white ">
-                  Back it because you believe in it.
+                  Empower change. Support now.
                 </h4>
                 <p className=" mt-[20px] font-epilogue font-normal leading-[22px] text-[#4d4d4d] dark:text-[#808191] ">
-                  Support the project for no reward, just it speaks to you.
+                  Transform lives, shape the future. Your donation fuels
+                  progress. Join us, make an impact.
                 </p>
               </div>
               <CustomButton
                 btnType="button"
-                title="Fund Campaign"
-                styles="w-full bg-[#d7b4ff] dark:bg-[#ac73ff]"
-                isDisabled={remainingDays === "Ended"}
+                title={
+                  remainingDays === 0 ? "Deadline Reached" : "Fund Campaign"
+                }
+                styles={`w-full bg-[#6F01Ec] ${
+                  remainingDays === 0 && "!text-white"
+                }`}
+                isDisabled={remainingDays === 0}
                 handleClick={handleDonate}
               />
             </div>
@@ -215,14 +223,14 @@ const CampaignDetails = () => {
               btnType="button"
               id={state.pId}
               title="Update Campaign"
-              styles="w-[31%] bg-[#d7b4ff] dark:bg-[#ac73ff]"
+              styles="w-[31%] bg-[#03dac5]"
               handleClick={handleUpdate}
             />
 
             <CustomButton
               btnType="button"
               title="Delete Campaign"
-              styles=" w-[31%] bg-[#ff3333] dark:bg-[#FF0000]"
+              styles=" w-[31%] bg-[#ff3333] dark:bg-[#FF0000] !text-white"
               handleClick={handleDelete}
             />
           </div>
