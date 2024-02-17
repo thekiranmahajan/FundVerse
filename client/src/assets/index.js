@@ -12,6 +12,7 @@ import loader from "./loader.svg";
 import sun from "./sun.svg";
 import moon from "./moon.svg";
 import system from "./system.svg";
+import cross from "./cross.svg";
 
 export {
   tagType,
@@ -22,6 +23,7 @@ export {
   withdraw,
   search,
   menu,
+  cross,
   money,
   loader,
   sun,

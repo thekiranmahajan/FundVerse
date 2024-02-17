@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
-import { logo, menu, search } from "../assets";
+import { cross, logo, menu, search } from "../assets";
 import { navlinks } from "../constants";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { ConnectWallet, darkTheme, lightTheme } from "@thirdweb-dev/react";
@@ -19,7 +19,7 @@ const Navbar = () => {
         <input
           type="text"
           placeholder="Search for campaigns"
-          className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#6e7682]  text-black dark:text-white bg-transparent outline-none"
+          className="flex w-full font-epilogue font-normal text-sm placeholder:text-[#6e7682]  text-black dark:text-white bg-transparent outline-none"
         />
         <div className="w-[72px] h-full rounded-[20px] bg-[#6F01Ec] flex justify-center items-center cursor-pointer shadow-md">
           <img
@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="sm:flex hidden flex-row justify-end gap-4">
         <ConnectWallet
           className={
-            "!font-epilogue !bg-[#03dac5] !mr-5 !shadow-md !outline-none"
+            "!font-epilogue !bg-[#03dac5] !mr-5 !shadow-md !outline-none !font-semibold"
           }
           theme={
             (themeMode === "Light" &&
@@ -81,22 +81,20 @@ const Navbar = () => {
       {/* small screen navigation */}
 
       <div className="sm:hidden flex justify-between items-center relative">
-        <div className="w-[40px] h-[40px] rounded-xl bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-          <img
-            src={logo}
-            alt="Logo"
-            className="w-[60%] h-[60%] object-contain"
-          />
+        <div className="w-14 h-14 rounded-xl bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer shadow-md">
+          <img src={logo} alt="Logo" className="w-4/5 h-4/5 object-contain" />
         </div>
 
         <img
-          src={menu}
-          alt="menu"
-          className="w-[34px] h-[34px] object-contain cursor-pointer"
+          src={toggleDrawer ? cross : menu}
+          alt="Hamburger Menu"
+          className={`${
+            toggleDrawer ? "w-12 -rotate-90" : "w-9 h-9 "
+          } object-contain cursor-pointer transition-transform duration-200 select-none `}
           onClick={() => setToggleDrawer((prev) => !prev)}
         />
         <div
-          className={`absolute top-[60px] right-0 left-0 bg-[#f2f2f2] dark:bg-[#1c1c24] z-10 shadow-secondary py-4 cursor-pointer ${
+          className={`absolute top-20 right-0 left-0 bg-[#f2f2f2] dark:bg-[#1c1c24] z-10 shadow-secondary py-4 cursor-pointer rounded-xl ${
             !toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"
           } transition-all duration-700`}
         >
@@ -115,9 +113,9 @@ const Navbar = () => {
               >
                 <img src={Link.imgUrl} alt={Link.name} />
                 <p
-                  className={`ml-[20px] font-epilogue font-semibold text-[14px] ${
+                  className={`ml-5 font-epilogue font-semibold text-sm ${
                     isActive === Link.name
-                      ? "text-[#48d48a]  dark:text-[#6F01Ec]"
+                      ? "text-[#6F01Ec]"
                       : "text-[#4d4d4d] dark:text-[#808191]"
                   }`}
                 >
@@ -129,20 +127,39 @@ const Navbar = () => {
           <div className="flex mx-4">
             <ConnectWallet
               className={
-                "!font-epilogue !bg-[#6F01Ec] !text-white !mr-5 !shadow-md"
+                "!font-epilogue !bg-[#03dac5] !mr-5 !shadow-md !outline-none !font-semibold"
               }
-              theme={(themeMode === "Light" && "light") || "dark"}
+              theme={
+                (themeMode === "Light" &&
+                  lightTheme({
+                    colors: {
+                      accentButtonBg: "#03dac5",
+                      primaryButtonBg: "#03dac5",
+                      accentText: "#03dac5",
+                    },
+                  })) ||
+                (themeMode === "Dark" &&
+                  darkTheme({
+                    colors: {
+                      accentButtonBg: "#03dac5",
+                      primaryButtonBg: "#03dac5",
+                      accentText: "#03dac5",
+                    },
+                  }))
+              }
+              modalTitle={"FundVerse"}
               modalSize={"wide"}
-              showThirdwebBranding={false}
               welcomeScreen={{
-                title:
-                  "Welcome To FundVerse: A Decentralised CrowdFunding Application",
                 img: {
                   src: `${logo}`,
-                  width: 300,
+                  width: 200,
+                  height: 200,
                 },
+                title:
+                  "Welcome To FundVerse: A Decentralised CrowdFunding Application",
               }}
-              modalTitle="FundVerse"
+              modalTitleIconUrl={logo}
+              showThirdwebBranding={false}
             />
           </div>
         </div>
