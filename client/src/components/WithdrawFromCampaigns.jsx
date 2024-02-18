@@ -19,7 +19,19 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
 
   const handleWithdraw = async (campaign) => {
     if (campaign.amountCollected == 0) {
-      toast("❌ Error! No donations found for this campaign", {
+      toast("❌ No donations found for this campaign", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    if (campaign.deadline >= Date.now()) {
+      toast("❌ You can't withdraw campaign before deadline", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

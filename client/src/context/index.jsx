@@ -16,7 +16,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0xACAf7D5b72EB78c59B0d50ceC24E05682a9FF674",
+    "0x91c73db61aBD2292a68D9140359fC0BE79672F0e",
     contractABI
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -261,6 +261,7 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i,
     }));
+    console.log(parsedCampaigns);
     return parsedCampaigns;
   };
 
