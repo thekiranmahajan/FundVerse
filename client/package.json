@@ -11,7 +11,6 @@
   "dependencies": {
     "@thirdweb-dev/react": "^3",
     "@thirdweb-dev/sdk": "^3",
-    "dotenv": "^16.4.2",
     "ethers": "^5",
     "react": "^18.2",
     "react-dom": "^18.2",
@@ -22,6 +21,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^2",
     "autoprefixer": "^10.4.16",
+    "dotenv": "^16.4.4",
     "postcss": "^8.4.30",
     "tailwindcss": "^3.3.3",
     "vite": "^3",
