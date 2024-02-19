@@ -78,7 +78,6 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await createCampaign({
         args: [
-          address,
           form.name,
           form.title,
           form.category,
@@ -252,7 +251,7 @@ export const StateContextProvider = ({ children }) => {
 
   const getCampaigns = async () => {
     const campaigns = await contract.call("getCampaigns");
-    console.log("campaigns from contract", campaigns);
+    console.log("Raw Campaigns from contract before parsing", campaigns);
     const parsedCampaigns = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
       name: campaign.name,
@@ -267,7 +266,7 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       pId: i,
     }));
-    console.log(parsedCampaigns);
+    console.log("parsedCampaigns from index.jsx", parsedCampaigns);
     return parsedCampaigns;
   };
 
