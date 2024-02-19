@@ -50,7 +50,6 @@ contract CrowdFunding {
     }
 
     function createCampaign(
-        address _owner,
         string memory _name,
         string memory _title,
         string memory _category,
@@ -66,7 +65,7 @@ contract CrowdFunding {
 
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
-        campaign.owner = _owner;
+        campaign.owner = msg.sender;
         campaign.name = _name;
         campaign.title = _title;
         campaign.category = _category;
@@ -128,9 +127,7 @@ contract CrowdFunding {
         campaign.amountCollected += amount;
     }
 
-    function deleteCampaign(
-        uint256 _id
-    ) public authorisedPerson(_id) returns (bool) {
+    function deleteCampaign(uint256 _id) public returns (bool) {
         Campaign storage campaign = campaigns[_id];
 
         require(campaign.owner != address(0), "Campaign does not exist");
@@ -138,8 +135,12 @@ contract CrowdFunding {
         if (campaign.amountCollected > 0) {
             _refundDonators(_id);
         }
+        uint256 lastCampaignId = numberOfCampaigns - 1;
 
-        delete campaigns[_id];
+        if (_id != lastCampaignId) {
+            campaigns[_id] = campaigns[lastCampaignId];
+        }
+        delete campaigns[lastCampaignId];
 
         numberOfCampaigns--;
 
@@ -198,7 +199,7 @@ contract CrowdFunding {
     }
 
     function getCampaigns() public view returns (Campaign[] memory) {
-        Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
+        uint activeCampaignsCount = 0;
 
         for (uint i = 0; i < numberOfCampaigns; i++) {
             Campaign storage item = campaigns[i];
@@ -207,7 +208,22 @@ contract CrowdFunding {
                 bytes(item.name).length > 0 &&
                 bytes(item.title).length > 0
             ) {
-                allCampaigns[i] = item;
+                activeCampaignsCount++;
+            }
+        }
+
+        Campaign[] memory allCampaigns = new Campaign[](activeCampaignsCount);
+        uint index = 0;
+
+        for (uint i = 0; i < numberOfCampaigns; i++) {
+            Campaign storage item = campaigns[i];
+            if (
+                item.owner != address(0) &&
+                bytes(item.name).length > 0 &&
+                bytes(item.title).length > 0
+            ) {
+                allCampaigns[index] = item;
+                index++;
             }
         }
 

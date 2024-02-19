@@ -147,11 +147,6 @@ export const contractABI = [
     name: "createCampaign",
     inputs: [
       {
-        type: "address",
-        name: "_owner",
-        internalType: "address",
-      },
-      {
         type: "string",
         name: "_name",
         internalType: "string",
