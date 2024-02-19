@@ -45,27 +45,16 @@ const CreateCampaign = () => {
   return (
     <div className=" bg-[#f2f2f2] dark:bg-[#1c1c24] flex justify-center items-center flex-col rounded-xl sm:p-10 p-4 shadow-md">
       {isLoading && <Loader />}
-      <div
-        className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#e5e5e5] dark:bg-[#3a3a43] rounded-xl
-      "
-      >
-        <h1
-          className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-[#414A4C] dark:text-white
-        
-        "
-        >
+      <div className="flex justify-center items-center p-[16px] sm:min-w-[380px] bg-[#e5e5e5] dark:bg-[#3a3a43] rounded-xl">
+        <h1 className="font-epilogue font-bold sm:text-[25px] text-lg leading-[38px] text-[#414A4C] dark:text-white">
           Start a Campaign
         </h1>
       </div>
       <form
         onSubmit={handleSubmit}
-        className="w-full mt-[65px] flex flex-col gap-[30px]
-      "
+        className="w-full mt-[65px] flex flex-col gap-[30px]"
       >
-        <div
-          className=" flex flex-wrap gap-[40px]
- "
-        >
+        <div className=" flex flex-wrap gap-[40px]">
           <FormField
             labelName="Your Name *"
             placeholder="e.g. Kiran Mahajan"
