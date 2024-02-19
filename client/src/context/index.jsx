@@ -125,7 +125,7 @@ export const StateContextProvider = ({ children }) => {
         form.title,
         form.category,
         form.description,
-        form.target,
+        ethers.utils.parseUnits(form.target, 18),
         new Date(form.deadline).getTime(),
         form.image,
       ]);
