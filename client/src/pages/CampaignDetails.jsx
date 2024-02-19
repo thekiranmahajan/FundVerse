@@ -225,6 +225,7 @@ const CampaignDetails = () => {
               title="Update Campaign"
               styles="w-[31%] bg-[#03dac5]"
               handleClick={handleUpdate}
+              isDisabled={isLoading}
             />
 
             <CustomButton
@@ -232,6 +233,7 @@ const CampaignDetails = () => {
               title="Delete Campaign"
               styles=" w-[31%] bg-[#ff3333] dark:bg-[#FF0000] !text-white"
               handleClick={handleDelete}
+              isDisabled={isLoading}
             />
           </div>
         )}

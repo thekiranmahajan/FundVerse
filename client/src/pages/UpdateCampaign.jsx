@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const UpdateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const { updateCampaign } = useStateContext();
   const { state } = useLocation();
 
@@ -28,6 +29,7 @@ const UpdateCampaign = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsUpdating(true);
     e.preventDefault();
 
     checkIfImage(form.image, async (exists) => {
@@ -45,6 +47,7 @@ const UpdateCampaign = () => {
         setForm({ ...form, image: "" });
       }
     });
+    setIsUpdating(false);
   };
   return (
     <div className="bg-[#f2f2f2] dark:bg-[#1c1c24] flex justify-center items-center flex-col rounded-xl sm:p-10 p-4">
@@ -134,6 +137,7 @@ const UpdateCampaign = () => {
             btnType="submit"
             title="Update campaign"
             styles="bg-[#6F01Ec]"
+            isDisabled={isUpdating}
           />
         </div>
       </form>

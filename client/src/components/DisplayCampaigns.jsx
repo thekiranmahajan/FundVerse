@@ -10,7 +10,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   const handleNavigate = (campaign) => {
     navigate(`/campaign-details/${campaign.title}`, { state: campaign });
   };
-
+  console.log("display campaigns", campaigns);
   return (
     <div>
       <h1 className="font-epilogue font-semibold text-lg text-black dark:text-white text-left">
