@@ -139,11 +139,6 @@ export const contractABI = [
         name: "image",
         internalType: "string",
       },
-      {
-        type: "bool",
-        name: "exists",
-        internalType: "bool",
-      },
     ],
     stateMutability: "view",
   },
@@ -296,11 +291,6 @@ export const contractABI = [
             type: "uint256[]",
             name: "donations",
             internalType: "uint256[]",
-          },
-          {
-            type: "bool",
-            name: "exists",
-            internalType: "bool",
           },
         ],
         internalType: "struct CrowdFunding.Campaign[]",

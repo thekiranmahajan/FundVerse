@@ -21,7 +21,6 @@ contract CrowdFunding {
         string image;
         address[] donators;
         uint256[] donations;
-        bool exists;
     }
 
     event Action(
@@ -76,7 +75,6 @@ contract CrowdFunding {
         campaign.deadline = _deadline;
         campaign.amountCollected = 0;
         campaign.image = _image;
-        campaign.exists = true;
 
         numberOfCampaigns++;
 
@@ -143,6 +141,8 @@ contract CrowdFunding {
 
         delete campaigns[_id];
 
+        numberOfCampaigns--;
+
         emit Action(_id, "Campaign Deleted", msg.sender, block.timestamp);
 
         return true;
@@ -199,12 +199,15 @@ contract CrowdFunding {
 
     function getCampaigns() public view returns (Campaign[] memory) {
         Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
-        uint256 index = 0;
 
-        for (uint256 i = 0; i < numberOfCampaigns; i++) {
-            if (campaigns[i].exists) {
-                allCampaigns[index] = campaigns[i];
-                index++;
+        for (uint i = 0; i < numberOfCampaigns; i++) {
+            Campaign storage item = campaigns[i];
+            if (
+                item.owner != address(0) &&
+                bytes(item.name).length > 0 &&
+                bytes(item.title).length > 0
+            ) {
+                allCampaigns[i] = item;
             }
         }
 

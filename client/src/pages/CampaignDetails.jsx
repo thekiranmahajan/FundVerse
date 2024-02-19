@@ -14,15 +14,15 @@ const CampaignDetails = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("");
-  const [donors, setDonors] = useState([]);
+  const [donators, setDonators] = useState([]);
 
   const remainingDays = daysLeft(state.deadline);
 
   const fetchDonators = async () => {
     const data = await getDonations(state.pId);
-    setDonors(data);
+    setDonators(data);
   };
-
+  console.log("state", state);
   useEffect(() => {
     if (contract) fetchDonators();
   }, [contract, address]);
@@ -100,7 +100,7 @@ const CampaignDetails = () => {
             title={`Raised of ${state.target}`}
             value={state.amountCollected}
           />
-          <CountBox title="Total Backers" value={donors.length} />
+          <CountBox title="Total Backers" value={donators.length} />
         </div>
       </div>
 
@@ -153,8 +153,8 @@ const CampaignDetails = () => {
               Donors
             </h4>
             <div className=" mt-[20px] flex flex-col gap-4">
-              {donors.length > 0 ? (
-                donors.map((item, index) => (
+              {donators.length > 0 ? (
+                donators.map((item, index) => (
                   <div
                     key={`${item.donator}-${index}`}
                     className="flex justify-between items-center gap-4"
