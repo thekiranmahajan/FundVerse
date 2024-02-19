@@ -37,7 +37,7 @@ const CampaignDetails = () => {
   const image = state.image;
 
   const handleUpdate = () => {
-    navigate(`/update-campaign/${state.pId}`, {
+    navigate(`/update-campaign/${state.title}`, {
       state: {
         id,
         name,
