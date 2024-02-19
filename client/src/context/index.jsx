@@ -16,7 +16,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0x91c73db61aBD2292a68D9140359fC0BE79672F0e",
+    "0xA7610695DBC39bfA3fd04B69Cee5e95d43a5CBfF",
     contractABI
   );
   const { mutateAsync: createCampaign } = useContractWrite(
@@ -98,7 +98,12 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
-      console.log("contract call success", data);
+      console.log(
+        "contract call success",
+        data,
+        "form from createCampaign",
+        form
+      );
     } catch (error) {
       toast("❌ Error while creating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -136,6 +141,7 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
       console.log("contract update success", data);
+      return data;
     } catch (error) {
       toast("❌ Error while updating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -246,7 +252,7 @@ export const StateContextProvider = ({ children }) => {
 
   const getCampaigns = async () => {
     const campaigns = await contract.call("getCampaigns");
-
+    console.log("campaigns from contract", campaigns);
     const parsedCampaigns = campaigns.map((campaign, i) => ({
       owner: campaign.owner,
       name: campaign.name,
@@ -264,6 +270,29 @@ export const StateContextProvider = ({ children }) => {
     console.log(parsedCampaigns);
     return parsedCampaigns;
   };
+
+  //   const getCampaigns = async () => {
+  //     const campaigns = await contract.call("getCampaigns");
+  //     console.log("campaigns from contract",campaigns);
+
+  //     const parsedCampaigns = campaigns
+  //         .filter(campaign => campaign.owner !== "0x0000000000000000000000000000000000000000")
+  //         .map((campaign, i) => ({
+  //             owner: campaign.owner,
+  //             name: campaign.name,
+  //             title: campaign.title,
+  //             category: campaign.category,
+  //             description: campaign.description,
+  //             target: ethers.utils.formatEther(campaign.target.toString()),
+  //             deadline: campaign.deadline.toNumber(),
+  //             amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+  //             image: campaign.image,
+  //             pId: i,
+  //         }));
+
+  //     console.log(parsedCampaigns);
+  //     return parsedCampaigns;
+  // };
 
   const getUserCampaigns = async () => {
     const allCampaigns = await getCampaigns();
