@@ -12,11 +12,11 @@ const Home = () => {
     const data = await getCampaigns();
     setCampaigns(data);
     setIsLoading(false);
-    console.log(campaigns);
   };
 
   useEffect(() => {
     if (contract) fetchCampaigns();
+    console.log("Return Value of getCampaigns from Home ", campaigns);
   }, [address, contract]);
   return (
     <DisplayCampaigns

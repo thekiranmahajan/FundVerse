@@ -22,9 +22,9 @@ const CampaignDetails = () => {
     const data = await getDonations(state.pId);
     setDonators(data);
   };
-  console.log("state", state);
   useEffect(() => {
     if (contract) fetchDonators();
+    console.log("state", state);
   }, [contract, address]);
 
   const id = state.pId;
