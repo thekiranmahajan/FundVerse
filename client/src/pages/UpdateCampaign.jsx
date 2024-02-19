@@ -5,6 +5,7 @@ import { money } from "../assets";
 import { CustomButton, FormField, Loader } from "../components";
 import { checkIfImage } from "../utils";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateCampaign = () => {
   const navigate = useNavigate();
@@ -13,6 +14,10 @@ const UpdateCampaign = () => {
   const { updateCampaign } = useStateContext();
   const { state } = useLocation();
 
+  const defaultDeadline = new Date(state.deadline)
+    .toISOString()
+    .substring(0, 10);
+
   const [form, setForm] = useState({
     id: state.id,
     name: state.name,
@@ -20,7 +25,7 @@ const UpdateCampaign = () => {
     category: state.category,
     description: state.description,
     target: state.target,
-    deadline: state.deadline,
+    deadline: defaultDeadline,
     image: state.image,
   });
 
@@ -31,14 +36,39 @@ const UpdateCampaign = () => {
   const handleSubmit = async (e) => {
     setIsUpdating(true);
     e.preventDefault();
+    const isFormChanged =
+      JSON.stringify(form) !==
+      JSON.stringify({
+        id: state.id,
+        name: state.name,
+        title: state.title,
+        category: state.category,
+        description: state.description,
+        target: state.target,
+        deadline: defaultDeadline,
+        image: state.image,
+      });
 
+    if (!isFormChanged) {
+      toast("❌ No changes made. Please make changes before updating.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setIsUpdating(false);
+      return;
+    }
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true);
 
         await updateCampaign({
           ...form,
-          target: ethers.utils.parseUnits(form.target, 18),
         });
         setIsLoading(false);
         navigate("/");
