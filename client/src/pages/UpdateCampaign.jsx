@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ethers } from "ethers";
 import { useStateContext } from "../context";
 import { money } from "../assets";
 import { CustomButton, FormField, Loader } from "../components";
@@ -34,8 +33,10 @@ const UpdateCampaign = () => {
   };
 
   const handleSubmit = async (e) => {
-    setIsUpdating(true);
     e.preventDefault();
+
+    if (isUpdating) return;
+    setIsUpdating(true);
     const isFormChanged =
       JSON.stringify(form) !==
       JSON.stringify({
@@ -71,13 +72,14 @@ const UpdateCampaign = () => {
           ...form,
         });
         setIsLoading(false);
+        setIsUpdating(false);
         navigate("/");
       } else {
         alert("Provide valid image URL");
         setForm({ ...form, image: "" });
+        setIsUpdating(false);
       }
     });
-    setIsUpdating(false);
   };
   return (
     <div className="bg-[#f2f2f2] dark:bg-[#1c1c24] flex justify-center items-center flex-col rounded-xl sm:p-10 p-4">
@@ -167,7 +169,7 @@ const UpdateCampaign = () => {
             btnType="submit"
             title="Update campaign"
             styles="bg-[#6F01Ec]"
-            isDisabled={isUpdating}
+            isDisabled={isUpdating || isLoading}
           />
         </div>
       </form>
