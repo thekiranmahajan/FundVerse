@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useStateContext } from "../context";
-import { CountBox, CustomButton, Loader, Expandable } from "../components";
+import {
+  CountBox,
+  CustomButton,
+  Loader,
+  Expandable,
+  FormField,
+} from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
@@ -184,13 +190,22 @@ const CampaignDetails = () => {
               Fund the campaign
             </p>
             <div className="mt-[30px]">
-              <input
+              
+              {/* <input
                 type="number"
                 placeholder="ETH 0.1"
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-lg leading-8 placeholder:text-[#6e7682] text-[#4b5264] rounded-xl "
+              /> */}
+
+              <FormField
+                labelName="Amount"
+                placeholder="ETH 0.1"
+                inputType="number"
+                value={amount}
+                handleChange={(e) => setAmount(e.target.value)}
               />
               <div className="my-[20px] p-4 bg-[#eaeaea] dark:bg-[#13131a] rounded-xl ">
                 <h4 className="font-epilogue font-semibold text-sm leading-[22px] text-black dark:text-white ">
