@@ -190,16 +190,6 @@ const CampaignDetails = () => {
               Fund the campaign
             </p>
             <div className="mt-[30px]">
-              
-              {/* <input
-                type="number"
-                placeholder="ETH 0.1"
-                step="0.01"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className=" w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-lg leading-8 placeholder:text-[#6e7682] text-[#4b5264] rounded-xl "
-              /> */}
-
               <FormField
                 labelName="Amount"
                 placeholder="ETH 0.1"
