@@ -270,29 +270,6 @@ export const StateContextProvider = ({ children }) => {
     return parsedCampaigns;
   };
 
-  //   const getCampaigns = async () => {
-  //     const campaigns = await contract.call("getCampaigns");
-  //     console.log("campaigns from contract",campaigns);
-
-  //     const parsedCampaigns = campaigns
-  //         .filter(campaign => campaign.owner !== "0x0000000000000000000000000000000000000000")
-  //         .map((campaign, i) => ({
-  //             owner: campaign.owner,
-  //             name: campaign.name,
-  //             title: campaign.title,
-  //             category: campaign.category,
-  //             description: campaign.description,
-  //             target: ethers.utils.formatEther(campaign.target.toString()),
-  //             deadline: campaign.deadline.toNumber(),
-  //             amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
-  //             image: campaign.image,
-  //             pId: i,
-  //         }));
-
-  //     console.log(parsedCampaigns);
-  //     return parsedCampaigns;
-  // };
-
   const getUserCampaigns = async () => {
     const allCampaigns = await getCampaigns();
     const filteredCampaigns = allCampaigns.filter(
