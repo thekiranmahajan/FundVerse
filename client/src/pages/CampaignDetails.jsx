@@ -89,7 +89,24 @@ const CampaignDetails = () => {
 
   const handleDelete = async () => {
     setIsLoading(true);
+    const confirmDelete = confirm(
+      "Do you really want to delete this campaign?"
+    );
+    if (!confirmDelete) {
+      toast("🤔 No campaign is deleted. You've canceled the operation.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
 
+      setIsLoading(false);
+      return;
+    }
     await deleteCampaign(state.pId);
 
     navigate("/");
