@@ -5,7 +5,7 @@ import { cross, logo, menu, search } from "../assets";
 import { navlinks } from "../constants";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { ConnectWallet, darkTheme, lightTheme } from "@thirdweb-dev/react";
-import ThemeModeIcon from "./ThemeModeIcon";
+import ThemeModes from "./ThemeModes";
 
 const Navbar = () => {
   const [toggleDrawer, setToggleDrawer] = useState(false);
@@ -166,7 +166,7 @@ const Navbar = () => {
               showThirdwebBranding={false}
             />
             <div className="flex justify-evenly items-center w-40">
-              <ThemeModeIcon />
+              <ThemeModes />
             </div>
           </div>
         </div>

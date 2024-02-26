@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { logo } from "../assets";
 import { navlinks } from "../constants";
 import Icon from "./Icon";
-import ThemeModeIcon from "./ThemeModeIcon";
+import ThemeModes from "./ThemeModes";
 
 const Sidebar = () => {
   return (
@@ -26,7 +26,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex items-center justify-center flex-col gap-1">
-          <ThemeModeIcon />
+          <ThemeModes />
         </div>
       </div>
     </div>

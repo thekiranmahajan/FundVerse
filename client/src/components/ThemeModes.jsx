@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { themeModes } from "../constants";
 import { useStateContext } from "../context";
 
-const ThemeModeIcon = () => {
+const ThemeModes = () => {
   const { toggleTheme, themeMode } = useStateContext();
   const [isThemeActive, setIsThemeActive] = useState(themeMode);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -41,7 +41,7 @@ const ThemeModeIcon = () => {
           onMouseLeave={handleMouseLeave}
         >
           {hoveredIndex === index && (
-            <div className="absolute sm:top-1 sm:left-[4.5rem] top-16 dark:bg-[#6F01Ec] bg-[#c8cbcecb] dark:text-white text-[#6F01Ec] py-2 px-3 rounded-md font-epilogue">
+            <div className="z-30 absolute sm:top-1 sm:left-[4.5rem] top-16 dark:bg-[#6F01Ec] bg-[#c8cbcecb] dark:text-white text-[#6F01Ec] py-2 px-3 rounded-md font-epilogue">
               {mode.name}
             </div>
           )}
@@ -59,4 +59,4 @@ const ThemeModeIcon = () => {
   );
 };
 
-export default ThemeModeIcon;
+export default ThemeModes;
