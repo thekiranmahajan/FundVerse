@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Sepolia } from "@thirdweb-dev/chains";
 import {
   ThirdwebProvider,
@@ -13,6 +13,52 @@ import {
 import { StateContextProvider } from "./context";
 import App from "./App";
 import "./index.css";
+import {
+  Home,
+  CampaignDetails,
+  CreateCampaign,
+  Disconnect,
+  Profile,
+  UpdateCampaign,
+  Withdraw,
+} from "./pages";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/create-campaign",
+        element: <CreateCampaign />,
+      },
+      {
+        path: "/update-campaign/:id",
+        element: <UpdateCampaign />,
+      },
+      {
+        path: "/campaign-details/:id",
+        element: <CampaignDetails />,
+      },
+      {
+        path: "/withdraw",
+        element: <Withdraw />,
+      },
+      {
+        path: "/disconnect",
+        element: <Disconnect />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -30,10 +76,8 @@ root.render(
       trustWallet(),
     ]}
   >
-    <Router>
-      <StateContextProvider>
-        <App />
-      </StateContextProvider>
-    </Router>
+    <StateContextProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </StateContextProvider>
   </ThirdwebProvider>
 );

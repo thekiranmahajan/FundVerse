@@ -1,15 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Sidebar, Navbar, Footer } from "./components";
-import {
-  CampaignDetails,
-  CreateCampaign,
-  Disconnect,
-  Home,
-  Profile,
-  UpdateCampaign,
-  Withdraw,
-} from "./pages";
 
 const App = () => {
   return (
@@ -21,15 +12,7 @@ const App = () => {
         <div className="flex-1 max-sm:w-full  sm:pr-5">
           <Navbar />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/create-campaign" element={<CreateCampaign />} />
-            <Route path="/update-campaign/:id" element={<UpdateCampaign />} />
-            <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-            <Route path="/withdraw" element={<Withdraw />} />
-            <Route path="/disconnect" element={<Disconnect />} />
-          </Routes>
+          <Outlet />
         </div>
         <Footer />
       </div>
