@@ -11,6 +11,7 @@ import {
 } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
+import { toast } from "react-toastify";
 
 const CampaignDetails = () => {
   const { state } = useLocation();
@@ -59,11 +60,33 @@ const CampaignDetails = () => {
 
   const handleDonate = async () => {
     setIsLoading(true);
-    await donate(state.pId, amount);
 
-    navigate("/");
-    setIsLoading(false);
+    if (amount === 0 || amount === "") {
+      toast("❌ Please enter a valid donation amount.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      await donate(state.pId, amount);
+      navigate("/");
+    } catch (error) {
+      console.error("Error donating:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   const handleDelete = async () => {
     setIsLoading(true);
 
