@@ -19,27 +19,27 @@ export const navlinks = [
   {
     name: "Dashboard",
     imgUrl: dashboard,
-    link: "/",
+    route: "/",
   },
   {
     name: "Campaign",
     imgUrl: createCampaign,
-    link: "/create-campaign",
+    route: "/create-campaign",
   },
   {
     name: "Withdraw",
     imgUrl: withdraw,
-    link: "/withdraw",
+    route: "/withdraw",
   },
   {
     name: "Profile",
     imgUrl: profile,
-    link: "/profile",
+    route: "/profile",
   },
   {
     name: "Disconnect",
     imgUrl: disconnect,
-    link: "/disconnect",
+    route: "/disconnect",
   },
 ];
 

@@ -20,7 +20,7 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick }) => {
   return (
     <div
       className={`relative w-12 h-12 rounded-xl cursor-pointer flex justify-center items-center ${
-        isActive === name && "bg-[#c8cbcecb] dark:bg-[#2c2f32]"
+        isActive && "bg-[#c8cbcecb] dark:bg-[#2c2f32]"
       } ${styles}`}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
@@ -42,7 +42,7 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick }) => {
         <img
           src={imgUrl}
           alt="fund_logo"
-          className={`w-1/2 h-1/2 ${isActive !== name && "grayscale"} `}
+          className={`w-1/2 h-1/2 ${!isActive && "grayscale"} `}
         />
       )}
     </div>
