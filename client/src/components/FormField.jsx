@@ -58,6 +58,15 @@ const FormField = ({
           placeholder={placeholder}
           min={0}
           step="0.01"
+          onFocus={(e) =>
+            e.target.addEventListener(
+              "wheel",
+              function (e) {
+                e.preventDefault();
+              },
+              { passive: false }
+            )
+          }
           className=" py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-[#8b8b8b] dark:border-[#3a3a43] bg-transparent font-epilogue  dark:text-white text-sm placeholder:text-[#6e7682] text-[#4b5264] rounded-xl sm:min-w-[300px] 
           "
         />
