@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useStateContext } from "../context";
 import { cross, logo, menu, search } from "../assets";
 import { navlinks } from "../constants";
@@ -7,11 +7,8 @@ import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { ConnectWallet, darkTheme, lightTheme } from "@thirdweb-dev/react";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const [isActive, setIsActive] = useState("dashboard");
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const { address, themeMode } = useStateContext();
-  // console.log(themeMode, "themeMode");
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -67,7 +64,7 @@ const Navbar = () => {
           modalTitleIconUrl={logo}
           showThirdwebBranding={false}
         />
-        <Link to="/profile">
+        <NavLink to="/profile">
           <div className="w-[52px] h-[52px] rounded-full bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer overflow-hidden shadow-md">
             <Jazzicon
               className="w-[60%] h-[60%] object-contain"
@@ -75,14 +72,19 @@ const Navbar = () => {
               seed={jsNumberForAddress(`${address}`)}
             />
           </div>
-        </Link>
+        </NavLink>
       </div>
 
       {/* small screen navigation */}
 
       <div className="sm:hidden flex justify-between items-center relative">
         <div className="w-14 h-14 rounded-xl bg-[#f0f0f0] dark:bg-[#2c2f32] flex justify-center items-center cursor-pointer shadow-md">
-          <img src={logo} alt="Logo" className="w-4/5 h-4/5 object-contain" />
+          <NavLink
+            to="/"
+            className="flex items-center justify-center h-full w-full"
+          >
+            <img src={logo} alt="Logo" className="w-4/5 h-4/5 object-contain" />
+          </NavLink>
         </div>
 
         <img
@@ -100,28 +102,29 @@ const Navbar = () => {
         >
           <ul className="mb-4 ">
             {navlinks.map((Link) => (
-              <li
-                key={Link.name}
-                className={`flex p-4 ${
-                  isActive === Link.name && "bg-[#e5e5e5] dark:bg-[#3a3a43]"
-                }`}
-                onClick={() => {
-                  setIsActive(Link.name);
-                  setToggleDrawer(false);
-                  navigate(Link.link);
-                }}
-              >
-                <img src={Link.imgUrl} alt={Link.name} />
-                <p
-                  className={`ml-5 font-epilogue font-semibold text-sm ${
-                    isActive === Link.name
-                      ? "text-[#6F01Ec]"
-                      : "text-[#4d4d4d] dark:text-[#808191]"
-                  }`}
-                >
-                  {Link.name}
-                </p>
-              </li>
+              <NavLink key={Link.name} to={Link.route}>
+                {({ isActive }) => (
+                  <li
+                    className={`flex p-4 ${
+                      isActive && "bg-[#e5e5e5] dark:bg-[#3a3a43]"
+                    }`}
+                    onClick={() => {
+                      setToggleDrawer(false);
+                    }}
+                  >
+                    <img src={Link.imgUrl} alt={Link.name} />
+                    <p
+                      className={`ml-5 font-epilogue font-semibold text-sm ${
+                        isActive
+                          ? "text-[#6F01Ec]"
+                          : "text-[#4d4d4d] dark:text-[#808191]"
+                      }`}
+                    >
+                      {Link.name}
+                    </p>
+                  </li>
+                )}
+              </NavLink>
             ))}
           </ul>
           <div className="flex mx-4">
