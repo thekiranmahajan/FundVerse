@@ -4,7 +4,7 @@ import { daysLeft } from "../utils";
 import CustomButton from "./CustomButton";
 
 const WithdrawCard = ({
-  pId,
+  id,
   title,
   category,
   target,
@@ -37,7 +37,7 @@ const WithdrawCard = ({
           </div>
 
           <p className="ml-[12px] mt-[2px] font-epilogue font-medium text-[12px] h-[17px] text-[#4d4d4d] dark:text-[#808191] ">
-            Campaign Id: {pId}
+            Campaign Id: {id}
           </p>
         </div>
 

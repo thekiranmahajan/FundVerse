@@ -42,7 +42,7 @@ const WithdrawFromCampaigns = ({ title, campaigns, isLoading }) => {
         theme: "dark",
       });
     } else {
-      await withdraw(campaign.pId);
+      await withdraw(campaign.id);
       navigate("/");
     }
   };

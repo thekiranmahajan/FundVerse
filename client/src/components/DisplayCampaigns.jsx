@@ -8,8 +8,8 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (campaign) => {
-    console.log(campaign);
-    navigate(`/campaign-details/${encodeURIComponent(campaign.title)}`, {
+    console.log("campaigns from DisplayCampaigns", campaign);
+    navigate(`/campaign-details/${encodeURIComponent(campaign.id)}`, {
       state: campaign,
     });
   };

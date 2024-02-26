@@ -156,9 +156,9 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const deleteCampaign = async (pId) => {
+  const deleteCampaign = async (id) => {
     try {
-      const data = await contract.call("deleteCampaign", [pId]);
+      const data = await contract.call("deleteCampaign", [id]);
 
       toast("✅ Campaign deleted 🚮 successfully", {
         position: "top-right",
@@ -187,9 +187,9 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const donate = async (pId, amount) => {
+  const donate = async (id, amount) => {
     try {
-      const data = await contract.call("donateToCampaign", [pId], {
+      const data = await contract.call("donateToCampaign", [id], {
         value: ethers.utils.parseEther(amount),
       });
 
@@ -219,9 +219,9 @@ export const StateContextProvider = ({ children }) => {
     }
   };
 
-  const withdraw = async (pId) => {
+  const withdraw = async (id) => {
     try {
-      const data = await contract.call("withdrawDonations", [pId]);
+      const data = await contract.call("withdrawDonations", [id]);
 
       toast("🤑 Campaign funds successfully withdrawn", {
         position: "top-right",
@@ -264,7 +264,7 @@ export const StateContextProvider = ({ children }) => {
         campaign.amountCollected.toString()
       ),
       image: campaign.image,
-      pId: i,
+      id: i,
     }));
     console.log("parsedCampaigns from index.jsx", parsedCampaigns);
     return parsedCampaigns;
@@ -286,8 +286,8 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
-  const getDonations = async (pId) => {
-    const donations = await contract.call("getDonators", [pId]);
+  const getDonations = async (id) => {
+    const donations = await contract.call("getDonators", [id]);
     const numberOfDonations = donations[0].length;
     const parsedDonations = [];
 

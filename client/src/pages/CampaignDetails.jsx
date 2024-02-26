@@ -26,7 +26,7 @@ const CampaignDetails = () => {
   const remainingDays = daysLeft(state.deadline);
 
   const fetchDonators = async () => {
-    const data = await getDonations(state.pId);
+    const data = await getDonations(state.id);
     setDonators(data);
   };
   useEffect(() => {
@@ -34,7 +34,7 @@ const CampaignDetails = () => {
     console.log("state", state);
   }, [contract, address]);
 
-  const id = state.pId;
+  const id = state.id;
   const name = state.name;
   const title = state.title;
   const category = state.category;
@@ -60,7 +60,21 @@ const CampaignDetails = () => {
 
   const handleDonate = async () => {
     setIsLoading(true);
+    if (!address) {
+      toast("❌ Please connect to MetaMask🦊", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
 
+      setIsLoading(false);
+      return;
+    }
     if (amount === 0 || amount === "") {
       toast("❌ Please enter a valid donation amount.", {
         position: "top-right",
@@ -78,7 +92,7 @@ const CampaignDetails = () => {
     }
 
     try {
-      await donate(state.pId, amount);
+      await donate(state.id, amount);
       navigate("/");
     } catch (error) {
       console.error("Error donating:", error);
@@ -107,7 +121,7 @@ const CampaignDetails = () => {
       setIsLoading(false);
       return;
     }
-    await deleteCampaign(state.pId);
+    await deleteCampaign(state.id);
 
     navigate("/");
     setIsLoading(false);
@@ -266,7 +280,7 @@ const CampaignDetails = () => {
           <div className="flex flex-wrap justify-between gap-[40px]">
             <CustomButton
               btnType="button"
-              id={state.pId}
+              id={state.id}
               title="Update Campaign"
               styles="w-[31%] bg-[#03dac5]"
               handleClick={handleUpdate}
