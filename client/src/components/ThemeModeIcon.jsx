@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { themeModes } from "../constants";
 import { useStateContext } from "../context";
 
@@ -40,8 +40,8 @@ const ThemeModeIcon = () => {
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={handleMouseLeave}
         >
-          {hoveredIndex === index && ( // Show tooltip only for hovered index
-            <div className="absolute top-1 left-[4.5rem] dark:bg-[#6F01Ec] bg-[#c8cbcecb] dark:text-white text-[#6F01Ec] py-2 px-3 rounded-md font-epilogue">
+          {hoveredIndex === index && (
+            <div className="absolute sm:top-1 sm:left-[4.5rem] top-16 dark:bg-[#6F01Ec] bg-[#c8cbcecb] dark:text-white text-[#6F01Ec] py-2 px-3 rounded-md font-epilogue">
               {mode.name}
             </div>
           )}

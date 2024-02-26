@@ -5,6 +5,7 @@ import { cross, logo, menu, search } from "../assets";
 import { navlinks } from "../constants";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { ConnectWallet, darkTheme, lightTheme } from "@thirdweb-dev/react";
+import ThemeModeIcon from "./ThemeModeIcon";
 
 const Navbar = () => {
   const [toggleDrawer, setToggleDrawer] = useState(false);
@@ -127,7 +128,7 @@ const Navbar = () => {
               </NavLink>
             ))}
           </ul>
-          <div className="flex mx-4">
+          <div className="flex justify-evenly items-center flex-wrap gap-2 mx-2">
             <ConnectWallet
               className={
                 "!font-epilogue !bg-[#03dac5] !mr-5 !shadow-md !outline-none !font-semibold"
@@ -164,6 +165,9 @@ const Navbar = () => {
               modalTitleIconUrl={logo}
               showThirdwebBranding={false}
             />
+            <div className="flex justify-evenly items-center w-40">
+              <ThemeModeIcon />
+            </div>
           </div>
         </div>
       </div>
