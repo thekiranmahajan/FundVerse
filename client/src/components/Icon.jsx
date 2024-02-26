@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const Icon = ({ styles, name, imgUrl, isActive, handleClick }) => {
+const Icon = ({ styles, name, imgUrl, isActive }) => {
   const [hovered, setHovered] = useState(false);
   const [fadeOutTimer, setFadeOutTimer] = useState(null);
 
@@ -22,7 +22,6 @@ const Icon = ({ styles, name, imgUrl, isActive, handleClick }) => {
       className={`relative w-12 h-12 rounded-xl cursor-pointer flex justify-center items-center ${
         isActive && "bg-[#c8cbcecb] dark:bg-[#2c2f32]"
       } ${styles}`}
-      onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

@@ -1,20 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { logo } from "../assets";
-import { navlinks, themeModes } from "../constants";
+import { navlinks } from "../constants";
 import Icon from "./Icon";
-import { useStateContext } from "../context";
 import ThemeModeIcon from "./ThemeModeIcon";
 
 const Sidebar = () => {
-  const { toggleTheme, themeMode } = useStateContext();
-  const [isThemeActive, setIsThemeActive] = useState(themeMode);
-
-  const handleLinkClick = (Link) => {
-    setIsActive(Link.name);
-  };
   return (
-    <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh] ">
+    <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh] select-none">
       <NavLink to="/">
         <Icon
           name="FundVerse"
@@ -27,29 +20,13 @@ const Sidebar = () => {
         <div className="flex flex-col justify-center items-center gap-3">
           {navlinks.map((Link) => (
             <NavLink key={Link.name} to={Link.route}>
-              {({ isActive }) => (
-                <Icon
-                  {...Link}
-                  isActive={isActive}
-                  handleClick={() => handleLinkClick(Link)}
-                />
-              )}
+              {({ isActive }) => <Icon {...Link} isActive={isActive} />}
             </NavLink>
           ))}
         </div>
 
         <div className="flex items-center justify-center flex-col gap-1">
-          {themeModes.map((mode) => (
-            <ThemeModeIcon
-              key={mode.name}
-              {...mode}
-              isThemeActive={isThemeActive}
-              handleClick={() => {
-                toggleTheme(mode.name);
-                setIsThemeActive(mode.name);
-              }}
-            />
-          ))}
+          <ThemeModeIcon />
         </div>
       </div>
     </div>
