@@ -41,11 +41,11 @@ const router = createBrowserRouter([
         element: <CreateCampaign />,
       },
       {
-        path: "/update-campaign/:id",
+        path: "/update-campaign/:campaignId",
         element: <UpdateCampaign />,
       },
       {
-        path: "/campaign-details/:id",
+        path: "/campaign-details/:campaignId",
         element: <CampaignDetails />,
       },
       {
