@@ -27,10 +27,15 @@ export const StateContextProvider = ({ children }) => {
   const connectMetamask = useMetamask();
   const disconnect = useDisconnect();
   const connectionStatus = useConnectionStatus();
-
   const [themeMode, setThemeMode] = useState(
     localStorage.getItem("themeMode") || "System"
   );
+  const [campaigns, setCampaigns] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getCampaigns();
+  }, [contract, address]);
 
   useEffect(() => {
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
@@ -103,6 +108,7 @@ export const StateContextProvider = ({ children }) => {
         "form from createCampaign",
         form
       );
+      await getCampaigns();
     } catch (error) {
       toast("❌ Error while creating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -118,6 +124,13 @@ export const StateContextProvider = ({ children }) => {
     }
   };
   const updateCampaign = async (form) => {
+    if (isLoading) {
+      console.log("Campaign update is already in progress. Skipping.");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
       const data = await contract.call("updateCampaign", [
         form.id,
@@ -129,6 +142,7 @@ export const StateContextProvider = ({ children }) => {
         new Date(form.deadline).getTime(),
         form.image,
       ]);
+
       toast("✅ Campaign updated successfully", {
         position: "top-right",
         autoClose: 5000,
@@ -139,8 +153,10 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
-      console.log("contract update success", data);
-      return data;
+
+      await getCampaigns();
+
+      console.log("Contract update success", data);
     } catch (error) {
       toast("❌ Error while updating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -152,7 +168,10 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
-      console.log("contract update failure", error);
+
+      console.log("Contract update failure", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -171,6 +190,7 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
       console.log("Campaign delete success", data);
+      await getCampaigns();
       return data;
     } catch (error) {
       toast("❌ Error while deleting Campaign, please 🙏🏻 try again", {
@@ -203,6 +223,7 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
+      await getCampaigns();
       return data;
     } catch (err) {
       toast("❌ Error while Donating Campaign, please 🙏🏻 try again", {
@@ -233,6 +254,7 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
+      await getCampaigns();
       return data;
     } catch (err) {
       toast("❌ Error occurred while withdrawing funds.", {
@@ -250,9 +272,10 @@ export const StateContextProvider = ({ children }) => {
   };
 
   const getCampaigns = async () => {
-    const campaigns = await contract.call("getCampaigns");
+    setIsLoading(true);
+    const campaigns = await contract?.call("getCampaigns");
     console.log("Raw Campaigns from contract before parsing", campaigns);
-    const parsedCampaigns = campaigns.map((campaign, i) => ({
+    const parsedCampaigns = campaigns?.map((campaign, i) => ({
       owner: campaign.owner,
       name: campaign.name,
       title: campaign.title,
@@ -266,24 +289,10 @@ export const StateContextProvider = ({ children }) => {
       image: campaign.image,
       id: i,
     }));
-    console.log("parsedCampaigns from index.jsx", parsedCampaigns);
+    setCampaigns(parsedCampaigns);
+    setIsLoading(false);
+    console.log("Campaigns from index.jsx", campaigns);
     return parsedCampaigns;
-  };
-
-  const getUserCampaigns = async () => {
-    const allCampaigns = await getCampaigns();
-    const filteredCampaigns = allCampaigns.filter(
-      (campaign) => campaign.owner === address
-    );
-    return filteredCampaigns;
-  };
-
-  const getFilteredCampaigns = async (searchText) => {
-    const allCampaigns = await getCampaigns();
-    const filteredCampaigns = allCampaigns.filter((campaign) =>
-      campaign.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    return filteredCampaigns;
   };
 
   const getDonations = async (id) => {
@@ -298,6 +307,14 @@ export const StateContextProvider = ({ children }) => {
       });
     }
     return parsedDonations;
+  };
+
+  const getUserCampaigns = async () => {
+    await getCampaigns();
+    const filteredCampaigns = campaigns?.filter(
+      (campaign) => campaign.owner === address
+    );
+    return filteredCampaigns;
   };
 
   return (
@@ -316,9 +333,11 @@ export const StateContextProvider = ({ children }) => {
         getDonations,
         deleteCampaign,
         updateCampaign,
-        getFilteredCampaigns,
         toggleTheme,
         themeMode,
+        campaigns,
+        isLoading,
+        setIsLoading,
       }}
     >
       <ToastContainer />
