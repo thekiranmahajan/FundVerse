@@ -3,9 +3,9 @@ import React, { useState } from "react";
 const Expandable = ({ children, maxChars = 300 }) => {
   let [expanded, setExpanded] = useState(true);
 
-  if (children.length <= maxChars) return <p>{children}</p>;
+  if (children?.length <= maxChars) return <p>{children}</p>;
 
-  let text = expanded ? children.substring(0, maxChars) : children;
+  let text = expanded ? children?.substring(0, maxChars) : children;
 
   return (
     <div>
