@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { tagType } from "../assets";
 import { daysLeft } from "../utils";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 
 const FundCard = ({
+  id,
   owner,
   name,
   title,
@@ -16,10 +18,14 @@ const FundCard = ({
   handleClick,
 }) => {
   const remainingDays = daysLeft(deadline);
+  const navigate = useNavigate();
+  const handleNavigateDetails = () => {
+    navigate(`/campaign-details/${id}`);
+  };
   return (
     <div
       className="sm:w-[288px] w-full rounded-[15px] bg-[#f2f2f2] dark:bg-[#1c1c24] cursor-pointer shadow-md hover:scale-95 focus:scale-105 transition-transform duration-300"
-      onClick={handleClick}
+      onClick={handleClick || handleNavigateDetails}
     >
       <img
         src={image}
