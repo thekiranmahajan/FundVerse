@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
 import {
   CountBox,
@@ -14,48 +13,38 @@ import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { toast } from "react-toastify";
 
 const CampaignDetails = () => {
-  const { state } = useLocation();
+  const { campaignId } = useParams();
   const navigate = useNavigate();
-  const { getDonations, contract, address, donate, deleteCampaign } =
-    useStateContext();
-
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    getDonations,
+    contract,
+    address,
+    donate,
+    deleteCampaign,
+    campaigns,
+    isLoading,
+    setIsLoading,
+  } = useStateContext();
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
+  const [campaign, setCampaign] = useState([]);
 
-  const remainingDays = daysLeft(state.deadline);
-
-  const fetchDonators = async () => {
-    const data = await getDonations(state.id);
-    setDonators(data);
-  };
   useEffect(() => {
-    if (contract) fetchDonators();
-    console.log("state", state);
+    if (contract) {
+      fetchDonators();
+    }
   }, [contract, address]);
 
-  const id = state.id;
-  const name = state.name;
-  const title = state.title;
-  const category = state.category;
-  const description = state.description;
-  const target = state.target;
-  const deadline = state.deadline;
-  const image = state.image;
+  useEffect(() => {
+    if (campaigns && campaigns.length > 0) {
+      const foundCampaign = campaigns.find((c) => c.id === Number(campaignId));
+      setCampaign(foundCampaign);
+    }
+  }, [campaigns, campaignId]);
 
-  const handleUpdate = () => {
-    navigate(`/update-campaign/${state.title}`, {
-      state: {
-        id,
-        name,
-        title,
-        category,
-        description,
-        target,
-        deadline,
-        image,
-      },
-    });
+  const fetchDonators = async () => {
+    const data = await getDonations(campaignId);
+    setDonators(data);
   };
 
   const handleDonate = async () => {
@@ -92,7 +81,7 @@ const CampaignDetails = () => {
     }
 
     try {
-      await donate(state.id, amount);
+      await donate(campaign?.id, amount);
       navigate("/");
     } catch (error) {
       console.error("Error donating:", error);
@@ -103,9 +92,7 @@ const CampaignDetails = () => {
 
   const handleDelete = async () => {
     setIsLoading(true);
-    const confirmDelete = confirm(
-      "Do you really want to delete this campaign?"
-    );
+    const confirmDelete = confirm("Do you really want to delete this Campaign");
     if (!confirmDelete) {
       toast("🤔 No campaign is deleted. You've canceled the operation.", {
         position: "top-right",
@@ -121,19 +108,21 @@ const CampaignDetails = () => {
       setIsLoading(false);
       return;
     }
-    await deleteCampaign(state.id);
+    await deleteCampaign(campaign?.id);
 
     navigate("/");
     setIsLoading(false);
   };
+  const remainingDays = daysLeft(campaign?.deadline);
 
+  if (campaigns?.length <= 0) return <Loader />;
   return (
     <div>
       {isLoading && <Loader />}
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
           <img
-            src={state.image}
+            src={campaign?.image}
             alt="campaign"
             className="w-full h-[410px] object-cover rounded-xl "
           />
@@ -142,8 +131,8 @@ const CampaignDetails = () => {
               className="absolute h-full bg-[#6F01Ec]"
               style={{
                 width: `${calculateBarPercentage(
-                  state.target,
-                  state.amountCollected
+                  campaign?.target,
+                  campaign?.amountCollected
                 )}%`,
                 maxWidth: "100%",
               }}
@@ -154,13 +143,13 @@ const CampaignDetails = () => {
         <div className="flex md:w-[150px] w-full md:flex-wrap sm:flex-row flex-col justify-between sm:items-start items-center gap-[30px]">
           <CountBox
             title="Days Left"
-            value={remainingDays === 0 ? "Ended" : remainingDays}
+            value={remainingDays == 0 ? "Ended" : remainingDays.toString()}
           />
           <CountBox
-            title={`Raised of ${state.target}`}
-            value={state.amountCollected}
+            title={`Raised of ${campaign?.target}`}
+            value={campaign?.amountCollected}
           />
-          <CountBox title="Total Backers" value={donators.length} />
+          <CountBox title="Total Backers" value={donators?.length} />
         </div>
       </div>
 
@@ -168,10 +157,10 @@ const CampaignDetails = () => {
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
             <h4 className="font-epilogue font-semibold text-lg text-black dark:text-white uppercase">
-              {state.title}
+              {campaign?.title}
             </h4>
             <p className="mt-[3px] font-epilogue font-normal   leading-[18px] text-[#4d4d4d] dark:text-[#808191]">
-              {state.category}
+              {campaign?.category}
             </p>
           </div>
           <div>
@@ -184,16 +173,16 @@ const CampaignDetails = () => {
                 <Jazzicon
                   className="w-1/2 h-1/2 object-contain"
                   diameter={52}
-                  seed={jsNumberForAddress(`${state.owner}`)}
+                  seed={jsNumberForAddress(`${campaign?.owner}`)}
                 />
               </div>
               <div className="w-full">
                 <h4 className="font-epilogue font-semibold text-sm text-black dark:text-white truncate ">
-                  {state.name} is organizing this fundraiser for{" "}
-                  {state.category} category.
+                  {campaign?.name} is organizing this fundraiser for{" "}
+                  {campaign?.category} category.
                 </h4>
                 <p className="mt-[4px] font-epilogue font-normal text-[13px] text-[#4d4d4d] dark:text-[#808191] truncate">
-                  {state.owner}
+                  {campaign?.owner}
                 </p>
               </div>
             </div>
@@ -204,7 +193,7 @@ const CampaignDetails = () => {
             </h4>
 
             <div className="mt-[20px] text-[#4d4d4d] dark:text-[#808191]">
-              <Expandable>{state.description}</Expandable>
+              <Expandable>{campaign?.description}</Expandable>
             </div>
           </div>
 
@@ -213,8 +202,8 @@ const CampaignDetails = () => {
               Donors
             </h4>
             <div className=" mt-[20px] flex flex-col gap-4">
-              {donators.length > 0 ? (
-                donators.map((item, index) => (
+              {donators?.length > 0 ? (
+                donators?.map((item, index) => (
                   <div
                     key={`${item.donator}-${index}`}
                     className="flex justify-between items-center gap-4"
@@ -276,16 +265,17 @@ const CampaignDetails = () => {
         </div>
       </div>
       <div className="mt-16 mb-[30px]">
-        {address == state.owner && (
+        {address == campaign?.owner && (
           <div className="flex flex-wrap justify-between gap-[40px]">
-            <CustomButton
-              btnType="button"
-              id={state.id}
-              title="Update Campaign"
-              styles="w-[31%] bg-[#03dac5]"
-              handleClick={handleUpdate}
-              isDisabled={isLoading}
-            />
+            <Link to={`/update-campaign/${campaign?.id}`} className="w-[31%]">
+              <CustomButton
+                btnType="button"
+                id={campaign?.id}
+                title="Update Campaign"
+                styles="w-full bg-[#03dac5]"
+                isDisabled={isLoading}
+              />
+            </Link>
 
             <CustomButton
               btnType="button"
