@@ -20,7 +20,7 @@ const Withdraw = () => {
 
   const handleWithdraw = async (campaign) => {
     if (campaign?.amountCollected == 0) {
-      toast("❌ No donations found for this campaign", {
+      toast.warning("No donations found for this campaign", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -30,9 +30,10 @@ const Withdraw = () => {
         progress: undefined,
         theme: "dark",
       });
+      return;
     }
     if (campaign?.deadline >= Date.now()) {
-      toast("❌ You can't withdraw campaign before deadline", {
+      toast.error("You can't withdraw campaign before deadline", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -42,6 +43,7 @@ const Withdraw = () => {
         progress: undefined,
         theme: "dark",
       });
+      return;
     } else {
       await withdraw(campaign?.id);
       navigate("/");
@@ -52,39 +54,33 @@ const Withdraw = () => {
   }, [contract, address, campaigns]);
 
   return (
-    (userCampaigns?.length === 0 && address) || (
-      <div>
-        <h1 className="font-epilogue font-semibold text-lg text-black dark:text-white text-left">
-          Withdraw Campaigns ({userCampaigns?.length})
-        </h1>
+    <div>
+      <h1 className="font-epilogue font-semibold text-lg text-black dark:text-white text-left">
+        Withdraw Campaigns ({userCampaigns?.length})
+      </h1>
 
-        <div className="flex flex-wrap mt-[20px] gap-[26px]">
-          {isLoading && (
-            <img
-              src={loader}
-              alt="loader"
-              className="w-24 h-24 object-contain"
+      <div className="flex flex-wrap mt-[20px] gap-[26px]">
+        {isLoading && (
+          <img src={loader} alt="loader" className="w-24 h-24 object-contain" />
+        )}
+
+        {!isLoading && userCampaigns?.length === 0 && (
+          <p className="font-epilogue font-semibold text-sm leading-8 text-[#4e4e4e] dark:text-[#818183]">
+            You have not created any campaigns yet
+          </p>
+        )}
+
+        {!isLoading &&
+          userCampaigns?.length > 0 &&
+          userCampaigns?.map((campaign) => (
+            <WithdrawCard
+              key={uuidv4()}
+              {...campaign}
+              handleClick={() => handleWithdraw(campaign)}
             />
-          )}
-
-          {!isLoading && userCampaigns?.length === 0 && (
-            <p className="font-epilogue font-semibold text-sm leading-8 text-[#4e4e4e] dark:text-[#818183]">
-              You have not created any campaigns yet
-            </p>
-          )}
-
-          {!isLoading &&
-            userCampaigns?.length > 0 &&
-            userCampaigns?.map((campaign) => (
-              <WithdrawCard
-                key={uuidv4()}
-                {...campaign}
-                handleClick={() => handleWithdraw(campaign)}
-              />
-            ))}
-        </div>
+          ))}
       </div>
-    )
+    </div>
   );
 };
 
