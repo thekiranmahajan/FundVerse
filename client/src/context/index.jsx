@@ -31,6 +31,7 @@ export const StateContextProvider = ({ children }) => {
     localStorage.getItem("themeMode") || "System"
   );
   const [campaigns, setCampaigns] = useState([]);
+  const [userCampaigns, setUserCampaigns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -108,7 +109,6 @@ export const StateContextProvider = ({ children }) => {
         "form from createCampaign",
         form
       );
-      await getCampaigns();
     } catch (error) {
       toast("❌ Error while creating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -154,8 +154,6 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
 
-      await getCampaigns();
-
       console.log("Contract update success", data);
     } catch (error) {
       toast("❌ Error while updating Campaign, please 🙏🏻 try again", {
@@ -190,7 +188,6 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
       console.log("Campaign delete success", data);
-      await getCampaigns();
       return data;
     } catch (error) {
       toast("❌ Error while deleting Campaign, please 🙏🏻 try again", {
@@ -223,7 +220,6 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
-      await getCampaigns();
       return data;
     } catch (err) {
       toast("❌ Error while Donating Campaign, please 🙏🏻 try again", {
@@ -254,7 +250,6 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
-      await getCampaigns();
       return data;
     } catch (err) {
       toast("❌ Error occurred while withdrawing funds.", {
@@ -274,7 +269,7 @@ export const StateContextProvider = ({ children }) => {
   const getCampaigns = async () => {
     setIsLoading(true);
     const campaigns = await contract?.call("getCampaigns");
-    console.log("Raw Campaigns from contract before parsing", campaigns);
+    // console.log("Raw Campaigns from contract before parsing", campaigns);
     const parsedCampaigns = campaigns?.map((campaign, i) => ({
       owner: campaign.owner,
       name: campaign.name,
@@ -310,11 +305,12 @@ export const StateContextProvider = ({ children }) => {
   };
 
   const getUserCampaigns = async () => {
-    await getCampaigns();
+    setIsLoading(true);
     const filteredCampaigns = campaigns?.filter(
       (campaign) => campaign.owner === address
     );
-    return filteredCampaigns;
+    setUserCampaigns(filteredCampaigns);
+    setIsLoading(false);
   };
 
   return (
@@ -338,6 +334,7 @@ export const StateContextProvider = ({ children }) => {
         campaigns,
         isLoading,
         setIsLoading,
+        userCampaigns,
       }}
     >
       <ToastContainer />

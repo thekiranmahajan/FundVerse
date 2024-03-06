@@ -21,7 +21,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
           <img
             src={loader}
             alt="loader"
-            className="w-[100px] h-[100px] object-contain "
+            className="w-24 h-24 object-contain "
           />
         )}
         {!isLoading && campaigns?.length === 0 && (
@@ -32,7 +32,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
         {!isLoading && campaigns?.length > 0 && (
           <>
-            {campaigns.map((campaign) => (
+            {campaigns?.map((campaign) => (
               <FundCard
                 key={uuidv4()}
                 {...campaign}
