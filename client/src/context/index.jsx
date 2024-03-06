@@ -93,7 +93,7 @@ export const StateContextProvider = ({ children }) => {
           form.image,
         ],
       });
-      toast("✅ Campaign created successfully", {
+      toast.success(" Campaign created successfully", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -110,7 +110,7 @@ export const StateContextProvider = ({ children }) => {
         form
       );
     } catch (error) {
-      toast("❌ Error while creating Campaign, please 🙏🏻 try again", {
+      toast.error(" Error while creating Campaign, please 🙏🏻 try again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -143,7 +143,7 @@ export const StateContextProvider = ({ children }) => {
         form.image,
       ]);
 
-      toast("✅ Campaign updated successfully", {
+      toast.success("Campaign updated successfully", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -156,7 +156,7 @@ export const StateContextProvider = ({ children }) => {
 
       console.log("Contract update success", data);
     } catch (error) {
-      toast("❌ Error while updating Campaign, please 🙏🏻 try again", {
+      toast.error("Error while updating Campaign, please 🙏🏻 try again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -177,7 +177,7 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await contract.call("deleteCampaign", [id]);
 
-      toast("✅ Campaign deleted 🚮 successfully", {
+      toast.success("Campaign deleted 🚮 successfully", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -190,7 +190,7 @@ export const StateContextProvider = ({ children }) => {
       console.log("Campaign delete success", data);
       return data;
     } catch (error) {
-      toast("❌ Error while deleting Campaign, please 🙏🏻 try again", {
+      toast.error("Error while deleting Campaign, please 🙏🏻 try again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -210,19 +210,22 @@ export const StateContextProvider = ({ children }) => {
         value: ethers.utils.parseEther(amount),
       });
 
-      toast("🫡 Campaign funded successfully. Thanks for collaboration😊", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.success(
+        "Campaign funded successfully. Thanks for collaboration😊",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
       return data;
     } catch (err) {
-      toast("❌ Error while Donating Campaign, please 🙏🏻 try again", {
+      toast.error("Error while Donating Campaign, please 🙏🏻 try again", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -240,7 +243,7 @@ export const StateContextProvider = ({ children }) => {
     try {
       const data = await contract.call("withdrawDonations", [id]);
 
-      toast("🤑 Campaign funds successfully withdrawn", {
+      toast.success("🤑 Campaign funds successfully withdrawn", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -252,7 +255,7 @@ export const StateContextProvider = ({ children }) => {
       });
       return data;
     } catch (err) {
-      toast("❌ Error occurred while withdrawing funds.", {
+      toast.error("Error occurred while withdrawing funds.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

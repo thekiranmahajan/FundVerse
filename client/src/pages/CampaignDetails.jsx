@@ -50,7 +50,7 @@ const CampaignDetails = () => {
   const handleDonate = async () => {
     setIsLoading(true);
     if (!address) {
-      toast("❌ Please connect to MetaMask🦊", {
+      toast.error("Please connect to MetaMask🦊", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -65,7 +65,7 @@ const CampaignDetails = () => {
       return;
     }
     if (amount === 0 || amount === "") {
-      toast("❌ Please enter a valid donation amount.", {
+      toast.error("Please enter a valid donation amount.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -94,16 +94,19 @@ const CampaignDetails = () => {
     setIsLoading(true);
     const confirmDelete = confirm("Do you really want to delete this Campaign");
     if (!confirmDelete) {
-      toast("🤔 No campaign is deleted. You've canceled the operation.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.warning(
+        "🤔 No campaign is deleted. You've canceled the operation.",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
 
       setIsLoading(false);
       return;
