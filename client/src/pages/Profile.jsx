@@ -17,13 +17,11 @@ const Profile = () => {
   }, [contract, address, campaigns]);
 
   return (
-    (userCampaigns?.length === 0 && address) || (
-      <DisplayCampaigns
-        title="My Campaigns"
-        isLoading={isLoading}
-        campaigns={userCampaigns}
-      />
-    )
+    <DisplayCampaigns
+      title="My Campaigns"
+      isLoading={isLoading}
+      campaigns={userCampaigns}
+    />
   );
 };
 
