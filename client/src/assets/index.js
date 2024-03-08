@@ -13,6 +13,7 @@ import sun from "./sun.svg";
 import moon from "./moon.svg";
 import system from "./system.svg";
 import cross from "./cross.svg";
+import share from "./share.svg";
 
 export {
   tagType,
@@ -30,4 +31,5 @@ export {
   moon,
   system,
   logo,
+  share,
 };
