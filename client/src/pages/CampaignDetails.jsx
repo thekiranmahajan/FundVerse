@@ -95,6 +95,7 @@ const CampaignDetails = () => {
     if (navigator.share) {
       navigator
         .share({
+          image: campaign?.image,
           title: campaign?.title,
           text: campaign?.description,
           url: window.location.href,
