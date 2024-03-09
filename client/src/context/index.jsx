@@ -109,6 +109,7 @@ export const StateContextProvider = ({ children }) => {
         "form from createCampaign",
         form
       );
+      await getCampaigns();
     } catch (error) {
       toast.error(" Error while creating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -155,6 +156,7 @@ export const StateContextProvider = ({ children }) => {
       });
 
       console.log("Contract update success", data);
+      await getCampaigns();
     } catch (error) {
       toast.error("Error while updating Campaign, please 🙏🏻 try again", {
         position: "top-right",
@@ -188,6 +190,7 @@ export const StateContextProvider = ({ children }) => {
         theme: "dark",
       });
       console.log("Campaign delete success", data);
+      await getCampaigns();
       return data;
     } catch (error) {
       toast.error("Error while deleting Campaign, please 🙏🏻 try again", {
@@ -223,6 +226,7 @@ export const StateContextProvider = ({ children }) => {
           theme: "dark",
         }
       );
+      await getCampaigns();
       return data;
     } catch (err) {
       toast.error("Error while Donating Campaign, please 🙏🏻 try again", {
@@ -253,6 +257,7 @@ export const StateContextProvider = ({ children }) => {
         progress: undefined,
         theme: "dark",
       });
+      await getCampaigns();
       return data;
     } catch (err) {
       toast.error("Error occurred while withdrawing funds.", {
