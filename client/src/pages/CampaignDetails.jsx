@@ -11,7 +11,8 @@ import {
 import { calculateBarPercentage, daysLeft } from "../utils";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { toast } from "react-toastify";
-
+import { Helmet } from "react-helmet";
+import { share } from "../assets";
 const CampaignDetails = () => {
   const { campaignId } = useParams();
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const CampaignDetails = () => {
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
   const [campaign, setCampaign] = useState([]);
+  const [injectMetaTags, setInjectMetaTags] = useState(false);
 
   useEffect(() => {
     if (contract) {
@@ -89,7 +91,21 @@ const CampaignDetails = () => {
       setIsLoading(false);
     }
   };
-
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: campaign?.title,
+          text: campaign?.description,
+          url: window.location.href,
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Error sharing", error));
+    } else {
+      console.log("Web Share API not supported");
+    }
+    setInjectMetaTags(true);
+  };
   const handleDelete = async () => {
     setIsLoading(true);
     const confirmDelete = confirm("Do you really want to delete this Campaign");
@@ -121,6 +137,15 @@ const CampaignDetails = () => {
   if (campaigns?.length <= 0) return <Loader />;
   return (
     <div>
+      {injectMetaTags && (
+        <Helmet>
+          <meta property="og:title" content={campaign?.title} />
+          <meta property="og:description" content={campaign?.description} />
+          {campaign?.image && (
+            <meta property="og:image" content={campaign?.image} />
+          )}
+        </Helmet>
+      )}
       {isLoading && <Loader />}
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
@@ -159,8 +184,14 @@ const CampaignDetails = () => {
       <div className="mt-16 flex lg:flex-row flex-col gap-5">
         <div className="flex-[2] flex flex-col gap-[40px]">
           <div>
-            <h4 className="font-epilogue font-semibold text-lg text-black dark:text-white uppercase">
-              {campaign?.title}
+            <h4 className="font-epilogue font-semibold text-lg text-black dark:text-white uppercase flex gap-2 items-center ">
+              {campaign?.title}{" "}
+              <img
+                className="h-8 cursor-pointer"
+                onClick={handleShare}
+                src={share}
+                alt="share"
+              />
             </h4>
             <p className="mt-[3px] font-epilogue font-normal   leading-[18px] text-[#4d4d4d] dark:text-[#808191]">
               {campaign?.category}
